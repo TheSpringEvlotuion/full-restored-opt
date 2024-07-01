@@ -6,10 +6,6 @@ import meta.state.PlayState;
 
 using StringTools;
 
-#if !html5
-import sys.FileSystem;
-#end
-
 class CoolUtil
 {
 	// tymgus45
@@ -70,11 +66,11 @@ class CoolUtil
 	{
 		//
 		var libraryArray:Array<String> = [];
-		var unfilteredLibrary = FileSystem.readDirectory('$subDir/$library');
+		var unfilteredLibrary = Assets.list().filter(image -> image.contains('$subDir/$library'));
 
 		for (folder in unfilteredLibrary)
 		{
-			if (!folder.contains('.'))
+			if (!folder.startsWith('.'))
 				libraryArray.push(folder);
 		}
 		trace(libraryArray);
