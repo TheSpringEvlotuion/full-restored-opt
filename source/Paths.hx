@@ -14,8 +14,6 @@ import openfl.media.Sound;
 import openfl.system.System;
 import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
-import sys.FileSystem;
-import sys.io.File;
 
 using StringTools;
 
@@ -135,7 +133,7 @@ class Paths
 			// do dumbshit
 			return FlxG.bitmap.add(path, true, path);
 		} else {
-			if (FileSystem.exists(path))
+			if (OpenFlAssets.exists(path))
 			{
 				if (!currentTrackedAssets.exists(key))
 				{
@@ -206,12 +204,12 @@ class Paths
 	}
 
 	static public function shader(name:String) {
-		return File.getContent('./assets/shaders/$name.frag');
+		return OpenFlAssets.getText('./assets/shaders/$name.frag');
 	}
 
 	static function getPreloadPath(file:String) {
 		var returnPath:String = '$currentLevel/$file';
-		if (!FileSystem.exists(returnPath))
+		if (!ts.exists(returnPath))
 			returnPath = CoolUtil.swapSpaceDash(returnPath);
 		return returnPath;
 	}
@@ -284,8 +282,6 @@ class Paths
 		var graphic:FlxGraphic = returnGraphic(key, library, compression);
 		var fileContents;
 		if (library == null)
-			fileContents = File.getContent(file('images/$key.xml', library));
-		else
 			fileContents = Assets.getText(file('images/$key.xml', library));
 		return (FlxAtlasFrames.fromSparrow(graphic, fileContents));
 	}
