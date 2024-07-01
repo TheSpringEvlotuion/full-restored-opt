@@ -223,7 +223,7 @@ class Paths
 	}
 
 	static public function video(key:String) {
-		return 'assets/cutscenes/$key.mp4';
+		return Asset2File.getPath('assets/cutscenes/$key.mp4');
 	}
 
 	static public function xml(key:String, ?library:String) {
