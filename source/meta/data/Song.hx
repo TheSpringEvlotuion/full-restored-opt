@@ -5,7 +5,6 @@ import haxe.format.JsonParser;
 import lime.utils.Assets;
 import meta.data.Section.SwagSection;
 import meta.state.PlayState;
-import sys.io.File;
 
 using StringTools;
 
@@ -52,7 +51,7 @@ class Song
 		if (library != null)
 			rawJson = Assets.getText(Paths.songJson(folder.toLowerCase(), jsonInput.toLowerCase(), old, PlayState.songLibrary)).trim();
 		else 
-			rawJson = File.getContent(Paths.songJson(folder.toLowerCase(), jsonInput.toLowerCase(), old, PlayState.songLibrary)).trim();
+			rawJson = Assets.getText(Paths.songJson(folder.toLowerCase(), jsonInput.toLowerCase(), old, PlayState.songLibrary)).trim();
 
 		while (!rawJson.endsWith("}"))
 			rawJson = rawJson.substr(0, rawJson.length - 1);
