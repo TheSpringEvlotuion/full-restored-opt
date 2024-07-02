@@ -177,7 +177,7 @@ class Paths
 			if (library != null)
 				currentTrackedSounds.set(gottenPath, OpenFlAssets.getSound(getPath('$path/$key.$SOUND_EXT', SOUND, library)));
 			else
-				currentTrackedSounds.set(gottenPath, Sound.fromFile('./' + gottenPath));
+				currentTrackedSounds.set(gottenPath, Sound.fromFile(gottenPath));
 		}
 		localTrackedAssets.push(key);
 		return currentTrackedSounds.get(gottenPath);
@@ -204,12 +204,12 @@ class Paths
 	}
 
 	static public function shader(name:String) {
-		return OpenFlAssets.getText('./assets/shaders/$name.frag');
+		return OpenFlAssets.getText('assets/shaders/$name.frag');
 	}
 
 	static function getPreloadPath(file:String) {
 		var returnPath:String = '$currentLevel/$file';
-		if (!ts.exists(returnPath))
+		if (!OpenFlAssets.exists(returnPath))
 			returnPath = CoolUtil.swapSpaceDash(returnPath);
 		return returnPath;
 	}
