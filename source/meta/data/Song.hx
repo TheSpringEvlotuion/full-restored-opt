@@ -50,6 +50,9 @@ class Song
 		PlayState.songLibrary = library;
 		if (library != null)
 			rawJson = Assets.getText(Paths.songJson(folder.toLowerCase(), jsonInput.toLowerCase(), old, PlayState.songLibrary)).trim();
+		else
+			rawJson = Assets.getText(Paths.songJson(folder.toLowerCase(), jsonInput.toLowerCase(), old, PlayState.songLibrary)).trim();
+
 
 		while (!rawJson.endsWith("}"))
 			rawJson = rawJson.substr(0, rawJson.length - 1);
