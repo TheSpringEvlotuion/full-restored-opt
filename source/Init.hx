@@ -429,7 +429,7 @@ class Init extends FlxState
 		],
 		'Shaders' => [
 			Checkmark,
-			true,
+			false, //someone remind me to change it to true
 			"Whether to load shaders or not",
 		],
 		"Unfocus Pause" => [
