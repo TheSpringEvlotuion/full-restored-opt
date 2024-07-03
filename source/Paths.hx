@@ -280,11 +280,9 @@ class Paths
 	}
 
 	static public function getSparrowAtlas(key:String, ?compression:Bool = false, ?library:String) {
-		var graphic:FlxGraphic = returnGraphic(key, library, compression);
-		var fileContents;
-		if (library == null)
-			fileContents = Assets.getText(file('images/$key.xml', library));
-		return (FlxAtlasFrames.fromSparrow(graphic, fileContents));
+	  var graphic:FlxGraphic = returnGraphic(key, library, compression);
+		return FlxAtlasFrames.fromSparrow(graphic, Assets.getText(file('images/$key.xml', library)));
+
 	}
 
 	static public function getPackerAtlas(key:String, ?library:String)
