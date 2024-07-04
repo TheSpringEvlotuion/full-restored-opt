@@ -1,6 +1,10 @@
 package meta.data;
 
+#if (flixel >= "5.3.0")
+import flixel.sound.FlxSound;
+#else
 import flixel.system.FlxSound;
+#end
 import gameObjects.userInterface.UnownSubstate;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -31,6 +35,8 @@ import openfl.display.Shader;
 import openfl.filters.ShaderFilter;
 import sys.FileSystem;
 import sys.io.File;
+import lime.utils.Assets;
+import mobile.utils.HSys;
 
 using StringTools;
 
@@ -76,11 +82,11 @@ class ScriptHandler
 		exp.set("FlxGraphicsShader", FlxGraphicsShader);
 		exp.set("FlxColor", RealColor); // lol
 		exp.set("FlxGroup", FlxGroup);
-		
+
 		// Classes (Forever)
 		exp.set("Init", Init);
 		exp.set("Paths", Paths);
-        exp.set("Note", Note);
+		exp.set("Note", Note);
 		exp.set("Strumline", Strumline);
 		exp.set("Events", Events);
 		exp.set("Conductor", Conductor);
@@ -90,7 +96,7 @@ class ScriptHandler
 		exp.set("Boyfriend", Boyfriend);
 		exp.set("FNFSprite", FNFSprite);
 		exp.set("HealthIcon", HealthIcon);
-        exp.set("PlayState", PlayState);
+		exp.set("PlayState", PlayState);
 		exp.set("CelebiNote", CelebiNote);
 
 		// Functions (Custom)
@@ -98,8 +104,8 @@ class ScriptHandler
 		{
 			return Type.resolveClass(className);
 		});
-        
-        //
+
+		//
 		parser.allowTypes = true;
 	}
 
@@ -107,7 +113,7 @@ class ScriptHandler
 	{
 		// trace('Loading Module $path');
 		var modulePath:String = Paths.module(path);
-		return new ForeverModule(parser.parseString(File.getContent(modulePath), modulePath), extraParams);
+		return new ForeverModule(parser.parseString(HSys.getContent(modulePath), ''), extraParams);
 	}
 }
 
@@ -133,7 +139,6 @@ class ForeverModule
 			for (i in extraParams.keys())
 				interp.variables.set(i, extraParams.get(i));
 		}
-
 		// importing!!
 
 		interp.variables.set("importClass", function(className:String)
