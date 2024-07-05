@@ -180,7 +180,7 @@ class UnlockSubstate extends MusicBeatSubState {
 					close();
 					#else
 					FlxG.resetState();
-					#end);
+					#end
 				});
 				youCanSpamConfirmNow = false;
 			}
