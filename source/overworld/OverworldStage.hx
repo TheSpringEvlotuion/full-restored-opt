@@ -131,6 +131,7 @@ class OverworldStage extends MusicBeatState {
 
     #if mobile
     addVirtualPad(LEFT_FULL, NONE);
+    addVirtualPadCamera(false);
     #end
     }
 
