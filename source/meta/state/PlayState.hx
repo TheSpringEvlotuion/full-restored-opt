@@ -1206,6 +1206,7 @@ class PlayState extends MusicBeatState
 				addHitbox(true, DEFAULT);
 		}
 		addHitboxCamera(false);
+		hitbox.visible = false;
 		#end
 	}
 
@@ -4247,6 +4248,9 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
+	  #if mobile
+	  hitbox.visible = false;
+	  #end
 		if (!songLoops) {
 			canPause = false;
 
@@ -4492,6 +4496,9 @@ class PlayState extends MusicBeatState
 
 	public function startCountdown():Void
 	{
+	  #if mobile
+	  hitbox.visible = true;
+	  #end
 		inCutscene = false;
 		Conductor.songPosition = -(Conductor.crochet * 5) + Init.trueSettings.get("Offset");
 		swagCounter = 0;
