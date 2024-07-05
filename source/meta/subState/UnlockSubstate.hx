@@ -117,7 +117,6 @@ class UnlockSubstate extends MusicBeatSubState {
 						newText.setPosition(Std.int(textbox.x + 16), Std.int(textbox.y + (32 * (i - (unlocks.length / 2)))));
 					} else {
 						newText.text = 'Touch';
-						}
 						newText.text += ' to continue';
 						newText.setPosition(Std.int(textbox.x + 16), Std.int(textbox.y + (textbox.height / 2) - 56));
 					}
@@ -127,6 +126,7 @@ class UnlockSubstate extends MusicBeatSubState {
 					textGroup.add(newText);
 					FlxTween.tween(newText, {alpha: 1, x: newText.x - FlxG.width / 8}, 0.25, {ease: FlxEase.circOut, startDelay: 0.05 * i});
 				}
+			}});
 		}});
     }
 
@@ -176,11 +176,7 @@ class UnlockSubstate extends MusicBeatSubState {
 						FlxG.save.data.doneUnlocks.push(curUnlockable);
 						FlxG.save.flush();
 					}
-					#if desktop
 					close();
-					#else
-					FlxG.resetState();
-					#end
 				});
 				youCanSpamConfirmNow = false;
 			}
