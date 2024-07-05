@@ -132,12 +132,12 @@ class OverworldStage extends FlxState {
         gameboyShader.data.intensity.value = [1.0];
 
         pointTo = new FlxPoint(320 + 8, 192 + 8);
-    #if mobile
+    /*#if mobile
     addVirtualPad(LEFT_FULL, NONE);
-    #end
+    #end*/
     }
 
-  #if mobile
+  /*#if mobile
 	var virtualPad:FlxVirtualPad;
 	var trackedInputsVirtualPad:Array<FlxActionInput> = [];
 	public function addVirtualPad(DPad:FlxDPadMode, Action:FlxActionMode, visible:Bool = true):Void
@@ -188,7 +188,7 @@ class OverworldStage extends FlxState {
 		if (virtualPad != null)
 			virtualPad = FlxDestroyUtil.destroy(virtualPad);
 		#end
-	}
+	}*/
 
     var shiftX:Float = 0;
 	var fullElapsed:Float = 0;
