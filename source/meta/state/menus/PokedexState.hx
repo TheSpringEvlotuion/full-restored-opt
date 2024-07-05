@@ -9,12 +9,12 @@ import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
-import sys.FileSystem;
-import sys.io.File;
 import flixel.util.FlxColor;
 import haxe.Json;
 import meta.MusicBeat.MusicBeatState;
 import meta.data.Highscore;
+import openfl.utils.Assets;
+import mobile.utils.HSys;
 
 typedef Offsets = {
     var x:Float; 
@@ -145,9 +145,9 @@ class PokedexState extends MusicBeatState {
 
         for (i in folderList) {
             trace('found folder: ' + i);
-            if (FileSystem.exists(Paths.getPath('images/pokedex/${i}/info.json', TEXT))) 
+            if (Assets.exists(Paths.getPath('images/pokedex/${i}/info.json', TEXT))) 
             {
-                var rawJson = File.getContent(Paths.getPath('images/pokedex/${i}/info.json', TEXT));
+                var rawJson = HSys.getContent(Paths.getPath('images/pokedex/${i}/info.json', TEXT));
                 var swagShit:PokeData = cast Json.parse(rawJson).info;
 
                 dexArray.push(swagShit);
@@ -168,8 +168,8 @@ class PokedexState extends MusicBeatState {
                 var daPoke:String = dexArray[i].name;
 
                 trace('found folder: ' + daPoke);
-                if (FileSystem.exists(Paths.getPath('images/pokedex/'+ daPoke + '/info.json', TEXT))) {
-                    var rawJson = File.getContent(Paths.getPath('images/pokedex/' + daPoke + '/info.json', TEXT));
+                if (Assets.exists(Paths.getPath('images/pokedex/'+ daPoke + '/info.json', TEXT))) {
+                    var rawJson = HSys.getContent(Paths.getPath('images/pokedex/' + daPoke + '/info.json', TEXT));
                     var swagShit:PokeData = cast Json.parse(rawJson).info;
 
                     var newOffset:Offsets = cast Json.parse(rawJson).info.offset;
