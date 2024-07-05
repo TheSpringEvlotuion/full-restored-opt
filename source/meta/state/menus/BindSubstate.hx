@@ -303,7 +303,7 @@ class BindSubstate extends MusicBeatSubState
 	override public function close()
 	{
 		//
-		Init.savecontrols(); // for controls
+		Init.saveControls(); // for controls
 		super.close();
 	}
 }
