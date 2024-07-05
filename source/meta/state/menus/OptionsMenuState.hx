@@ -34,7 +34,6 @@ import Init.SettingTypes;
  * Exit
  * 
  */
-
 /**
  * Preferences
  * 
@@ -53,7 +52,6 @@ import Init.SettingTypes;
  * FPS Counter
  * Memory Counter
  */
-
 /**
  * Controls
  * 
@@ -73,7 +71,6 @@ import Init.SettingTypes;
  * UI Right
  * Edit Offset
  */
-
 /**
  * Mechanics
  * 
@@ -112,21 +109,20 @@ import Init.SettingTypes;
  * Bygone Purpose
  * Floaty-Note-y (true by default)
  */
-
 typedef OptionData = Array<Dynamic>; // just to make it more readable
 
 class OptionsMenuState extends MusicBeatSubState
 {
 	/* "name" => [
-		["name", ?confirmFunc, ?extraGenerationFunc, ?updateFunc]
-	] 
-	confirmFunc is called when you press enter while on the option
-	extraGenerationFunc is called when generating the extras (checkboxes, selections, etc)
-	updateFunc is called every update while the option is on screen
-	*/
+			["name", ?confirmFunc, ?extraGenerationFunc, ?updateFunc]
+		] 
+		confirmFunc is called when you press enter while on the option
+		extraGenerationFunc is called when generating the extras (checkboxes, selections, etc)
+		updateFunc is called every update while the option is on screen
+	 */
 	var categoryMap:Map<String, Array<OptionData>> = [];
 
-	// would do this diff but im tryna keep it similar to Forever's own without just copy pasting it 
+	// would do this diff but im tryna keep it similar to Forever's own without just copy pasting it
 	var currentExtras:Map<FlxText, FlxSprite> = [];
 	var currentSelected:Map<String, Int> = [];
 	var currentDisplayed:FlxTypedGroup<FlxText>;
@@ -146,7 +142,9 @@ class OptionsMenuState extends MusicBeatSubState
 	var bg:FlxSprite;
 
 	var canControl:Bool = true;
-	function exit(){
+
+	function exit()
+	{
 		canControl = false;
 		FlxTween.cancelTweensOf(bg);
 		var menuState:MainMenuState = cast FlxG.state;
@@ -170,9 +168,16 @@ class OptionsMenuState extends MusicBeatSubState
 		categoryMap = [
 			'main' => [
 				// main page
-				["Controls", function(){
+				[
+					"Controls",
+					function()
+					{
 						openSubState(new BindSubstate());
-				}],
+						#if mobile
+						removeVirtualPad();
+						#end
+					}
+				],
 				["Preferences", loadSelectedGroup],
 				["Appearance", loadSelectedGroup],
 				["Mechanics", loadSelectedGroup],
@@ -216,13 +221,14 @@ class OptionsMenuState extends MusicBeatSubState
 			],
 			"Mechanics" => [
 				["Mechanics", confirmOption, generateExtra, updateOption],
+				["Hitbox Type", confirmOption, generateExtra, updateOption],
 				["Custom Settings"],
 				["Pendulum"],
 				["Pendulum Enabled", confirmOption, generateExtra, updateOption],
 				["Psyshock", confirmOption, generateExtra, updateOption],
 				["Beat Time", confirmOption, generateExtra, updateOption],
 				["Psyshock Damage Percent", confirmOption, generateExtra, updateOption],
-				
+
 				["Frostbite"],
 				["Freezing Enabled", confirmOption, generateExtra, updateOption],
 				["Freezing Rate Percent", confirmOption, generateExtra, updateOption],
@@ -247,6 +253,11 @@ class OptionsMenuState extends MusicBeatSubState
 			],
 		];
 		super.create();
+
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B);
+		addVirtualPadCamera(false);
+		#end
 
 		bg = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
 		bg.setGraphicSize(FlxG.width, FlxG.height);
@@ -273,8 +284,9 @@ class OptionsMenuState extends MusicBeatSubState
 		selector.scrollFactor.set();
 		add(selector);
 
-		//allDisplays.set("main", generateGroup(categoryMap.get("main")));
-		for (name in categoryMap.keys()){
+		// allDisplays.set("main", generateGroup(categoryMap.get("main")));
+		for (name in categoryMap.keys())
+		{
 			var shit = generateGroup(categoryMap.get(name));
 			allDisplays.set(name, shit[0]);
 			allExtras.set(name, shit[1]);
@@ -285,8 +297,9 @@ class OptionsMenuState extends MusicBeatSubState
 
 	var pressTimers:Map<FlxObject, Float> = [];
 	var isHolding:Map<FlxObject, Bool> = [];
-	
-	function updateOption(){
+
+	function updateOption()
+	{
 		var name = currentScreen[curSelected][0];
 		if (!Init.trueSettings.exists(name) || !Init.gameSettings.exists(name))
 			return;
@@ -299,35 +312,38 @@ class OptionsMenuState extends MusicBeatSubState
 
 				var left = controls.UI_LEFT;
 				var right = controls.UI_RIGHT;
-				
+
 				var selector:Dynamic = currentExtras.get(currentDisplayed.members[curSelected]);
 				if (pressTimers.get(selector) == null)
 					pressTimers.set(selector, 0);
 
-				if(left || right)
+				if (left || right)
 					pressTimers.set(selector, pressTimers.get(selector) + FlxG.elapsed);
-				else{
+				else
+				{
 					pressTimers.set(selector, 0);
 					isHolding.set(selector, false);
 				}
 
-				if (pressTimers.get(selector) >= 0.3){
-					if (!isHolding.get(selector)){
+				if (pressTimers.get(selector) >= 0.3)
+				{
+					if (!isHolding.get(selector))
+					{
 						isHolding.set(selector, true);
 						pressTimers.set(selector, 0.1);
 					}
 				}
-				
-				
-				if (pressTimers.get(selector) >= 0.1 && isHolding.get(selector)){ // every 0.1 seconds that its held
+
+				if (pressTimers.get(selector) >= 0.1 && isHolding.get(selector))
+				{ // every 0.1 seconds that its held
 					pressTimers.set(selector, pressTimers.get(selector) - 0.1);
 					pressLeft = left;
 					pressRight = right;
 				}
-				
+
 				if (!left)
 					selector.selectorPlay('left');
-					
+
 				if (!right)
 					selector.selectorPlay('right');
 
@@ -344,18 +360,24 @@ class OptionsMenuState extends MusicBeatSubState
 		}
 	}
 
-	function updateSelector(selector:Dynamic, inc:Int=0){
+	function updateSelector(selector:Dynamic, inc:Int = 0)
+	{
 		var settingDat = Init.gameSettings.get(selector.setting);
 		trace(settingDat[0]);
-		if (settingDat[0] == NumberSelector){
+		if (settingDat[0] == NumberSelector)
+		{
 			var sel:NumPixelSelector = cast selector;
 			sel.value += inc * sel.step;
-			if(selector.value < sel.min)sel.value = sel.max;
-			if(selector.value > sel.max)sel.value = sel.min;
+			if (selector.value < sel.min)
+				sel.value = sel.max;
+			if (selector.value > sel.max)
+				sel.value = sel.min;
 			sel.chosenOptionString = Std.string(sel.value);
 			sel.optionChosen.text = sel.chosenOptionString + (settingDat[6] == null ? "" : settingDat[6]);
 			trace(sel.optionChosen.text);
-		}else{
+		}
+		else
+		{
 			var sel:PixelSelector = cast selector;
 			var curIdx:Int = sel.options.indexOf(selector.chosenOptionString);
 			var newIdx:Int = curIdx + inc;
@@ -369,17 +391,16 @@ class OptionsMenuState extends MusicBeatSubState
 			sel.optionChosen.text = sel.chosenOptionString.toUpperCase() + (settingDat[6] == null ? "" : settingDat[6]);
 		}
 
-		if(inc<0)
+		if (inc < 0)
 			selector.selectorPlay('left', 'press');
-		else if(inc>0)
+		else if (inc > 0)
 			selector.selectorPlay('right', 'press');
 
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 
-
-
 		var type = settingDat[0];
-		switch(type){
+		switch (type)
+		{
 			case NumberSelector:
 				var sel:NumPixelSelector = cast selector;
 				Init.trueSettings.set(sel.setting, sel.value);
@@ -387,17 +408,19 @@ class OptionsMenuState extends MusicBeatSubState
 				var sel:PixelSelector = cast selector;
 				Init.trueSettings.set(sel.setting, sel.chosenOptionString);
 			default:
-
 		}
-		
+
 		Init.saveSettings();
 	}
 
-	function confirmOption(){
+	function confirmOption()
+	{
 		var name = currentScreen[curSelected][0];
-		if(!Init.trueSettings.exists(name) || !Init.gameSettings.exists(name))return;
+		if (!Init.trueSettings.exists(name) || !Init.gameSettings.exists(name))
+			return;
 
-		switch(Init.gameSettings.get(name)[0]){
+		switch (Init.gameSettings.get(name)[0])
+		{
 			case StringSelector:
 
 			case NumberSelector:
@@ -411,12 +434,14 @@ class OptionsMenuState extends MusicBeatSubState
 				// nawr
 		}
 	}
-	
-	function loadGroup(daGroup:String){
-		if (currentDisplayed!=null)
+
+	function loadGroup(daGroup:String)
+	{
+		if (currentDisplayed != null)
 			remove(currentDisplayed);
-		
-		for (key in currentExtras.keys()){
+
+		for (key in currentExtras.keys())
+		{
 			var extra = currentExtras.get(key);
 			remove(extra);
 		}
@@ -425,12 +450,15 @@ class OptionsMenuState extends MusicBeatSubState
 		currentScreen = categoryMap.get(daGroup);
 		currentExtras = allExtras.get(daGroup);
 		currentScreenName = daGroup;
-		
+
 		add(currentDisplayed);
-		if (daGroup=='main'){
+		if (daGroup == 'main')
+		{
 			expanseVertical = defaultExpanseVertical;
 			expanseHorizontal = defaultExpanseHorizontal;
-		}else{
+		}
+		else
+		{
 			expanseHorizontal = 24;
 			expanseVertical = 18;
 		}
@@ -442,11 +470,13 @@ class OptionsMenuState extends MusicBeatSubState
 		changeSelection(0);
 	}
 
-	function generateGroup(group:Array<OptionData>):Array<Dynamic>{	
+	function generateGroup(group:Array<OptionData>):Array<Dynamic>
+	{
 		var idx:Int = 0;
 		var typedGroup = new FlxTypedGroup<FlxText>();
-		var extraMap:Map<FlxText, FlxSprite>=[];
-		for(dat in group){
+		var extraMap:Map<FlxText, FlxSprite> = [];
+		for (dat in group)
+		{
 			var label = dat[0];
 
 			var newText:FlxText = new FlxText(0, idx * 30, 0, label);
@@ -456,19 +486,23 @@ class OptionsMenuState extends MusicBeatSubState
 			newText.scrollFactor.set();
 			typedGroup.add(newText);
 
-			var extra:Dynamic = (dat[2] == null)?null:dat[2](dat);
-			if(extra!=null){
+			var extra:Dynamic = (dat[2] == null) ? null : dat[2](dat);
+			if (extra != null)
+			{
 				extraMap.set(newText, extra);
 			}
 		}
 		return [typedGroup, extraMap];
-		//allDisplays.set(group)
+		// allDisplays.set(group)
 	}
 
-	function generateExtra(data:OptionData):FlxSprite{
+	function generateExtra(data:OptionData):FlxSprite
+	{
 		var shit = Init.gameSettings.get(data[0]);
-		if(shit!=null){
-			switch(shit[0]){
+		if (shit != null)
+		{
+			switch (shit[0])
+			{
 				case StringSelector:
 					var selector:PixelSelector = new PixelSelector(10, 0, data[0], Init.gameSettings.get(data[0])[3]);
 					selector.scale.set(3, 3);
@@ -476,18 +510,19 @@ class OptionsMenuState extends MusicBeatSubState
 					return selector;
 				case NumberSelector:
 					/*var options:Array<String> = [];
-					var gameSettings = Init.gameSettings.get(data[0]);
-					var idx:Float = gameSettings[4];
-					var step:Float = gameSettings[3];
-					while(idx <= gameSettings[5]){
-						options.push(Std.string(idx));
-						idx += step;
-					}
-					var selector:PixelSelector = new PixelSelector(10, 0, data[0], options);
-					selector.scale.set(3, 3);
-					selector.updateHitbox();
-					
-					return selector;*/
+						var gameSettings = Init.gameSettings.get(data[0]);
+						var idx:Float = gameSettings[4];
+						var step:Float = gameSettings[3];
+						while(idx <= gameSettings[5]){
+							options.push(Std.string(idx));
+							idx += step;
+						}
+						var selector:PixelSelector = new PixelSelector(10, 0, data[0], options);
+						selector.scale.set(3, 3);
+						selector.updateHitbox();
+
+						return selector; */
+
 					var gameSettings = Init.gameSettings.get(data[0]);
 					// Step, Min, Max, Suffix (optional)
 					// 3, 4, 5, 6
@@ -500,8 +535,8 @@ class OptionsMenuState extends MusicBeatSubState
 					var checkbox = new FlxSprite().loadGraphic(Paths.image("UI/pixel/checkbox"), true, 11, 11);
 					checkbox.animation.add("unselected", [0], 24, false);
 					checkbox.animation.add("selected", [1], 24, true);
-					checkbox.animation.play(Init.trueSettings.get(data[0])?"selected":"unselected");
-					checkbox.antialiasing=false;
+					checkbox.animation.play(Init.trueSettings.get(data[0]) ? "selected" : "unselected");
+					checkbox.antialiasing = false;
 					checkbox.scale.set(3, 3);
 					checkbox.updateHitbox();
 					return checkbox;
@@ -512,13 +547,15 @@ class OptionsMenuState extends MusicBeatSubState
 		return null;
 	}
 
-	function loadSelectedGroup(){
+	function loadSelectedGroup()
+	{
 		var name = currentScreen[curSelected][0];
 		loadGroup(name);
 	}
 
-	function changeSelection(inc:Int){
-		curSelected+=inc;
+	function changeSelection(inc:Int)
+	{
+		curSelected += inc;
 		if (curSelected > currentScreen.length - 1)
 			curSelected = 0;
 
@@ -526,12 +563,13 @@ class OptionsMenuState extends MusicBeatSubState
 			curSelected = currentScreen.length - 1;
 		currentSelected.set(currentScreenName, curSelected);
 		if (currentScreen[curSelected][1] == null)
-			changeSelection(inc==0?1:inc);
+			changeSelection(inc == 0 ? 1 : inc);
 	}
-	override function update(elapsed:Float){
+
+	override function update(elapsed:Float)
+	{
 		super.update(elapsed);
-		
-		
+
 		if (Math.abs(centralTextbox.boxWidth - expanseHorizontal) < 0.05)
 			centralTextbox.boxWidth = expanseHorizontal;
 		else
@@ -542,11 +580,11 @@ class OptionsMenuState extends MusicBeatSubState
 		else
 			centralTextbox.boxHeight = FlxMath.lerp(centralTextbox.boxHeight, expanseVertical, 0.3 * (elapsed / (1 / 60)));
 
-		//centralTextbox.scale.x = FlxMath.lerp(centralTextbox.scale.x, scale, 0.3 * (elapsed / (1 / 60)));
-		//centralTextbox.scale.y = FlxMath.lerp(centralTextbox.scale.y, scale, 0.3 * (elapsed / (1 / 60)));
-		//trace(centralTextbox.scale.x, centralTextbox.scale.y);
+		// centralTextbox.scale.x = FlxMath.lerp(centralTextbox.scale.x, scale, 0.3 * (elapsed / (1 / 60)));
+		// centralTextbox.scale.y = FlxMath.lerp(centralTextbox.scale.y, scale, 0.3 * (elapsed / (1 / 60)));
+		// trace(centralTextbox.scale.x, centralTextbox.scale.y);
 		selector.scale.set(centralTextbox.scale.x * (centralTextbox.boxWidth / expanseHorizontal),
-		centralTextbox.scale.y * (centralTextbox.boxHeight / expanseVertical));
+			centralTextbox.scale.y * (centralTextbox.boxHeight / expanseVertical));
 		selector.x = centralTextbox.x - centralTextbox.width / 2 + (selector.scale.x * centralTextbox.boxInterval);
 		selector.screenCenter(Y);
 		selector.y -= (centralTextbox.boxInterval * centralTextbox.boxHeight * centralTextbox.scale.y) / 2;
@@ -557,36 +595,41 @@ class OptionsMenuState extends MusicBeatSubState
 		// I hate doing this shit lol
 		if (curSelected > 12)
 			m -= curSelected - 12;
-		
+
 		selector.y += 36 * m;
 		for (i in 0...currentDisplayed.members.length)
 		{
 			var s = i;
 			if (curSelected > 12)
-				s -= curSelected-12;
+				s -= curSelected - 12;
 
 			var text = currentDisplayed.members[i];
-			text.visible=s < 13 && s >= 0;
-			text.scale.set(centralTextbox.scale.x * (centralTextbox.boxWidth / expanseHorizontal), centralTextbox.scale.y * (centralTextbox.boxHeight / expanseVertical));
+			text.visible = s < 13 && s >= 0;
+			text.scale.set(centralTextbox.scale.x * (centralTextbox.boxWidth / expanseHorizontal),
+				centralTextbox.scale.y * (centralTextbox.boxHeight / expanseVertical));
 			text.updateHitbox();
 			text.screenCenter();
-			if(currentScreen[i][1]!=null)
-				text.x -= ((centralTextbox.width - text.width)/2) - (selector.frameWidth * selector.scale.x);
+			if (currentScreen[i][1] != null)
+				text.x -= ((centralTextbox.width - text.width) / 2) - (selector.frameWidth * selector.scale.x);
 
-			text.y -= (centralTextbox.boxInterval * centralTextbox.boxHeight * centralTextbox.scale.y)/2;
+			text.y -= (centralTextbox.boxInterval * centralTextbox.boxHeight * centralTextbox.scale.y) / 2;
 
 			text.y += 12;
 			text.y += 36 * s;
 
 			var attachment = currentExtras.get(text);
-			if(attachment!=null){
+			if (attachment != null)
+			{
 				attachment.scale.set(centralTextbox.scale.x * (centralTextbox.boxWidth / expanseHorizontal),
 					centralTextbox.scale.y * (centralTextbox.boxHeight / expanseVertical));
 				attachment.updateHitbox();
-				if((attachment is PixelSelector)){
+				if ((attachment is PixelSelector))
+				{
 					attachment.x = text.x + text.width;
-					attachment.y = text.y + 6; // da magic number 
-				}else{
+					attachment.y = text.y + 6; // da magic number
+				}
+				else
+				{
 					attachment.x = text.x + text.width;
 					attachment.y = text.y + ((text.height - attachment.height) / 2);
 				}
@@ -594,46 +637,49 @@ class OptionsMenuState extends MusicBeatSubState
 			}
 		}
 
-		if (canControl){
+		if (canControl)
+		{
 			var pressUp = controls.UI_UP_P;
 			var pressDown = controls.UI_DOWN_P;
 			var confirm = controls.ACCEPT;
 			var back = controls.BACK;
 
-			if(back){
-				if(currentScreenName=='main')
+			if (back)
+			{
+				if (currentScreenName == 'main')
 					exit();
 				else
 					loadGroup("main");
 			}
 
 			/*if (pressDown)
-				curSelected++;
-			
-			if (pressUp)
-				curSelected--;
-			
-			if (curSelected > currentScreen.length - 1)
-				curSelected = 0;
+					curSelected++;
 
-			if (curSelected < 0)
-				curSelected = currentScreen.length - 1;*/
+				if (pressUp)
+					curSelected--;
+
+				if (curSelected > currentScreen.length - 1)
+					curSelected = 0;
+
+				if (curSelected < 0)
+					curSelected = currentScreen.length - 1; */
+
 			var last = curSelected;
 			if (pressDown)
 				changeSelection(1);
 			if (pressUp)
 				changeSelection(-1);
 
-			if(curSelected != last)
+			if (curSelected != last)
 				FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
-			
-			if (confirm){
-				if (currentScreen[curSelected][1]!=null)
+			if (confirm)
+			{
+				if (currentScreen[curSelected][1] != null)
 					currentScreen[curSelected][1]();
 			}
 
-			if (currentScreen[curSelected][3]!=null)
+			if (currentScreen[curSelected][3] != null)
 				currentScreen[curSelected][3]();
 		}
 	}

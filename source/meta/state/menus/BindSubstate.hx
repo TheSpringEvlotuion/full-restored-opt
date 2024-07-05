@@ -9,63 +9,48 @@ import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import meta.MusicBeat.MusicBeatSubState;
+
 using StringTools;
 
-class BindSubstate extends MusicBeatSubState{
+class BindSubstate extends MusicBeatSubState
+{
 	var centralTextbox:Textbox;
-    var bindTextbox:Textbox;
+	var bindTextbox:Textbox;
 	var popupTitle:FlxText;
 	var popupText:FlxText;
 	var unbindText:FlxText;
-    
+
 	var expanseHorizontal:Float;
 	var expanseVertical:Float;
 	var defaultExpanseHorizontal:Float;
 	var defaultExpanseVertical:Float;
 
-	var forcedBind:Array<String> = [
-		'UI_UP',
-		'UI_DOWN',
-		'UI_LEFT',
-		'UI_RIGHT',
-		'ACCEPT',
-		'BACK'
-	];
+	var forcedBind:Array<String> = ['UI_UP', 'UI_DOWN', 'UI_LEFT', 'UI_RIGHT', 'ACCEPT', 'BACK'];
 
 	var binds:Array<Array<String>> = [
-		['Gameplay'],
-		['Left', 'LEFT'],
-		['Down', 'DOWN'],
-		['Mechanic', 'SPACE'],
-		['Up', 'UP'],
-		['Right', 'RIGHT'],
-		['Pause', 'PAUSE'],
-		['UI'],
-		['Up', 'UI_UP'],
-		['Down', 'UI_DOWN'],
-		['Left', 'UI_LEFT'],
-		['Right', 'UI_RIGHT'],
-		['Accept', 'ACCEPT'],
-		['Back', 'BACK']
-	];
+		['Gameplay'], ['Left', 'LEFT'], ['Down', 'DOWN'], ['Mechanic', 'SPACE'], ['Up', 'UP'], ['Right', 'RIGHT'], ['Pause', 'PAUSE'], ['UI'],
+		['Up', 'UI_UP'], ['Down', 'UI_DOWN'], ['Left', 'UI_LEFT'], ['Right', 'UI_RIGHT'], ['Accept', 'ACCEPT'], ['Back', 'BACK']];
 
 	var bindID:Int = 0;
 	var bindTexts:Array<Array<FlxText>> = []; // the actual bind buttons. used for input etc lol
 	var internals:Array<String> = [];
 	var displays:Array<String> = [];
 
-    var curSelected:Int = 0;
+	var curSelected:Int = 0;
 
-    var rebinding:Bool = false;
-    var scrollableCamera:FlxCamera; // smth i learnt from riconuts and tgt!! thanks riconuts and tgt!!
+	var rebinding:Bool = false;
+	var scrollableCamera:FlxCamera; // smth i learnt from riconuts and tgt!! thanks riconuts and tgt!!
 	// .. isnt ACTUALLY necessary for this but im gonna keep it because it makes positioning stuff a lil bit easier
 	var overlayCamera:FlxCamera;
 
 	var selector:FlxSprite;
-	private function getStringKey(?arrayThingy:FlxKey=NONE):String
+
+	private function getStringKey(?arrayThingy:FlxKey = NONE):String
 	{
-		if (arrayThingy==null)return '---';
-		if (arrayThingy==NONE)return '---';
+		if (arrayThingy == null)
+			return '---';
+		if (arrayThingy == NONE)
+			return '---';
 
 		var keyString:String = '---';
 		keyString = arrayThingy.toString();
@@ -74,7 +59,8 @@ class BindSubstate extends MusicBeatSubState{
 		return keyString;
 	}
 
-    override function create(){
+	override function create()
+	{
 		var bg = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
 		bg.setGraphicSize(FlxG.width, FlxG.height);
 		bg.screenCenter();
@@ -92,7 +78,7 @@ class BindSubstate extends MusicBeatSubState{
 		bindTextbox.screenCenter();
 		bindTextbox.scale.set(3, 3);
 		bindTextbox.boxWidth = 14;
-        bindTextbox.boxHeight = 6;
+		bindTextbox.boxHeight = 6;
 		bindTextbox.update(0);
 
 		defaultExpanseVertical = expanseVertical;
@@ -104,16 +90,16 @@ class BindSubstate extends MusicBeatSubState{
 		overlayCamera.bgColor.alpha = 127;
 		overlayCamera.visible = false;
 
-        scrollableCamera.x = centralTextbox.x;
-        scrollableCamera.y = centralTextbox.y;
+		scrollableCamera.x = centralTextbox.x;
+		scrollableCamera.y = centralTextbox.y;
 		scrollableCamera.bgColor.alpha = 0;
 
-        FlxG.cameras.add(scrollableCamera, false); 
-		FlxG.cameras.add(overlayCamera, false); 
+		FlxG.cameras.add(scrollableCamera, false);
+		FlxG.cameras.add(overlayCamera, false);
 		add(bg);
 		add(centralTextbox);
 
-        // NGL most of this is just stolen from TGT
+		// NGL most of this is just stolen from TGT
 
 		var centerX = centralTextbox.x - (centralTextbox.width / 2);
 		var centerY = centralTextbox.y - (centralTextbox.height / 2);
@@ -121,9 +107,11 @@ class BindSubstate extends MusicBeatSubState{
 		var height = expanseVertical * 9 * 3;
 
 		var daY:Float = 0;
-		for (data in binds){
+		for (data in binds)
+		{
 			var label = data[0];
-			if(data.length>1){
+			if (data.length > 1)
+			{
 				// bind
 				var internal = data[1];
 				var keys = Init.gameControls.get(internal)[0];
@@ -143,7 +131,9 @@ class BindSubstate extends MusicBeatSubState{
 				add(text1);
 				add(text2);
 				daY += label.height;
-			}else{
+			}
+			else
+			{
 				var label:FlxText = new FlxText(0, daY, width, label, 12);
 				label.setFormat(Paths.font("poketext.ttf"), 24, 0xFF000000, FlxTextAlign.CENTER);
 				label.cameras = [scrollableCamera];
@@ -166,9 +156,11 @@ class BindSubstate extends MusicBeatSubState{
 		var centerY = bindTextbox.y - (bindTextbox.height / 2);
 		popupTitle = new FlxText(centerX, centerY + 20, bindTextbox.width - (bindTextbox.boxInterval * 3), "Currently binding my penis", 16);
 		popupTitle.setFormat(Paths.font("poketext.ttf"), 16, 0xFF000000, FlxTextAlign.CENTER);
-		popupText = new FlxText(centerX, centerY + 20 + popupTitle.height, bindTextbox.width - (bindTextbox.boxInterval * 3), "Press key to bind\npress to unbind", 16);
+		popupText = new FlxText(centerX, centerY + 20 + popupTitle.height, bindTextbox.width - (bindTextbox.boxInterval * 3),
+			"Press key to bind\npress to unbind", 16);
 		popupText.setFormat(Paths.font("poketext.ttf"), 16, 0xFF000000, FlxTextAlign.CENTER);
-		unbindText = new FlxText(centerX, centerY + 140, bindTextbox.width - (bindTextbox.boxInterval * 3), "(Note that this action needs atleast one key bound)", 16);
+		unbindText = new FlxText(centerX, centerY + 140, bindTextbox.width - (bindTextbox.boxInterval * 3),
+			"(Note that this action needs atleast one key bound)", 16);
 		unbindText.setFormat(Paths.font("poketext.ttf"), 16, 0xFF000000, FlxTextAlign.CENTER);
 
 		bindTextbox.cameras = [overlayCamera];
@@ -182,11 +174,17 @@ class BindSubstate extends MusicBeatSubState{
 		add(unbindText);
 
 		acceptDB = controls.ACCEPT;
-    }
 
-	function enterRebind(){
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B);
+		addVirtualPadCamera(false);
+		#end
+	}
+
+	function enterRebind()
+	{
 		rebinding = true;
-		
+
 		var internal = internals[curSelected];
 		popupText.text = 'Press any key to bind, or press [BACKSPACE] to cancel.';
 		var daKey:FlxKey = Init.gameControls.get(internal)[0][bindID];
@@ -197,9 +195,11 @@ class BindSubstate extends MusicBeatSubState{
 		overlayCamera.visible = true;
 		unbindText.visible = forcedBind.contains(internal);
 	}
-	
+
 	var acceptDB:Bool = false;
-    override function update(elapsed:Float){
+
+	override function update(elapsed:Float)
+	{
 		if (Math.abs(centralTextbox.boxWidth - expanseHorizontal) < 0.05)
 			centralTextbox.boxWidth = expanseHorizontal;
 		else
@@ -217,9 +217,10 @@ class BindSubstate extends MusicBeatSubState{
 		overlayCamera.visible = rebinding;
 
 		super.update(elapsed);
-		if(!rebinding){
+		if (!rebinding)
+		{
 			var lastBind = bindID;
-			if(controls.UI_LEFT_P)
+			if (controls.UI_LEFT_P)
 				bindID = bindID == 1 ? 0 : 1;
 			if (controls.UI_RIGHT_P)
 				bindID = bindID == 0 ? 1 : 0;
@@ -229,26 +230,31 @@ class BindSubstate extends MusicBeatSubState{
 				curSelected++;
 			if (controls.UI_UP_P)
 				curSelected--;
-			
 
-			if(controls.BACK){
+			if (controls.BACK)
+			{
+				#if desktop
 				close();
+				#else
+				Init.saveControls();
+				FlxG.resetState();
+				#end
 				return;
 			}
-			
 
-			if (curSelected > bindTexts.length-1)curSelected=0;
+			if (curSelected > bindTexts.length - 1)
+				curSelected = 0;
 			if (curSelected < 0)
 				curSelected = bindTexts.length - 1;
-			
+
 			if (last != curSelected || lastBind != bindID)
 				FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
 			selector.x = bindTexts[curSelected][bindID].x - 10;
 			selector.y = bindTexts[curSelected][bindID].y + 4;
-			if (controls.ACCEPT && !acceptDB)enterRebind();
-			
-		}	
+			if (controls.ACCEPT && !acceptDB)
+				enterRebind();
+		}
 		else
 		{
 			var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
@@ -268,7 +274,6 @@ class BindSubstate extends MusicBeatSubState{
 				rebinding = false;
 				if (binds[bindID] == keyPressed)
 					keyPressed = NONE;
-
 				else if (binds[opp] == keyPressed)
 				{
 					binds[opp] = NONE;
@@ -290,7 +295,6 @@ class BindSubstate extends MusicBeatSubState{
 				bindTexts[curSelected][bindID].text = getStringKey(keyPressed);
 				Init.gameControls.get(internal)[0] = binds;
 				controls.setKeyboardScheme(None, false);
-
 			}
 		}
 		acceptDB = controls.ACCEPT;
@@ -299,7 +303,7 @@ class BindSubstate extends MusicBeatSubState{
 	override public function close()
 	{
 		//
-		Init.saveControls(); // for controls
+		Init.savecontrols(); // for controls
 		super.close();
 	}
 }
