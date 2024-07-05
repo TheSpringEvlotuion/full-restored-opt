@@ -2810,14 +2810,16 @@ class PlayState extends MusicBeatState
 
 	function controllerInput()
 	{
+		var justPressArray:Array<Bool>;
+		var justReleaseArray:Array<Bool>;
 	  if (!bronzongMechanic) {
-		var justPressArray:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
+	  justPressArray = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
 
-		var justReleaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
+	 justReleaseArray = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
 		} else {
-		var justPressArray:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P, controls.SPACE_P];
+		justPressArray = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P, controls.SPACE_P];
 
-		var justReleaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R, controls.SPACE_R];
+	  justReleaseArray = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R, controls.SPACE_R];
 		}
 
 		if (justPressArray.contains(true))
