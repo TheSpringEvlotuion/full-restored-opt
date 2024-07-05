@@ -1176,8 +1176,11 @@ class PlayState extends MusicBeatState
 				];
 			}
 
+		if (!Init.trueSettings.get('Touch Mode'))
+		{
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
+		}
 
 		moneySound = new FlxSound().loadEmbedded(Paths.sound('MoneyBagGet'), false, true);
 		FlxG.sound.list.add(moneySound);
@@ -1190,6 +1193,20 @@ class PlayState extends MusicBeatState
 
 		// call the funny intro cutscene depending on the song
 		songIntroCutscene();
+		#if mobile
+		switch (curStage) // better than cursong
+		{
+			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar':
+				if (gameplayMode != PUSSY_MODE)
+					addHitbox(true, SPACE);
+				else
+					addHitbox(true, DEFAULT);
+
+			default: // What other songs use 5keys?
+				addHitbox(true, DEFAULT);
+		}
+		addHitboxCamera(false);
+		#end
 	}
 
 
@@ -1677,7 +1694,7 @@ class PlayState extends MusicBeatState
 
 		if ((key >= 0)
 			&& !strumLines.members[playerLane].autoplay
-			&& (FlxG.keys.checkStatus(eventKey, JUST_PRESSED))
+			&& (FlxG.keys.checkStatus(eventKey, JUST_PRESSED) || Init.trueSettings.get('Touch Mode'))
 			&& (FlxG.keys.enabled && !paused && (FlxG.state.active || FlxG.state.persistentUpdate)))
 		{
 			if (generatedMusic && !inCutscene)
@@ -2036,7 +2053,7 @@ class PlayState extends MusicBeatState
 			
 			// pause the game if the game is allowed to pause and enter is pressed
 			if(!inCutscene){
-				if ((SONG.song.toLowerCase() != 'sansno' && FlxG.keys.justPressed.ENTER) && startedCountdown && (accuracySound == null || (accuracySound != null && !accuracySound.playing)) && canPause && !deadstone)
+				if ((SONG.song.toLowerCase() != 'sansno' && FlxG.keys.justPressed.ENTER #if mobile || FlxG.android.justReleased.BACK #end) && startedCountdown && (accuracySound == null || (accuracySound != null && !accuracySound.playing)) && canPause && !deadstone)
 				{
 					// update drawing stuffs
 					paused = true;
@@ -2581,6 +2598,8 @@ class PlayState extends MusicBeatState
 				// */
 			}
 			noteCalls();
+			if (Init.trueSettings.get('Touch Mode'))
+				controllerInput();
 		}
 
 		if (staticCamera) {
@@ -2787,6 +2806,38 @@ class PlayState extends MusicBeatState
 	}
 
 	public var mxMechanic:Bool = false;
+
+	function controllerInput()
+	{
+	  if (!bronzongMechanic) {
+		var justPressArray:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
+
+		var justReleaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R];
+		} else {
+		var justPressArray:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P, controls.SPACE_P];
+
+		var justReleaseArray:Array<Bool> = [controls.LEFT_R, controls.DOWN_R, controls.UP_R, controls.RIGHT_R, controls.SPACE_R];
+		}
+
+		if (justPressArray.contains(true))
+		{
+			for (i in 0...justPressArray.length)
+			{
+				if (justPressArray[i])
+					onKeyPress(new KeyboardEvent(KeyboardEvent.KEY_DOWN, true, true, -1, keysArray[i][0]));
+			}
+		}
+
+		if (justReleaseArray.contains(true))
+		{
+			for (i in 0...justReleaseArray.length)
+			{
+				if (justReleaseArray[i])
+					onKeyRelease(new KeyboardEvent(KeyboardEvent.KEY_UP, true, true, -1, keysArray[i][0]));
+			}
+		}
+	}
+
 	function noteCalls()
 	{
 		// reset strums
