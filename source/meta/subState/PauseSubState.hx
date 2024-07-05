@@ -1,6 +1,7 @@
 package meta.subState;
 
 import sys.FileSystem;
+import openfl.utils.Assets;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
@@ -8,7 +9,11 @@ import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
+#if (flixel >= "5.3.0")
+import flixel.sound.FlxSound;
+#else
 import flixel.system.FlxSound;
+#end
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -43,8 +48,14 @@ class PauseSubState extends MusicBeatSubState
 	{
 		super();
 
+		#if mobile
+		addVirtualPad(UP_DOWN, A);
+		addVirtualPadCamera();
+		#end
+
 		mutex = new Mutex();
-		Thread.create(function(){
+		Thread.create(function()
+		{
 			mutex.acquire();
 			pauseMusic = new FlxSound().loadEmbedded(Paths.music('LullabyPause'), true, true);
 			pauseMusic.volume = 0;
@@ -60,20 +71,24 @@ class PauseSubState extends MusicBeatSubState
 
 		var portraitDistance:Float = 1000;
 		pausePortraitLeft = new FlxSprite(portraitDistance * -1, 0);
-		pausePortraitLeft.loadGraphic(Paths.image('pause/' + PlayState.SONG.song.toLowerCase()+ '/left' + PlayState.instance.pausePortraitPrefix[0]));
+		pausePortraitLeft.loadGraphic(Paths.image('pause/' + PlayState.SONG.song.toLowerCase() + '/left' + PlayState.instance.pausePortraitPrefix[0]));
 		pausePortraitLeft.scrollFactor.set();
-		if (!FileSystem.exists(Paths.getPath('pause/' + PlayState.SONG.song.toLowerCase()+ '/left' + PlayState.instance.pausePortraitPrefix[0] + '.png', IMAGE))) add(pausePortraitLeft);
+		if (!Assets.exists(Paths.getPath('pause/' + PlayState.SONG.song.toLowerCase() + '/left' + PlayState.instance.pausePortraitPrefix[0] + '.png', IMAGE)))
+			add(pausePortraitLeft);
 		pausePortraitLeft.x = portraitDistance * -1;
 		pausePortraitLeft.alpha = 0;
-		if (PlayState.instance.pausePortraitRevealed[0] == false) pausePortraitLeft.color = FlxColor.BLACK;
+		if (PlayState.instance.pausePortraitRevealed[0] == false)
+			pausePortraitLeft.color = FlxColor.BLACK;
 
 		pausePortraitRight = new FlxSprite((FlxG.width / 2) + portraitDistance, 0);
-		pausePortraitRight.loadGraphic(Paths.image('pause/' + PlayState.SONG.song.toLowerCase()+ '/right' + PlayState.instance.pausePortraitPrefix[1]));
+		pausePortraitRight.loadGraphic(Paths.image('pause/' + PlayState.SONG.song.toLowerCase() + '/right' + PlayState.instance.pausePortraitPrefix[1]));
 		pausePortraitRight.scrollFactor.set();
-		if (!FileSystem.exists(Paths.getPath('pause/' + PlayState.SONG.song.toLowerCase()+ '/right' + PlayState.instance.pausePortraitPrefix[1] + '.png', IMAGE))) add(pausePortraitRight);
+		if (!Assets.exists(Paths.getPath('pause/' + PlayState.SONG.song.toLowerCase() + '/right' + PlayState.instance.pausePortraitPrefix[1] + '.png', IMAGE)))
+			add(pausePortraitRight);
 		pausePortraitRight.x = (FlxG.width / 2) + portraitDistance;
 		pausePortraitRight.alpha = 0;
-		if (PlayState.instance.pausePortraitRevealed[1] == false) pausePortraitRight.color = FlxColor.BLACK;
+		if (PlayState.instance.pausePortraitRevealed[1] == false)
+			pausePortraitRight.color = FlxColor.BLACK;
 
 		mainTextbox = new Textbox(x, y);
 		mainTextbox.scrollFactor.set();
@@ -81,7 +96,8 @@ class PauseSubState extends MusicBeatSubState
 		// mainTextbox.scale.set(6, 6);
 		add(mainTextbox);
 
-		for (i in menuItems) {
+		for (i in menuItems)
+		{
 			var newText:FlxText = new FlxText(x, y, 16 * 8, i);
 			newText.setFormat(Paths.font('poketext.ttf'), 8, FlxColor.BLACK);
 			newText.screenCenter();
@@ -89,7 +105,7 @@ class PauseSubState extends MusicBeatSubState
 			add(newText);
 			grpText.push(newText);
 		}
-		
+
 		expanseHorizontal = 8 / mainTextbox.boxInternalDivision;
 		expanseVertical = 4 / mainTextbox.boxInternalDivision;
 		mainTextbox.boxInterval = Std.int(mainTextbox.boxInterval / mainTextbox.boxInternalDivision);
@@ -114,18 +130,22 @@ class PauseSubState extends MusicBeatSubState
 
 	var lockControls:Bool = false;
 
-	override public function update(elapsed:Float) {
-		
+	override public function update(elapsed:Float)
+	{
 		var fakeElapsed:Float = CoolUtil.clamp(elapsed, 0, 1);
-		if (fakeElapsed > 0) {
-			if (!closing) {
+		if (fakeElapsed > 0)
+		{
+			if (!closing)
+			{
 				bg.alpha = FlxMath.lerp(bg.alpha, 0.6, fakeElapsed * ogLerpVal);
 				//
 				pausePortraitLeft.x = FlxMath.lerp(pausePortraitLeft.x, 0, fakeElapsed * portraitLerp);
 				pausePortraitLeft.alpha = FlxMath.lerp(pausePortraitLeft.alpha, 1, fakeElapsed * portraitLerp);
 				pausePortraitRight.x = FlxMath.lerp(pausePortraitRight.x, 560, fakeElapsed * portraitLerp);
 				pausePortraitRight.alpha = FlxMath.lerp(pausePortraitRight.alpha, 1, fakeElapsed * portraitLerp);
-			} else {
+			}
+			else
+			{
 				bg.alpha = FlxMath.lerp(bg.alpha, 0, fakeElapsed * ogLerpVal);
 				pausePortraitLeft.x = FlxMath.lerp(pausePortraitLeft.x, -1000, fakeElapsed * portraitLerp / 2);
 				pausePortraitLeft.alpha = FlxMath.lerp(pausePortraitLeft.alpha, 0, fakeElapsed * portraitLerp);
@@ -235,10 +255,11 @@ class PauseSubState extends MusicBeatSubState
 					+ (selector.scale.y * mainTextbox.boxInterval * (curSelected + mainTextbox.boxInternalDivision))
 					+ (selector.height / mainTextbox.boxInternalDivision)));
 			// SHIT BANDAGE SOLUTION LOLLL
-			if (mainTextbox.boxInternalDivision == 1) 
+			if (mainTextbox.boxInternalDivision == 1)
 				selector.y += (selector.height / 2) + selector.scale.y;
-				
-			if (pauseMusic != null && pauseMusic.playing) {
+
+			if (pauseMusic != null && pauseMusic.playing)
+			{
 				if (pauseMusic.volume < 0.5)
 					pauseMusic.volume += 0.025 * fakeElapsed;
 			}
