@@ -116,19 +116,7 @@ class UnlockSubstate extends MusicBeatSubState {
 						newText.text = '* "${unlocks[i]}"';
 						newText.setPosition(Std.int(textbox.x + 16), Std.int(textbox.y + (32 * (i - (unlocks.length / 2)))));
 					} else {
-						newText.text = 'Press ';
-						var keyArray = cast(Init.gameControls.get('ACCEPT')[0], Array<Dynamic>);
-						for (i in 0...keyArray.length) {
-							if (i > 0 && i < keyArray.length - 1) {
-								newText.text += ', ';
-							} else 
-							if (i == keyArray.length - 1)
-								newText.text += ' or ';
-							var key:Dynamic = keyArray[i];
-							if (key != null) {
-								var keyDisplay:FlxKey = key;
-								newText.text += keyDisplay.toString();
-							}
+						newText.text = 'Touch';
 						}
 						newText.text += ' to continue';
 						newText.setPosition(Std.int(textbox.x + 16), Std.int(textbox.y + (textbox.height / 2) - 56));
@@ -146,8 +134,20 @@ class UnlockSubstate extends MusicBeatSubState {
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
 
+		var pressedEnter:Bool = controls.ACCEPT;
+
+			#if mobile
+			for (touch in FlxG.touches.list)
+			{
+				if (touch.justPressed)
+				{
+					pressedEnter = true;
+				}
+			}
+			#end
+
 		if (youCanSpamConfirmNow) {
-			if (controls.ACCEPT) {
+			if (pressedEnter) {
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.4);
 				for (i in 0...textGroup.members.length) {
 					var text:FlxText = textGroup.members[i];
@@ -177,7 +177,11 @@ class UnlockSubstate extends MusicBeatSubState {
 						FlxG.save.data.doneUnlocks.push(curUnlockable);
 						FlxG.save.flush();
 					}
+					#if desktop
 					close();
+					#else
+					FlxG.resetState();
+					#end
 				});
 				youCanSpamConfirmNow = false;
 			}
