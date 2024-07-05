@@ -127,7 +127,6 @@ class UnlockSubstate extends MusicBeatSubState {
 					textGroup.add(newText);
 					FlxTween.tween(newText, {alpha: 1, x: newText.x - FlxG.width / 8}, 0.25, {ease: FlxEase.circOut, startDelay: 0.05 * i});
 				}
-			}});
 		}});
     }
 
