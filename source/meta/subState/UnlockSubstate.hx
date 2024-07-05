@@ -176,7 +176,11 @@ class UnlockSubstate extends MusicBeatSubState {
 						FlxG.save.data.doneUnlocks.push(curUnlockable);
 						FlxG.save.flush();
 					}
+					#if desktop
 					close();
+					#else
+					FlxG.resetState();
+					#end);
 				});
 				youCanSpamConfirmNow = false;
 			}
