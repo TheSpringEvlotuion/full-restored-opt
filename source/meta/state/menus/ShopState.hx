@@ -791,6 +791,10 @@ class ShopState extends MusicBeatState
 		switchOldPortrait(oldPortraitText);
 
 		CoolUtil.lerpSnap = true;
+	
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
 	}
 
 	function getMenuDisplacement()
