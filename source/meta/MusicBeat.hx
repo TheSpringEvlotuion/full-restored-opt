@@ -28,6 +28,7 @@ import mobile.flixel.FlxHitbox.HitboxType;
 class MusicBeatState extends FNFUIState
 {
 	// original variables extended from original game source
+	public static var instance:MusicBeatState;
 	private var lastBeat:Float = 0;
 	private var lastStep:Float = 0;
 
@@ -144,6 +145,7 @@ class MusicBeatState extends FNFUIState
 	// class create event
 	override function create()
 	{
+	 		instance = this;
 		// dump
 		Paths.clearStoredMemory();
 		if ((!Std.isOfType(this, meta.state.PlayState)) && (!Std.isOfType(this, meta.state.charting.OriginalChartingState)))
