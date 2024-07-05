@@ -132,10 +132,6 @@ class OverworldStage extends FlxState {
         gameboyShader.data.intensity.value = [1.0];
 
         pointTo = new FlxPoint(320 + 8, 192 + 8);
-      #if mobile
-      addVirtualPad(LEFT_FULL, NONE);
-      addVirtualPadCamera(false);
-      #end
     }
 
     var shiftX:Float = 0;
@@ -277,6 +273,10 @@ class OverworldBF extends FlxSprite {
 
     public function new() {
 		super();
+      #if mobile
+      addVirtualPad(LEFT_FULL, NONE);
+      addVirtualPadCamera(false);
+      #end
         loadGraphic(Paths.image('overworld/bf'), true, 16, 16);
 		animation.add('down', [0, 1, 2, 1], 8, false);
 		animation.add('up', [3, 4, 5, 4], 8, false);
