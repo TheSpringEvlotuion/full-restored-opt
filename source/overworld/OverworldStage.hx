@@ -25,6 +25,7 @@ import flixel.util.FlxCollision;
 import flixel.util.FlxColor;
 import meta.Controls;
 import meta.data.PlayerSettings;
+import meta.MusicBeat;
 
 class OverworldStage extends FlxState {
     public static var gameCam:FlxCamera;
