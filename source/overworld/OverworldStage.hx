@@ -127,6 +127,9 @@ class OverworldStage extends FlxState {
         gameboyShader.data.intensity.value = [1.0];
 
         pointTo = new FlxPoint(320 + 8, 192 + 8);
+      #if mobile
+      addVirtualPad(LEFT_FULL, NONE);
+      #end
     }
 
     var shiftX:Float = 0;
