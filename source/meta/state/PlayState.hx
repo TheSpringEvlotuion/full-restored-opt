@@ -1783,8 +1783,10 @@ class PlayState extends MusicBeatState
 	}
 
 	override public function destroy() {
+	  if (!Init.trueSettings.get('Touch Mode')) {
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
+	  }
 
 		FlxG.autoPause = Init.trueSettings.get("Unfocus Pause");
 
