@@ -129,7 +129,7 @@ class OverworldStage extends FlxState {
 
         pointTo = new FlxPoint(320 + 8, 192 + 8);
       #if mobile
-      MusicBeatState.addVirtualPad(LEFT_FULL, NONE);
+      MusicBeatState.instance.addVirtualPad(LEFT_FULL, NONE);
       #end
     }
 
