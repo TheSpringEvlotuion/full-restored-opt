@@ -25,13 +25,9 @@ import flixel.util.FlxCollision;
 import flixel.util.FlxColor;
 import meta.Controls;
 import meta.data.PlayerSettings;
-#if mobile
-import mobile.flixel.FlxVirtualPad;
-import flixel.input.actions.FlxActionInput;
-import flixel.util.FlxDestroyUtil;
-#end
+import meta.MusicBeat;
 
-class OverworldStage extends FlxState {
+class OverworldStage extends MusicBeat {
     public static var gameCam:FlxCamera;
     public static var uiCam:FlxCamera;
     public static var gameboyCam:FlxCamera;
@@ -132,63 +128,11 @@ class OverworldStage extends FlxState {
         gameboyShader.data.intensity.value = [1.0];
 
         pointTo = new FlxPoint(320 + 8, 192 + 8);
-    /*#if mobile
+
+    #if mobile
     addVirtualPad(LEFT_FULL, NONE);
-    #end*/
+    #end
     }
-
-  /*#if mobile
-	var virtualPad:FlxVirtualPad;
-	var trackedInputsVirtualPad:Array<FlxActionInput> = [];
-	public function addVirtualPad(DPad:FlxDPadMode, Action:FlxActionMode, visible:Bool = true):Void
-	{
-		if (virtualPad != null)
-			removeVirtualPad();
-
-		virtualPad = new FlxVirtualPad(DPad, Action);
-		virtualPad.visible = visible;
-		add(virtualPad);
-
-		controls.setVirtualPadUI(virtualPad, DPad, Action);
-		trackedInputsVirtualPad = controls.trackedInputsUI;
-		controls.trackedInputsUI = [];
-	}
-
-	public function addVirtualPadCamera(DefaultDrawTarget:Bool = true):Void
-	{
-		if (virtualPad != null)
-		{
-			var camControls:FlxCamera = new FlxCamera();
-			camControls.bgColor.alpha = 0;
-			FlxG.cameras.add(camControls, DefaultDrawTarget);
-			virtualPad.cameras = [camControls];
-		}
-	}
-
-	public function removeVirtualPad():Void
-	{
-		if (trackedInputsVirtualPad.length > 0)
-			controls.removeVirtualControlsInput(trackedInputsVirtualPad);
-
-		if (virtualPad != null)
-			remove(virtualPad);
-	}
-  #end
-
-	override function destroy():Void
-	{
-		#if mobile
-		if (trackedInputsVirtualPad.length > 0)
-			controls.removeVirtualControlsInput(trackedInputsVirtualPad);
-		#end
-
-		super.destroy();
-
-		#if mobile
-		if (virtualPad != null)
-			virtualPad = FlxDestroyUtil.destroy(virtualPad);
-		#end
-	}*/
 
     var shiftX:Float = 0;
 	var fullElapsed:Float = 0;
