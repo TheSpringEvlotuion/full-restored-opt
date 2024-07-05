@@ -1,7 +1,6 @@
 package meta.state.menus;
 
 import haxe.Json;
-import sys.io.File;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -13,7 +12,8 @@ import flixel.util.FlxColor;
 import meta.MusicBeat;
 import openfl.display.GraphicsShader;
 import openfl.filters.ShaderFilter;
-import sys.FileSystem;
+import openfl.utils.Assets;
+import mobile.utils.HSys;
 
 using StringTools;
 typedef Credits = {
@@ -214,9 +214,9 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
 
 		var list:Array<String> = CoolUtil.coolTextFile(Paths.txt('images/menus/credit/iconorder'));
 		for (person in list) {
-			if (FileSystem.exists(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.json', TEXT))) {
+			if (Assets.exists(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.json', TEXT))) {
 				var icon:FlxSprite = new FlxSprite();
-				if (FileSystem.exists(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.png', IMAGE)))
+				if (Assets.exists(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.png', IMAGE)))
 					icon.loadGraphic(Paths.image('menus/credit/icon/${person.replace(' ', '_')}'));
 				else icon.loadGraphic(Paths.image('menus/credit/icon/placeholder'));
 				icon.setGraphicSize(Std.int(icon.width * (3 / 5)));
@@ -225,7 +225,7 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
 				iconList.push(icon);
 				background.add(icon);
 			
-				var rawJson = File.getContent(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.json', TEXT));
+				var rawJson = HSys.getContent(Paths.getPath('images/menus/credit/icon/${person.replace(' ', '_')}.json', TEXT));
 				var credits:Credits = cast Json.parse(rawJson).info;
 				credits.name = person;
 				personList.push(credits);
@@ -286,6 +286,10 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
 		background.add(descriptionText);
 
 		updateText();
+    
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
     }
 
 	public var moverCooldown:Float = 0;
