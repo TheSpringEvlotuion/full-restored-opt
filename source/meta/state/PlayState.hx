@@ -2582,24 +2582,21 @@ class PlayState extends MusicBeatState
 			}
 
 			// event bullshit
-			if (eventList.length > 0) {
+			/*if (eventList.length > 0) {
 				 // /*
 				for (i in 0...eventList.length)
 				{
 					if (eventList[i] != null && Conductor.songPosition >= eventList[i].timestamp) {
-						// /*
 						var module:ForeverModule = Events.loadedModules.get(eventList[i].eventName);
 						if (module != null && module.exists("eventFunction"))
 							module.get("eventFunction")(eventList[i].params);
 						stageBuild.dispatchEvent(eventList[i].eventName);
 						if (module != null && module.exists("onUpdate"))
 							updateableScript.push(module);
-						// */
 						trace(eventList.splice(i, 1));
 					}
 				}
-				// */
-			}
+			}*/
 			noteCalls();
 			if (Init.trueSettings.get('Touch Mode'))
 				controllerInput();
