@@ -2583,7 +2583,7 @@ class PlayState extends MusicBeatState
 
 			// event bullshit
 			if (eventList.length > 0) {
-				 /*
+				 // /*
 				for (i in 0...eventList.length)
 				{
 					if (eventList[i] != null && Conductor.songPosition >= eventList[i].timestamp) {
@@ -2594,7 +2594,7 @@ class PlayState extends MusicBeatState
 						stageBuild.dispatchEvent(eventList[i].eventName);
 						if (module != null && module.exists("onUpdate"))
 							updateableScript.push(module);
-						 */
+						// */
 						trace(eventList.splice(i, 1));
 					}
 				}
