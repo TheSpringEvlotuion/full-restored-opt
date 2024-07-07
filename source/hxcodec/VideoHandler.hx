@@ -1,12 +1,12 @@
 package hxcodec;
 
 #if (hxCodec >= "2.6.1")
-import hxcodec.VideoHandler;
+import hxcodec.VideoHandler as VideoHandlerOG;
 #elseif (hxCodec == "2.6.0")
-import VideoHandler;
+import VideoHandler as VideoHandlerOG;
 #end
 
-class VideoHandler extends VideoHandler
+class VideoHandler extends VideoHandlerOG
 {
 	public var isDisposed:Bool = false;
 
