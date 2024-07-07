@@ -742,8 +742,8 @@ class GameOverSubstate extends MusicBeatSubState
 
 		if (controls.BACK)
 		{
-			if (escapeFunction != null)
-				escapeFunction();
+			//if (escapeFunction != null)
+			//	escapeFunction();
 
 			if (FlxG.sound.music != null)
 				FlxG.sound.music.stop();
