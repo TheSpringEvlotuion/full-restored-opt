@@ -2583,7 +2583,7 @@ class PlayState extends MusicBeatState
 			}
 
 			// event bullshit
-			/*if (eventList.length > 0) {
+			if (eventList.length > 0) {
 				 // /*
 				for (i in 0...eventList.length)
 				{
@@ -2597,7 +2597,7 @@ class PlayState extends MusicBeatState
 						trace(eventList.splice(i, 1));
 					}
 				}
-			}*/
+			}
 			noteCalls();
 			if (Init.trueSettings.get('Touch Mode'))
 				controllerInput();
