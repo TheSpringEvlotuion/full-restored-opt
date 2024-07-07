@@ -366,11 +366,16 @@ class ShopState extends MusicBeatState
 
 		// my DUMBASS doesnt know how to sort arrays. so i just put a number in the folder name first if somebody can help that woud be awesome im so sorry - sector : - (
 
+		var storedFolders:Array<String> = [];
+
 		for (i in folderList)
 		{
 			trace('found folder: ' + i);
-			if (Assets.exists(Paths.getPath('images/shop/${i}/${i}.json', TEXT)))
+
+			if (Assets.exists(Paths.getPath('images/shop/${i}/${i}.json', TEXT)) && !storedFolders.contains(i))
 			{
+				storedFolders.push(i); //que 
+
 				var rawJson = Assets.getText(Paths.getPath('images/shop/${i}/${i}.json', TEXT));
 				var swagShit:ShopItem = cast Json.parse(rawJson).itemDetail;
 				var id = swagShit.lane + (swagShit.row * 3);
