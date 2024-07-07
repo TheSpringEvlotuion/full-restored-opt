@@ -597,7 +597,7 @@ class GameOverSubstate extends MusicBeatSubState
 						try
 						{
 							if (video != null && !video.isDisposed)
-								video.finishVideo();
+								video.onEndReached();
 						}
 						catch (e:Dynamic)
 						{
@@ -618,7 +618,7 @@ class GameOverSubstate extends MusicBeatSubState
 					escapeFunction = function()
 					{
 						if (video != null)
-							video.finishVideo();
+							video.onEndReached();
 					}
 				}
 				else if (PlayState.SONG.song.toLowerCase() == "monochrome")
