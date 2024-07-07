@@ -2675,6 +2675,7 @@
 		],
 		"player3": "gf-christmas",
 		"song": "Safety Lullaby",
+		"stage": "alley",
 		"arrowSkin": "",
 		"needsVoices": true,
 		"validScore": true,
