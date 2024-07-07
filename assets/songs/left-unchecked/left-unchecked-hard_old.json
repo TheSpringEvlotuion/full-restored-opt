@@ -6249,6 +6249,7 @@
 			}
 		],
 		"song": "Left-Unchecked",
+		"stage": "alley",
 		"validScore": true,
 		"sections": 45,
 		"needsVoices": true,
