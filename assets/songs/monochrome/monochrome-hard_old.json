@@ -5306,6 +5306,7 @@
 		],
 		"player2": "gold",
 		"song": "Monochrome",
+		"stage": "none",
 		"arrowSkin": "",
 		"validScore": true,
 		"sections": 0,
