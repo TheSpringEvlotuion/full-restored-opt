@@ -1198,7 +1198,7 @@ class PlayState extends MusicBeatState
 		switch (curStage) // better than cursong
 		{
 			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar':
-				if (gameplayMode != PUSSY_MODE || PlayState.old)
+				if (gameplayMode != PUSSY_MODE)
 					addHitbox(true, SPACE);
 				else
 					addHitbox(true, DEFAULT);
