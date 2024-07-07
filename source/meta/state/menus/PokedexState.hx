@@ -94,6 +94,7 @@ class PokedexState extends MusicBeatState
 
 		#if mobile
 		addVirtualPad(UP_DOWN, A_B);
+		addVirtualPadCamera(false);
 		#end
 
 		glitch = new ShaderFilter(new GraphicsShader("", Paths.shader('glitch')));
