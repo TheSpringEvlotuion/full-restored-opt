@@ -64,7 +64,7 @@ import openfl.media.Sound;
 import openfl.utils.Assets;
 import meta.data.dependency.Discord;
 
-import vlc.MP4Handler;
+import hxcodec.VideoHandler as MP4Handler;
 
 using StringTools;
 
