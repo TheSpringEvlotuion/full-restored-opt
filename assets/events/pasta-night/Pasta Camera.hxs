@@ -1,13 +1,10 @@
 function eventFunction(params) {
     var newPoint:FlxPoint = new FlxPoint(PlayState.instance.lordX.getMidpoint().x - 50, PlayState.instance.lordX.getMidpoint().y - 200);
-
-    var daParam = Std.parseInt(params[0]);
-    if(daParam==null)daParam=0;
-
-    newPoint.x += 200 * daParam;
-
+    switch (Std.parseInt(params[0])) {
+        case -1:
+            newPoint.x -= 200;
+        case 1:
+            newPoint.x += 200;
+    }
     PlayState.instance.manualCameraPosition.set(newPoint.x, newPoint.y);
-
-    PlayState.staticValues.set('camFocus', daParam+1);
-
 }
