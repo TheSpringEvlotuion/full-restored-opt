@@ -33,6 +33,7 @@ class GameOverSubstate extends MusicBeatSubState
 	var bf:Character;
 	var camFollow:FlxObject;
 	var stageSuffix:String = "";
+	public var isDisposed:Bool = false;
 
 	public static var redGraphic:FlxGraphic;
 
@@ -596,7 +597,7 @@ class GameOverSubstate extends MusicBeatSubState
 						try
 						{
 							if (video != null && !video.isDisposed)
-								video.finishVideo();
+								video.onVLCEndReached();
 						}
 						catch (e:Dynamic)
 						{
@@ -617,7 +618,7 @@ class GameOverSubstate extends MusicBeatSubState
 					escapeFunction = function()
 					{
 						if (video != null)
-							video.finishVideo();
+							video.onVLCEndReached();
 					}
 				}
 				else if (PlayState.SONG.song.toLowerCase() == "monochrome")
