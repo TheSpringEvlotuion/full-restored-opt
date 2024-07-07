@@ -25,7 +25,7 @@ import openfl.utils.Assets;
 #if sys
 import sys.FileSystem;
 #end
-import vlc.MP4Handler;
+import hxcodec.VideoHandler as MP4Handler;
 
 class GameOverSubstate extends MusicBeatSubState
 {
