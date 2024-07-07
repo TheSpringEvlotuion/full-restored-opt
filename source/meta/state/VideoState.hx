@@ -1,6 +1,6 @@
 package meta.state;
 
-import vlc.MP4Handler;
+import hxcodec.VideoHandler as MP4Handler;
 import sys.FileSystem;
 import meta.MusicBeat.MusicBeatState;
 
