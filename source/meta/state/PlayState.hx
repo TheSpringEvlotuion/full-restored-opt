@@ -2632,8 +2632,8 @@ class PlayState extends MusicBeatState
 					if(earRinging!=null){
 						earRinging.stop();
 						FlxG.sound.list.remove(earRinging); // stop ringing
-						openSubState(new GameOverSubstate(boyfriend.curCharacter, boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 					}
+						openSubState(new GameOverSubstate(boyfriend.curCharacter, boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				case 'brimstone':
 					songMusic.pause();
 					vocals.pause();
