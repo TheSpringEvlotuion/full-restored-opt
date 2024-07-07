@@ -186,10 +186,8 @@ class PokedexState extends MusicBeatState
 			var daPoke:String = dexArray[i].name;
 
 			trace('found folder: ' + daPoke);
-			if (Assets.exists(Paths.getPath('images/pokedex/' + daPoke + '/info.json', TEXT)) && !storedFolders.contains(i))
+			if (Assets.exists(Paths.getPath('images/pokedex/' + daPoke + '/info.json', TEXT)))
 			{
-			  storedFolders.push(i); 
-
 				var rawJson = Assets.getText(Paths.getPath('images/pokedex/' + daPoke + '/info.json', TEXT));
 				var swagShit:PokeData = cast Json.parse(rawJson).info;
 
