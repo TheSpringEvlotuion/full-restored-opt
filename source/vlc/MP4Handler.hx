@@ -6,14 +6,14 @@ import hxcodec.VideoHandler;
 import VideoHandler;
 #end
 
-import openfl.events.Event;
-import flixel.FlxG;
+//import openfl.events.Event;
+//import flixel.FlxG;
 
 /**
  * Play a video using cpp.
  * Use bitmap to connect to a graphic or use `MP4Sprite`.
  */
-class MP4Handler extends VideoHandler
+/*class MP4Handler extends VideoHandler
 {
 	public var isDisposed:Bool = false;
 	public var readyCallback:Void->Void;
@@ -32,3 +32,4 @@ class MP4Handler extends VideoHandler
 		onVLCEndReached();
 	
 }
+*/
