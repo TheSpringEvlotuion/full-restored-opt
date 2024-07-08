@@ -1207,7 +1207,7 @@ class PlayState extends MusicBeatState
 				addHitbox(true, DEFAULT);
 		  } else {
 			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar' | 'none' | 'pokecenter' | 'bygone' | 'shitty-cave':
-				if (gameplayMode !=PUSSY_MODE)
+				if (gameplayMode != PUSSY_MODE)
 					addHitbox(true, SPACE);
 				else
 					addHitbox(true, DEFAULT);
