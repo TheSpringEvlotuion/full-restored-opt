@@ -1206,6 +1206,7 @@ class PlayState extends MusicBeatState
 			default: // What other songs use 5keys?
 				addHitbox(true, DEFAULT);
 		  }
+	}
 	   if (gameplayMode == HELL_MODE || gameplayMode == FUCK_YOU) {
 	     		switch (curStage) // better than cursong
 		{
@@ -1222,7 +1223,6 @@ class PlayState extends MusicBeatState
 
 		addHitboxCamera(false);
 		//hitbox.visible = false;
-	}
 		#end
 	}
 
