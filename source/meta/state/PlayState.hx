@@ -1205,7 +1205,9 @@ class PlayState extends MusicBeatState
 
 			default: // What other songs use 5keys?
 				addHitbox(true, DEFAULT);
-		  } else {
+		  }
+
+		  if (gameplayMode == HELL_MODE || gameplayMode == FUCK_YOU) {
 			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar' | 'none' | 'pokecenter' | 'bygone' | 'shitty-cave':
 				if (gameplayMode != PUSSY_MODE)
 					addHitbox(true, SPACE);
