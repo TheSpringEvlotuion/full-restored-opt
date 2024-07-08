@@ -1194,10 +1194,13 @@ class PlayState extends MusicBeatState
 		// call the funny intro cutscene depending on the song
 		songIntroCutscene();
 		#if mobile
-		
 		switch (curStage) // better than cursong
 		{
-			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar':
+		  if (gameplayMode != HELL_MODE || gameplayMode != FUCK_YOU) {
+			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar' :
+		  } else {
+			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar' | 'none' | 'pokecenter' | 'bygone' | 'shitty-cave':
+		  }
 				if (gameplayMode != PUSSY_MODE)
 					addHitbox(true, SPACE);
 				else
