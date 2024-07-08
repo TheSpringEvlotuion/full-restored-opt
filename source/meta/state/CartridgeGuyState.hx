@@ -91,6 +91,10 @@ class CartridgeGuyState extends MusicBeatState
 		blackOverlay = new FlxSprite(0, 0).makeGraphic(FlxG.width * 4, FlxG.height * 4, FlxColor.BLACK);
 		blackOverlay.alpha = 0.0001;
 		add(blackOverlay);
+		#if mobile
+		addVirtualPad(LEFT_RIGHT, A);
+		addVirtualPadCamera(false);
+		#end
 	}
 
 	override function update(elapsed:Float)
