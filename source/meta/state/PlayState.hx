@@ -1194,9 +1194,9 @@ class PlayState extends MusicBeatState
 		// call the funny intro cutscene depending on the song
 		songIntroCutscene();
 		#if mobile
+	if (gameplayMode != HELL_MODE || gameplayMode != FUCK_YOU) {
 		switch (curStage) // better than cursong
 		{
-		  if (gameplayMode != HELL_MODE || gameplayMode != FUCK_YOU) {
 			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar' :
 				if (gameplayMode != PUSSY_MODE)
 					addHitbox(true, SPACE);
@@ -1206,20 +1206,23 @@ class PlayState extends MusicBeatState
 			default: // What other songs use 5keys?
 				addHitbox(true, DEFAULT);
 		  }
-
-		  if (gameplayMode == HELL_MODE || gameplayMode == FUCK_YOU) {
+	   if (gameplayMode == HELL_MODE || gameplayMode == FUCK_YOU) {
+	     		switch (curStage) // better than cursong
+		{
 			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar' | 'none' | 'pokecenter' | 'bygone' | 'shitty-cave':
 				if (gameplayMode != PUSSY_MODE)
 					addHitbox(true, SPACE);
 				else
 					addHitbox(true, DEFAULT);
 
-			default: // What other songs use 5keys?
+				 default: // What other songs use 5keys?
 				addHitbox(true, DEFAULT);
-		  }
 		}
+ }
+
 		addHitboxCamera(false);
 		//hitbox.visible = false;
+	}
 		#end
 	}
 
