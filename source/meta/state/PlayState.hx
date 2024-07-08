@@ -1198,9 +1198,6 @@ class PlayState extends MusicBeatState
 		{
 		  if (gameplayMode != HELL_MODE || gameplayMode != FUCK_YOU) {
 			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar' :
-		  } else {
-			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar' | 'none' | 'pokecenter' | 'bygone' | 'shitty-cave':
-		  }
 				if (gameplayMode != PUSSY_MODE)
 					addHitbox(true, SPACE);
 				else
@@ -1208,6 +1205,16 @@ class PlayState extends MusicBeatState
 
 			default: // What other songs use 5keys?
 				addHitbox(true, DEFAULT);
+		  } else {
+			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar' | 'none' | 'pokecenter' | 'bygone' | 'shitty-cave':
+				if (gameplayMode !=PUSSY_MODE)
+					addHitbox(true, SPACE);
+				else
+					addHitbox(true, DEFAULT);
+
+			default: // What other songs use 5keys?
+				addHitbox(true, DEFAULT);
+		  }
 		}
 		addHitboxCamera(false);
 		//hitbox.visible = false;
