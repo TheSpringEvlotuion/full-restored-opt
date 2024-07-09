@@ -130,7 +130,6 @@ function onCreatePost() {
 }
 
 function onUpdate(elapsed) {
-  if (!FlxG.save.data.activatedPurin) {
 	if(purinHitbox!=null){
     if (FlxG.mouse.overlaps(purinHitbox))
 		{
@@ -140,7 +139,6 @@ function onUpdate(elapsed) {
 				}
 		}
 	}
- }
 }
 
 function onBeat(beat) {
