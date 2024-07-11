@@ -86,7 +86,7 @@ function onCreate() {
 		stageForeground.active = false;
 		foreground.add(stageForeground);
 
-		purinHitbox = new FlxSprite(consistentPosition[0] + -400, consistentPosition[1] + -300);
+		purinHitbox = new FlxSprite(consistentPosition[0] - 400, consistentPosition[1] - 300);
 		purinHitbox.makeGraphic(1000, 700, FlxColor.fromRGB(255, 255, 255));
 		purinHitbox.scale.set(1.0, 1.0);
 		purinHitbox.visible = true;
