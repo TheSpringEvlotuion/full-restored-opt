@@ -89,7 +89,7 @@ function onCreate() {
 		purinHitbox = new FlxSprite(consistentPosition[0] - 400, consistentPosition[1] - 350);
 		purinHitbox.makeGraphic(1000, 700, FlxColor.fromRGB(255, 255, 255));
 		purinHitbox.scale.set(1.0, 1.0);
-		purinHitbox.visible = true;
+		purinHitbox.visible = false;
 		add(purinHitbox);
 		
 		trace(boyfriend.x);
