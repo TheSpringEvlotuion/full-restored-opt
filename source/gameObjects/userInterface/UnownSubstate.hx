@@ -19,6 +19,7 @@ import meta.MusicBeat.MusicBeatSubState;
 import meta.data.Song;
 import meta.state.PlayState;
 import openfl.utils.Assets;
+import openfl.events.KeyboardEvent;
 
 using StringTools;
 
@@ -172,6 +173,9 @@ class UnownSubstate extends MusicBeatSubState
 		timerTxt.font = Paths.font('metro.otf');
 		add(timerTxt);
 		timerTxt.text = Std.string(timer);
+
+		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
+		FlxG.stage.window.textInputEnabled = true;
 	}
 	static var wordsList:MonochromeWords;
     public static function init(?song:String) {
@@ -259,8 +263,23 @@ class UnownSubstate extends MusicBeatSubState
 		timerTxt.text = Std.string(timer);
 	}
 
+	public function onKeyPress(e:KeyboardEvent):Void 
+	{
+		var needed:String = String.fromCharCode(e.keyCode);
+
+		// Convert to string it in uppercase to see if it matches the key pressed
+		if (realWord.charAt(position).toUpperCase() == needed.toUpperCase())
+			correctLetter();
+		else
+			FlxG.sound.play(Paths.sound('BUZZER'));
+
+		// Idklool, me cooked, go fix shaders lmao
+	}
+
 	override public function close() {
 		// FlxG.autoPause = true;
+		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
+		FlxG.stage.window.textInputEnabled = false;
 		super.close();
 	}
 }
