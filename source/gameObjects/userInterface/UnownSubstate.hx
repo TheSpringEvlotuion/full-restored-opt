@@ -20,6 +20,9 @@ import meta.data.Song;
 import meta.state.PlayState;
 import openfl.utils.Assets;
 import openfl.events.KeyboardEvent;
+import openfl.text.TextField;
+import openfl.text.TextFieldType;
+import openfl.Lib;
 
 using StringTools;
 
@@ -55,40 +58,40 @@ class UnownSubstate extends MusicBeatSubState
 	public var lose:Void->Void = null;
 	var timer:Int = 10;
 	var timerTxt:FlxText;
+
+	var hiddenTextField:TextField;
+
 	public function new(theTimer:Int = 15, word:String = '', ?wordList:Array<String>)
 	{
 		timer = theTimer;
 		super();
+
 		var overlay:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.RED);
 		overlay.alpha = 0.4;
 		add(overlay);
 
 		words = publicWords;
-        /*
-		if (PlayState.gameplayMode == HELL_MODE) {
-			for (i in hellModeWords)
-				words.push(i);
-		}
-        */
 
-		if (wordList!=null)
+		if (wordList != null)
 			words = wordList;
-		else{
+		else
+		{
 			var level:Int = 0;
 
 			if (PlayState.dadOpponent.curCharacter == 'gold-headless')
 				level++;
-			if (PlayState.gameplayMode == HELL_MODE && PlayState.SONG.song.toLowerCase()=='monochrome' && FlxG.random.int(0,3)==0)
+			if (PlayState.gameplayMode == HELL_MODE && PlayState.SONG.song.toLowerCase() == 'monochrome' && FlxG.random.int(0, 3) == 0)
 				level++;
 
-
-			while (level < 3){
-				if (FlxG.random.int(0, 10) == 0) 
+			while (level < 3)
+			{
+				if (FlxG.random.int(0, 10) == 0)
 					level++;
 				else
 					break;
 			}
-			switch(level){
+			switch (level)
+			{
 				default:
 					words = publicWords;
 				case 1:
@@ -101,12 +104,11 @@ class UnownSubstate extends MusicBeatSubState
 		}
 
 		selectedWord = words[FlxG.random.int(0, words.length - 1)];
-        // */
-		
+
 		if (word != '')
 			selectedWord = word;
 
-		if (selectedWord.toLowerCase()=='no more')
+		if (selectedWord.toLowerCase() == 'no more')
 			if (PlayState.gameplayMode == HELL_MODE)
 				selectedWord = "NO FUCKING WAY";
 			else if (PlayState.gameplayMode == FUCK_YOU)
@@ -114,22 +116,23 @@ class UnownSubstate extends MusicBeatSubState
 
 		selectedWord = selectedWord.toUpperCase();
 		realWord = selectedWord.replace(" ", "");
-		
+
 		lines = new FlxTypedGroup<FlxSprite>();
 		add(lines);
 
 		unowns = new FlxTypedSpriteGroup<FlxSprite>();
 		add(unowns);
-		
+
 		var realThing:Int = 0;
 		var scale:Float = 1;
-		var width:Float = 100 * (selectedWord.length-1);
-		if(width > FlxG.width)
+		var width:Float = 100 * (selectedWord.length - 1);
+		if (width > FlxG.width)
 			scale *= FlxG.width / width;
 		width *= scale;
 
-		for (i in 0...selectedWord.length) {
-			if (!selectedWord.isSpace(i)) 
+		for (i in 0...selectedWord.length)
+		{
+			if (!selectedWord.isSpace(i))
 			{
 				var unown:FlxSprite = new FlxSprite(0, 90);
 				var xPos = i * 100;
@@ -149,14 +152,14 @@ class UnownSubstate extends MusicBeatSubState
 			}
 		}
 
-		for (i in 0...unowns.members.length){
+		for (i in 0...unowns.members.length)
+		{
 			var u:FlxSprite = unowns.members[i];
 			var l:FlxSprite = lines.members[i];
 
 			u.scale.scale(scale);
 			u.updateHitbox();
 			u.x *= scale;
-			//u.x += (FlxG.width - width)/2;
 			l.x = u.x;
 			l.scale.copyFrom(u.scale);
 			l.updateHitbox();
@@ -164,7 +167,8 @@ class UnownSubstate extends MusicBeatSubState
 
 		unowns.screenCenter(X);
 		unowns.y += 100;
-		for (i in 0...lines.length) {
+		for (i in 0...lines.length)
+		{
 			lines.members[i].x = unowns.members[i].x;
 		}
 
@@ -174,20 +178,33 @@ class UnownSubstate extends MusicBeatSubState
 		add(timerTxt);
 		timerTxt.text = Std.string(timer);
 
+		hiddenTextField = new TextField();
+		hiddenTextField.type = TextFieldType.INPUT;
+		hiddenTextField.alpha = 0;
+		hiddenTextField.width = 1;
+		hiddenTextField.height = 1;
+		hiddenTextField.selectable = true;
+		Lib.current.stage.addChild(hiddenTextField);
+		hiddenTextField.requestSoftKeyboard();
+		hiddenTextField.setSelection(0, 0);
+
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 		FlxG.stage.window.textInputEnabled = true;
 	}
+
 	static var wordsList:MonochromeWords;
-    public static function init(?song:String) {
+
+	public static function init(?song:String)
+	{
 		var rawJson = Assets.getText(Paths.getPath('unownTexts.json', TEXT)).trim();
 		while (!rawJson.endsWith("}"))
 			rawJson = rawJson.substr(0, rawJson.length - 1);
-        // trace(rawJson);
 		var faggot:WordList = cast Json.parse(rawJson);
 		if (song == null)
-			song = PlayState.SONG.song; // because i wanna add missingno words in brimstone!!
+			song = PlayState.SONG.song;
 
-		switch (song.toLowerCase()){
+		switch (song.toLowerCase())
+		{
 			case 'brimstone':
 				wordsList = faggot.brimstoneTexts;
 			case 'missingno':
@@ -199,56 +216,66 @@ class UnownSubstate extends MusicBeatSubState
 			default:
 				wordsList = faggot.monochromeTexts;
 		}
-		
 
 		publicWords = wordsList.words;
 		rareWords = wordsList.rareWords;
 		impossibleWords = wordsList.impossibleWords;
 		harderWords = wordsList.harderWords;
-    }
+	}
 
-	function correctLetter() {
+	function correctLetter()
+	{
 		position++;
-		if (position >= realWord.length) {
+		if (position >= realWord.length)
+		{
 			close();
 			win();
 			FlxG.sound.play(Paths.sound('CORRECT'));
 		}
 	}
+
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
 
-		for (i in lines) {
-			if (i.ID == position) {
+		for (i in lines)
+		{
+			if (i.ID == position)
+			{
 				FlxFlicker.flicker(i, 1.3, 1, true, false);
-			} else if (i.ID < position) {
+			}
+			else if (i.ID < position)
+			{
 				i.visible = false;
 				i.alpha = 0;
 			}
 		}
-		if (FlxG.keys.justPressed.ANY) {
-			if (realWord.charAt(position) == '?') {
+		if (FlxG.keys.justPressed.ANY)
+		{
+			if (realWord.charAt(position) == '?')
+			{
 				if (FlxG.keys.justPressed.SLASH && FlxG.keys.pressed.SHIFT)
 					correctLetter();
 				else if (!FlxG.keys.justPressed.SHIFT)
 					FlxG.sound.play(Paths.sound('BUZZER'));
-			} else if (realWord.charAt(position) == '!') {
+			}
+			else if (realWord.charAt(position) == '!')
+			{
 				if (FlxG.keys.justPressed.ONE && FlxG.keys.pressed.SHIFT)
 					correctLetter();
 				else if (!FlxG.keys.justPressed.SHIFT)
 					FlxG.sound.play(Paths.sound('BUZZER'));
-			} else {
-				if (FlxG.keys.anyJustPressed([FlxKey.fromString(realWord.charAt(position))])) {
+			}
+			else
+			{
+				if (FlxG.keys.anyJustPressed([FlxKey.fromString(realWord.charAt(position))]))
+				{
 					correctLetter();
-				} else
+				}
+				else
 					FlxG.sound.play(Paths.sound('BUZZER'));
 			}
 		}
-		/*if (FlxG.keys.justPressed.Z) {
-			close();
-			win();
-		}*/
 	}
 
 	override function beatHit()
@@ -256,30 +283,30 @@ class UnownSubstate extends MusicBeatSubState
 		super.beatHit();
 		if (timer > 0)
 			timer--;
-		else {
+		else
+		{
 			close();
 			lose();
 		}
 		timerTxt.text = Std.string(timer);
 	}
 
-	public function onKeyPress(e:KeyboardEvent):Void 
+	public function onKeyPress(e:KeyboardEvent):Void
 	{
 		var needed:String = String.fromCharCode(e.keyCode);
 
-		// Convert to string it in uppercase to see if it matches the key pressed
 		if (realWord.charAt(position).toUpperCase() == needed.toUpperCase())
 			correctLetter();
 		else
 			FlxG.sound.play(Paths.sound('BUZZER'));
-
-		// Idklool, me cooked, go fix shaders lmao
 	}
 
-	override public function close() {
-		// FlxG.autoPause = true;
+	override public function close()
+	{
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 		FlxG.stage.window.textInputEnabled = false;
+		if (hiddenTextField != null && hiddenTextField.parent != null)
+			hiddenTextField.parent.removeChild(hiddenTextField);
 		super.close();
 	}
 }
