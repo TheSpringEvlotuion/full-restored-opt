@@ -174,7 +174,9 @@ class UnownSubstate extends MusicBeatSubState
 		add(timerTxt);
 		timerTxt.text = Std.string(timer);
 
-		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
+		#if mobile
+		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress); // detalhe super importante
+		#end
 		FlxG.stage.window.textInputEnabled = true;
 	}
 	static var wordsList:MonochromeWords;
@@ -207,27 +209,54 @@ class UnownSubstate extends MusicBeatSubState
 		harderWords = wordsList.harderWords;
     }
 
-	function correctLetter() {
+	function correctLetter()
+	{
 		position++;
-		if (position >= realWord.length) {
+		if (position >= realWord.length)
+		{
 			close();
 			win();
 			FlxG.sound.play(Paths.sound('CORRECT'));
 		}
 	}
+			
+	private function onKeyDown(e:KeyboardEvent):Void
+	{
+		if (e.keyCode == 16 || e.keyCode == 17 || e.keyCode == 220 || e.keyCode == 27) // Do nothing for Shift, Ctrl, Esc, and flixel console hotkey
+			return;
+		else
+		{
+			if (e.charCode == 0) // Non-printable characters crash String.fromCharCode
+				return;
+
+			var daKey:String = String.fromCharCode(e.charCode);
+			if (realWord.charAt(position) == daKey)
+				correctLetter();
+			else
+				FlxG.sound.play(Paths.sound('CORRECT', 'shared'));
+		}
+	}
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		
+		timerTxt.text = Std.string(timer);
 
-		for (i in lines) {
-			if (i.ID == position) {
+		for (i in lines)
+		{
+			if (i.ID == position)
+			{
 				FlxFlicker.flicker(i, 1.3, 1, true, false);
-			} else if (i.ID < position) {
+			}
+			else if (i.ID < position)
+			{
 				i.visible = false;
 				i.alpha = 0;
 			}
 		}
-		if (FlxG.keys.justPressed.ANY) {
+		
+	}
+		/*if (FlxG.keys.justPressed.ANY) {
 			if (realWord.charAt(position) == '?') {
 				if (FlxG.keys.justPressed.SLASH && FlxG.keys.pressed.SHIFT)
 					correctLetter();
@@ -276,10 +305,11 @@ class UnownSubstate extends MusicBeatSubState
 		// Idklool, me cooked, go fix shaders lmao
 	}
 
-	override public function close() {
-		// FlxG.autoPause = true;
-		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
+	 override function destroy():Void {
+		#if mobile
 		FlxG.stage.window.textInputEnabled = false;
-		super.close();
+		#end
+		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+		super.destroy();
 	}
 }
