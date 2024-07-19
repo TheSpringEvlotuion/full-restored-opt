@@ -277,8 +277,8 @@ class UnownSubstate extends MusicBeatSubState
 		/*if (FlxG.keys.justPressed.Z) {
 			close();
 			win();
-		}*/
-	}
+		}
+	}*/
 
 	override function beatHit()
 	{
