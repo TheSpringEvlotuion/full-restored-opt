@@ -3,8 +3,8 @@
 https://www.shadertoy.com/view/wtt3z2
 */
 
-uniform float aberration = 0.0;
-uniform float effectTime = 0.0;
+uniform float aberration;
+uniform float effectTime;
 
 vec3 tex2D(sampler2D _tex,vec2 _p)
 {
