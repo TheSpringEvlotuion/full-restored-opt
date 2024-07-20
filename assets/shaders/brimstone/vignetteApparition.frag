@@ -1,6 +1,6 @@
 #pragma header
 
-#define PI 3.14159265
+float PI = 3.14159265;
 uniform float time = 0.0;
 uniform float vignetteIntensity = 0.75;
 

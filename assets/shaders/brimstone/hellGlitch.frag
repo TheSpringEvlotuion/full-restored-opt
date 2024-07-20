@@ -25,8 +25,8 @@ vec3 tex2D(sampler2D _tex,vec2 _p)
     return col;
 }
 
-#define PI 3.14159265359
-#define PHI (1.618033988749895)
+float PI = 3.14159265359;
+float PHI = (1.618033988749895);
 
 // --------------------------------------------------------
 // Glitch core
@@ -85,7 +85,7 @@ float shouldApply(GlitchSeed seed) {
 }
 
 // gamma again
-const float GAMMA = 1;
+const float GAMMA = 1.;
 
 vec3 gamma(vec3 color, float g) {
     return pow(color, vec3(g));
@@ -189,24 +189,24 @@ void glitchSwap(inout vec2 p) {
     float apply;
 
     groupSize = vec2(.6) * scale;
-    subGrid = vec2(2);
-    blockSize = vec2(1);
+    subGrid = vec2(2.);
+    blockSize = vec2(1.);
 
     seed = glitchSeed(glitchCoord(p, groupSize), speed);
     apply = shouldApply(seed);
     swapBlocks(p, groupSize, subGrid, blockSize, seed.seed, apply);
 
     groupSize = vec2(.8) * scale;
-    subGrid = vec2(3);
-    blockSize = vec2(1);
+    subGrid = vec2(3.);
+    blockSize = vec2(1.);
 
     seed = glitchSeed(glitchCoord(p, groupSize), speed);
     apply = shouldApply(seed);
     swapBlocks(p, groupSize, subGrid, blockSize, seed.seed, apply);
 
     groupSize = vec2(.2) * scale;
-    subGrid = vec2(6);
-    blockSize = vec2(1);
+    subGrid = vec2(6.);
+    blockSize = vec2(1.);
 
     seed = glitchSeed(glitchCoord(p, groupSize), speed);
     float apply2 = shouldApply(seed);
@@ -217,16 +217,16 @@ void glitchSwap(inout vec2 p) {
     swapBlocks(p, groupSize, subGrid, blockSize, (seed.seed + 5.), apply * apply2);
 
     groupSize = vec2(1.2, .2) * scale;
-    subGrid = vec2(9,2);
-    blockSize = vec2(3,1);
+    subGrid = vec2(9.,2.);
+    blockSize = vec2(3.,1.);
 
     seed = glitchSeed(glitchCoord(p, groupSize), speed);
     apply = shouldApply(seed);
     swapBlocks(p, groupSize, subGrid, blockSize, seed.seed, apply);
 
     groupSize = vec2(1.5, 6.0) * scale;
-    subGrid = vec2(2, 9);
-    blockSize = vec2(0.5, 15);
+    subGrid = vec2(2., 9.);
+    blockSize = vec2(0.5, 15.);
 
     seed = glitchSeed(glitchCoord(vec2(p.x, 0.0), groupSize), speed * 1.25, prob);
     apply = shouldApply(seed);
@@ -243,12 +243,12 @@ void glitchTime(vec2 p, inout float time) {
 
 void glitchColor(vec2 p, inout vec4 color) {
     vec2 groupSize = vec2(.75,.125) * glitchScale;
-    vec2 subGrid = vec2(0,6);
+    vec2 subGrid = vec2(0.,6.);
     float speed = 5.;
     GlitchSeed seed = glitchSeed(glitchCoord(p, groupSize), speed);
     seed.prob *= .3;
     if (shouldApply(seed) == 1.)
-        color = vec4(0, 0, 0, 1.0);
+        color = vec4(0., 0, 0, 1.0);
 }
 
 vec4 transverseChromatic(vec2 p) {
@@ -259,7 +259,7 @@ vec4 transverseChromatic(vec2 p) {
 
     mat3x2 increments = mat3x2(velocity * 1.0 * inverseSampleCount, velocity * 2.0 * inverseSampleCount, velocity * 4.0 * inverseSampleCount);
 
-    vec3 accumulator = vec3(0);
+    vec3 accumulator = vec3(0.);
     mat3x2 offsets = mat3x2(0);
     for (int i = 0; i < sampleCount; i++) {
         accumulator.r += flixel_texture2D(bitmap, destCoord + offsets[0]).r;
@@ -276,7 +276,7 @@ void main() {
     vec2 p = openfl_TextureCoordv.xy;
     vec4 col = flixel_texture2D(bitmap, p);
     float alpha = col.a;
-    if(prob<=0){
+    if(prob<=0.){
       gl_FragColor = col;
       return;
     }
