@@ -339,7 +339,7 @@ class PlayState extends MusicBeatState
 	public static var old:Bool = true;
 	public static var songLibrary:String;
 
-	var lordX:Boyfriend;
+	public var lordX:Boyfriend; // pasta-night crash fix, i think :skull:
 	public var mx:Boyfriend;
 	public var mxHand:Boyfriend;
 	var table:FlxSprite;
