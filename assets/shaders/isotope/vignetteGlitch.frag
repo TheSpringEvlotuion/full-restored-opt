@@ -3,9 +3,9 @@
 #pragma header
 #extension GL_EXT_gpu_shader4 : enable
 
-uniform float time = 0.0;
-uniform float prob = 0.0;
-uniform float vignetteIntensity = 0.75;
+uniform float time;
+uniform float prob;
+uniform float vignetteIntensity;
 
 float _round(float n) {
     return floor(n + .5);
