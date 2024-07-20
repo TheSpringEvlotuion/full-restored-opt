@@ -1825,7 +1825,7 @@ class PlayState extends MusicBeatState
 	var tranceInterval:Int = 0;
 	var beatInterval:Float = 2; // every how many beats the pendulum must be hit 
 
-	var manualCameraPosition:FlxPoint;
+	public var manualCameraPosition:FlxPoint;
 	var accuracyColor:FlxColor = new FlxColor();
 	
 	public var soundVolume:Float = 1;
