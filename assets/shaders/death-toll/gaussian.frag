@@ -5,9 +5,9 @@
 float Pi = 6.28318530718; // Pi*2
 
 // GAUSSIAN BLUR SETTINGS {{{
-uniform float Directions = 8.0; // BLUR DIRECTIONS (Default 16.0 - More is better but slower)
-uniform float Quality = 6.0; // BLUR QUALITY (Default 4.0 - More is better but slower)
-uniform float Size = 8.0; // BLUR SIZE (Radius)
+uniform float Directions; // BLUR DIRECTIONS (Default 16.0 - More is better but slower)
+uniform float Quality; // BLUR QUALITY (Default 4.0 - More is better but slower)
+uniform float Size; // BLUR SIZE (Radius)
 // GAUSSIAN BLUR SETTINGS }}}
    
 
