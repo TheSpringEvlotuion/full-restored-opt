@@ -2604,8 +2604,8 @@ class PlayState extends MusicBeatState
 				{
 					if (eventList[i] != null && Conductor.songPosition >= eventList[i].timestamp) {
 						var module:ForeverModule = Events.loadedModules.get(eventList[i].eventName);
-						if (module != null && module.exists("eventFunction"))
-							module.get("eventFunction")(eventList[i].params);
+						if (module != null && module.exists("eventFunction") && eventList[i].params != null)
+                            				module.get("eventFunction")(eventList[i].params);
 						stageBuild.dispatchEvent(eventList[i].eventName);
 						if (module != null && module.exists("onUpdate"))
 							updateableScript.push(module);
