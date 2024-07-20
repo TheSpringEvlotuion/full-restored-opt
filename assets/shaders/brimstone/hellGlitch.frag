@@ -248,7 +248,7 @@ void glitchColor(vec2 p, inout vec4 color) {
     GlitchSeed seed = glitchSeed(glitchCoord(p, groupSize), speed);
     seed.prob *= .3;
     if (shouldApply(seed) == 1.)
-        color = vec4(0., 0, 0, 1.0);
+        color = vec4(0., 0., 0., 1.0);
 }
 
 vec4 transverseChromatic(vec2 p) {
