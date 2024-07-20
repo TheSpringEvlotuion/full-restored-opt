@@ -3,7 +3,7 @@
 // Modified to support OpenFL.
 
 #pragma header
-float PI 3.14159265
+float PI 3.14159265;
 
 uniform float time;
 
