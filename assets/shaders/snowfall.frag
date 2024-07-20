@@ -1,13 +1,13 @@
 #pragma header
 
-uniform float intensity = 0.0;
-uniform int amount = 200;
-uniform float time = 0.0;
+uniform float intensity;
+uniform int amount;
+uniform float time;
 
 vec2 uv;
 
 float rnd(float x) {
-    return fract(sin(dot(vec2(x + 48, 38 / (x + 2.5)), vec2(13, 78))) * (43758));
+    return fract(sin(dot(vec2(x + 48., 38. / (x + 2.5)), vec2(13., 78.))) * (43758.));
 }
 
 float drawCircle(vec2 center, float radius) {

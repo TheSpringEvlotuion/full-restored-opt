@@ -144,7 +144,7 @@ void main()
     gl_FragColor = vec4(mod(uv.x+time*0.5, 0.1)*10.);
     //return; /* Debug FpsTime */
      
-    vec2 suv = ShakeUV(uv, time / 2);
+    vec2 suv = ShakeUV(uv, time / 2.);
     gl_FragColor = vec4(mod(suv.xy,0.1)*10., 0., 1.0);
     //return; /* Debug ShakeUV */
     
