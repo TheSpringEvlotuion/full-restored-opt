@@ -1,6 +1,6 @@
 #pragma header
 
-#define PI 3.14159265
+float PI = 3.14159265;
 uniform float time = 0.0;
 uniform float intensity = 0.0;
 uniform float initial = 0.0;
@@ -20,7 +20,7 @@ vec3 spectrum_offset( float t ) {
 
 void main() {
     vec2 uv = openfl_TextureCoordv;
-    float ofs = (initial / 1000) + (intensity / 1000);
+    float ofs = (initial / 1000.) + (intensity / 1000.);
 
 	vec4 sum = vec4(0.0);
 	vec3 wsum = vec3(0.0);

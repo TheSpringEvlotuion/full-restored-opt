@@ -24,8 +24,8 @@ vec3 tex2D(sampler2D _tex,vec2 _p)
     return col;
 }
 
-#define PI 3.14159265359
-#define PHI (1.618033988749895)
+float PI = 3.14159265359;
+float PHI = (1.618033988749895);
 
 // --------------------------------------------------------
 // Glitch core
@@ -74,7 +74,7 @@ float shouldApply(GlitchSeed seed) {
 }
 
 // gamma again 
-const float GAMMA = 1;
+const float GAMMA = 1.;
 
 vec3 gamma(vec3 color, float g) {
     return pow(color, vec3(g));
@@ -164,24 +164,24 @@ void glitchSwap(inout vec2 p) {
     float apply;
     
     groupSize = vec2(.6) * scale;
-    subGrid = vec2(2);
-    blockSize = vec2(1);
+    subGrid = vec2(2.);
+    blockSize = vec2(1.);
 
     seed = glitchSeed(glitchCoord(p, groupSize), speed);
     apply = shouldApply(seed);
     swapBlocks(p, groupSize, subGrid, blockSize, seed.seed, apply);
     
     groupSize = vec2(.8) * scale;
-    subGrid = vec2(3);
-    blockSize = vec2(1);
+    subGrid = vec2(3.);
+    blockSize = vec2(1.);
     
     seed = glitchSeed(glitchCoord(p, groupSize), speed);
     apply = shouldApply(seed);
     swapBlocks(p, groupSize, subGrid, blockSize, seed.seed, apply);
 
     groupSize = vec2(.2) * scale;
-    subGrid = vec2(6);
-    blockSize = vec2(1);
+    subGrid = vec2(6.);
+    blockSize = vec2(1.);
     
     seed = glitchSeed(glitchCoord(p, groupSize), speed);
     float apply2 = shouldApply(seed);
@@ -192,8 +192,8 @@ void glitchSwap(inout vec2 p) {
     swapBlocks(p, groupSize, subGrid, blockSize, (seed.seed + 5.), apply * apply2);
     
     groupSize = vec2(1.2, .2) * scale;
-    subGrid = vec2(9,2);
-    blockSize = vec2(3,1);
+    subGrid = vec2(9.,2.);
+    blockSize = vec2(3.,1.);
     
     seed = glitchSeed(glitchCoord(p, groupSize), speed);
     apply = shouldApply(seed);
