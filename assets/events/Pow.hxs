@@ -1,20 +1,14 @@
-var startReverse:Float = 0;
-var doReverse:Bool = false;
+var startReverse = 0;
+var doReverse = false;
 
-function returnDescription():String {
+function returnDescription()
     return 'Makes MX hit the pow block\nReversing the scroll direction.';
-}
 
-function eventFunction(params:Array<String>) {
-    if (StringTools.contains(params[0], 'hell') && PlayState.gameplayMode != 'HELL_MODE') return;
-    if (StringTools.contains(params[0], 'fuck') && PlayState.gameplayMode != 'FUCK_YOU') return;
-    
+function eventFunction(params) {
     startReverse = 0;
     doReverse = false;
-    
     var him:Boyfriend = PlayState.instance.mx;
     PlayState.instance.mxMechanic = true;
-    
     if (him != null) {
         if (PlayState.playerLane == 0) { 
             // dont fucking do that!!!!
@@ -35,9 +29,8 @@ function eventFunction(params:Array<String>) {
                 }
             }
         }
-    } else {
+    } else 
         dropStart();
-    }
 }
 
 function dropStart() {
@@ -47,68 +40,75 @@ function dropStart() {
 }
 
 // https://easings.net/#easeOutBounce
-function easeOutBounce(x:Float):Float {
-    var n1:Float = 7.5625;
-    var d1:Float = 2.75;
-    
-    if (x < 1 / d1) {
-        return n1 * x * x;
-    } else if (x < 2 / d1) {
-        return n1 * (x -= 1.5 / d1) * x + 0.75;
-    } else if (x < 2.5 / d1) {
-        return n1 * (x -= 2.25 / d1) * x + 0.9375;
-    } else {
-        return n1 * (x -= 2.625 / d1) * x + 0.984375;
-    }
+function easeOutBounce(x:Int):Int {
+	var n1 = 7.5625;
+	var d1 = 2.75;
+	
+	if (x < 1 / d1) {
+		return n1 * x * x;
+	} else if (x < 2 / d1) {
+		return n1 * (x -= 1.5 / d1) * x + 0.75;
+	} else if (x < 2.5 / d1) {
+		return n1 * (x -= 2.25 / d1) * x + 0.9375;
+	} else {
+		return n1 * (x -= 2.625 / d1) * x + 0.984375;
+	}
 }
 
-function lerp(a:Float, b:Float, t:Float):Float {
-    return a + t * (b - a);
+function lerp(a:Float, b:Float, t:Float)
+{
+	return a + t * (b - a);
 }
 
-function onUpdate(elapsed:Float) {
-    if (doReverse) {
-        var frog:Strumline = PlayState.strumLines.members[PlayState.playerLane];
-        
-        var realbeats:Float = (Conductor.songPosition / 1000) * (Conductor.bpm / 60);
 
-        if (startReverse == 0) {
-            startReverse = realbeats;
-            frog.downscroll = !frog.downscroll;
-            // do this as a way to fix downscroll dying after the first pow
-            PlayState.defaultDownscroll = false;
-        }
+function onUpdate(elapsed) {
+    if (doReverse)
+		{
+            var frog:Strumline = PlayState.strumLines.members[PlayState.playerLane];
+            
+            var realbeats = (Conductor.songPosition / 1000) * (Conductor.bpm / 60);
 
-        var perc:Float = easeOutBounce((realbeats - startReverse) / 2.5);
-
-        if (perc < 1) {
-            for (i in 0...4) {
-                var speed:Float = PlayState.SONG.speed;
-                if (frog.downscroll) {
-                    PlayState.laneSpeed[i] = lerp(speed, -speed, perc);
-                } else {
-                    PlayState.laneSpeed[i] = lerp(-speed, speed, perc);
-                }
+			if (startReverse == 0)
+            {
+				startReverse = realbeats;
+                frog.downscroll = !frog.downscroll;
+                // do this as a way to fix downscroll dying after the first pow
+                PlayState.defaultDownscroll = false;
             }
 
-            var multi:Float = 1;
-            for (i in 0...frog.receptors.members.length) {
-                var arrow:UIStaticArrow = frog.receptors.members[i];
-                var localPerc:Float = perc * multi;
+			var perc = easeOutBounce(((realbeats - startReverse) / 2.5));
 
-                if (localPerc > 1) localPerc = 1;
+			if (perc < 1)
+			{
 
-                if (frog.downscroll) {
-                    arrow.y = lerp(25, 26 + FlxG.height - 200, localPerc);
-                } else {
-                    arrow.y = lerp(26 + FlxG.height - 200, 25, localPerc);
-                }
-                multi += 0.05;
-            }
+				for (i in 0...4) {
+                    var speed = PlayState.SONG.speed;
+                    if (frog.downscroll)
+					    PlayState.laneSpeed[i] = lerp(speed, -speed, perc);
+                    else
+                        PlayState.laneSpeed[i] = lerp(-speed, speed, perc);
+				}
+				
+                var multi = 1;
+				for (i in 0...frog.receptors.members.length) {
+					var arrow:UIStaticArrow = frog.receptors.members[i];
+					
+					var localPerc = perc * multi;
 
-            frog.allNotes.forEachAlive(function(daNote:Note) {
-                daNote.endHoldOffset = Math.NEGATIVE_INFINITY;
-            });
-        }
-    }
+					if (localPerc > 1)
+						localPerc = 1;
+                    
+					if (frog.downscroll)
+						arrow.y = lerp(25, 26 + FlxG.height - 200, localPerc);
+					else
+						arrow.y = lerp(26 + FlxG.height - 200, 25, localPerc);
+                    multi += 0.05;
+				}
+
+                frog.allNotes.forEachAlive(function(daNote:Note)
+                {
+                    daNote.endHoldOffset = Math.NEGATIVE_INFINITY;
+                });
+			}
+		}
 }
