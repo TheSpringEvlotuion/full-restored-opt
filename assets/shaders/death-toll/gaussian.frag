@@ -13,7 +13,6 @@ uniform float Size = 8.0; // BLUR SIZE (Radius)
 
 void main()
 {
-
     vec2 Radius = Size/openfl_TextureSize.xy;
     
     // Normalized pixel coordinates (from 0 to 1)
@@ -28,7 +27,7 @@ void main()
     {
 		for(float i=1.0/Quality; i<=1.0; i+=1.0/Quality)
         {
-			Color += flixel_texture2D( bitmap, uv+vec2(cos(d),sin(d))*Radius*i);		
+			Color += flixel_texture2D( bitmap, uv+vec2(cos(d),sin(d))*Radius*i);
         }
     }
     
