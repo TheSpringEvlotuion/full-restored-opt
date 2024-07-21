@@ -130,7 +130,7 @@ void main() {
         gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
 
     /*
-    vec3 gbColor = vec3(closest_gb(texture(bitmap, openfl_TextureCoordv).rgb));
+    vec3 gbColor = vec3(closest_gb(texture2D(bitmap, openfl_TextureCoordv).rgb));
     // Output to screen
     gl_FragColor = vec4(
         mix(texture2D(bitmap, openfl_TextureCoordv).rgb * texture2D(bitmap, openfl_TextureCoordv).a, gbColor.rgb, intensity),
