@@ -1,7 +1,7 @@
 // https://www.shadertoy.com/view/XtyXzW
 
 #pragma header
-#extension GL_EXT_gpu_shader4 : enable
+// #extension GL_EXT_gpu_shader4 : enable
 
 uniform float time;
 uniform float prob;
@@ -38,7 +38,7 @@ float rand(vec2 co){
 const float glitchScale = .5;
 
 vec2 glitchCoord(vec2 p, vec2 gridSize) {
-	vec2 coord = floor(p / gridSize) * gridSize;;
+	vec2 coord = floor(p / gridSize) * gridSize;
     coord += (gridSize / 2.);
     return coord;
 }
