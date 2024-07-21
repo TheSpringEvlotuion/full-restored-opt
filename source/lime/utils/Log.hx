@@ -37,7 +37,7 @@ class Log
 
 			if (throwErrors)
 			{
-                    if (!FileSystem.exists(Asset2File.getPath() + 'logs'))
+			  if (!FileSystem.exists(Asset2File.getPath() + 'logs'))
 					FileSystem.createDirectory(Asset2File.getPath() + 'logs');
 
 				File.saveContent(Asset2File.getPath()
@@ -48,6 +48,7 @@ class Log
 					+ '.log',
 					message
 					+ '\n');
+
                                 Lib.application.window.alert(message, 'Error!');
 				throw message;
 			}
