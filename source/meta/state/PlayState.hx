@@ -1196,8 +1196,9 @@ class PlayState extends MusicBeatState
 		#if mobile
 	if (SONG.song.toLowerCase() == 'rednecks' && gameplayMode != PUSSY_MODE) {
 						addHitbox(true, SPACE);
-				else
+			}	else {
 					addHitbox(true, DEFAULT);
+	}
 	  
 	if (gameplayMode != HELL_MODE || gameplayMode != FUCK_YOU) {
 		switch (curStage) // better than cursong
