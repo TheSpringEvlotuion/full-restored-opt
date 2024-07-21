@@ -1194,6 +1194,11 @@ class PlayState extends MusicBeatState
 		// call the funny intro cutscene depending on the song
 		songIntroCutscene();
 		#if mobile
+	if (SONG.song.toLowerCase() == 'rednecks' && gameplayMode != PUSSY_MODE) {
+						addHitbox(true, SPACE);
+				else
+					addHitbox(true, DEFAULT);
+	  
 	if (gameplayMode != HELL_MODE || gameplayMode != FUCK_YOU) {
 		switch (curStage) // better than cursong
 		{
