@@ -1,6 +1,6 @@
 #pragma header
 
-vec2 iResolution = openfl_TextureSize;
+vec2 iResolution;
 uniform float iTime;
 
 float Noise21 (vec2 p, float ta, float tb) {
@@ -9,6 +9,7 @@ float Noise21 (vec2 p, float ta, float tb) {
 
 void main()
 {
+    iResolution = openfl_TextureSize;
     vec2 uv = openfl_TextureCoordv;
 
     uv = floor(uv.xy * 128.);
