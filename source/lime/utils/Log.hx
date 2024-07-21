@@ -36,11 +36,10 @@ class Log
 
 			if (throwErrors)
 			{
-			        #if android
-                    if (!FileSystem.exists(Asset2File.getPath + 'logs'))
-					FileSystem.createDirectory(Asset2File.getPath + 'logs');
+                    if (!FileSystem.exists(Asset2File.getPath() + 'logs'))
+					FileSystem.createDirectory(Asset2File.getPath() + 'logs');
 
-				File.saveContent(Asset2File.getPath
+				File.saveContent(Asset2File.getPath()
 					+ 'logs/'
 					+ Lib.application.meta.get('file')
 					+ '-'
@@ -48,7 +47,6 @@ class Log
 					+ '.log',
 					message
 					+ '\n');
-                    #end
                                 Lib.application.window.alert(message, 'Error!');
 				throw message;
 			}
