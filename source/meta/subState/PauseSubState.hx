@@ -48,11 +48,6 @@ class PauseSubState extends MusicBeatSubState
 	{
 		super();
 
-		#if mobile
-		addVirtualPad(UP_DOWN, A);
-		addVirtualPadCamera();
-		#end
-
 		mutex = new Mutex();
 		Thread.create(function()
 		{
@@ -114,6 +109,11 @@ class PauseSubState extends MusicBeatSubState
 		selector.loadGraphic(Paths.image('UI/pixel/selector'));
 		selector.scrollFactor.set();
 		add(selector);
+
+		#if mobile
+		addVirtualPad(UP_DOWN, A);
+		addVirtualPadCamera(false);
+		#end
 
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
