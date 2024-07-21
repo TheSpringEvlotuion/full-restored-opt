@@ -52,11 +52,6 @@ class GameOverSubstate extends MusicBeatSubState
 	{
 		super();
 
-		#if mobile
-		addVirtualPad(NONE, A_B);
-		addVirtualPadCamera();
-		#end
-
 		lastCharacter = character;
 
 		Conductor.songPosition = 0;
@@ -133,6 +128,12 @@ class GameOverSubstate extends MusicBeatSubState
 		precacheSoundFile(deathSoundName);
 		precacheSoundFile(loopSoundName);
 		precacheSoundFile(deathSoundName);
+
+
+		#if mobile
+		addVirtualPad(NONE, A_B);
+		addVirtualPadCamera(false);
+		#end
 	}
 
 	public var deathEnd:Void->Void = function() {};
