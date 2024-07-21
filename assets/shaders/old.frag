@@ -2,8 +2,6 @@
 
 uniform float iTime;
 
-vec2 iResolution = openfl_TextureSize;
-
 //COMMON
 //
 // Description : Array and textureless GLSL 2D simplex noise function.
@@ -131,6 +129,7 @@ float FpsTime(float time, float fps){
 
 void main()
 {
+    vec2 iResolution = openfl_TextureSize;
     vec2 fragCoord = openfl_TextureCoordv * iResolution;
 
     vec2 uv = fragCoord/iResolution.xy;

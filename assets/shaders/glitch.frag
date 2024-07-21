@@ -1,7 +1,7 @@
 // https://www.shadertoy.com/view/XtyXzW
 
 #pragma header
-#extension GL_EXT_gpu_shader4 : enable
+// #extension GL_EXT_gpu_shader4 : enable
 
 uniform float time;
 uniform float prob;
@@ -132,7 +132,6 @@ void swapBlocks(inout vec2 xy, vec2 groupSize, vec2 subGrid, vec2 blockSize, vec
     
     xy = pos + groupOffset;
 }
-
 
 // Static
 
