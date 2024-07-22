@@ -32,5 +32,5 @@ void main() {
     float rx = (px - qx) * lum + uv.x;
     float ry = (py - qy) * lum + uv.y;
 
-    fragColor = texture(bitmap, vec2(rx, ry));
+    fragColor = texture2D(bitmap, vec2(rx, ry));
 }
