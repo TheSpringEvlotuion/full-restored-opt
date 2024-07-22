@@ -1,14 +1,17 @@
 #pragma header
 
-vec2 V = vec2(0.,1.);
-float PI = 3.14159265;
-int SAMPLES = 3;
+#define V vec2(0.,1.)
+#define PI 3.14159265
+#define HUGE 1E9
+#define VHSRES vec2(320.0,240.0)
+#define saturate(i) clamp(i,0.,1.)
+#define lofi(i,d) floor(i/d)*d
+#define validuv(v) (abs(v.x-0.5)<0.5&&abs(v.y-0.5)<0.5)
+#define SAMPLES 3
 
 uniform float aberration;
 uniform float effectTime;
 uniform sampler2D noiseTexture; 
-
-float validuv(vec2 v) { return (abs(v.x-0.5)<0.5 && abs(v.y-0.5)<0.5); }
 
 vec3 tex2D(sampler2D _tex,vec2 _p)
 {
@@ -56,7 +59,7 @@ vec3 vhsTex2D( vec2 uv, float rot ) {
     for ( int i = 0; i < SAMPLES; i ++ ) {
       yiq += (
         rgb2yiq( texture2D( bitmap, uv - vec2( float( i ), 0.0 ) / VHSRES ).xyz ) *
-        vec2( float( i ), float( SAMPLES - 1. - i ) ).yxx / float( SAMPLES - 1. )
+        vec2( float( i ), float( SAMPLES - 1 - i ) ).yxx / float( SAMPLES - 1 )
       ) / float( SAMPLES ) * 2.0;
     }
     if ( rot != 0.0 ) { yiq.yz = rotate2D( rot ) * yiq.yz; }
