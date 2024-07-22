@@ -1,6 +1,6 @@
 #pragma header
 
-#version 100 es
+#version 100
 
 precision mediump float;
 
