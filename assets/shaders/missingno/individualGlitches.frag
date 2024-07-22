@@ -1,6 +1,6 @@
 #pragma header
 
-#version 300 es
+#version 100 es
 
 precision mediump float;
 
@@ -19,7 +19,7 @@ void main() {
     float px = floor(uv.x * psq + 0.5) * psize;
     float py = floor(uv.y * psq + 0.5) * psize;
 
-    vec4 colSnap = texture(bitmap, vec2(px, py));
+    vec4 colSnap = texture2D(bitmap, vec2(px, py));
 
     float lum = pow(1.0 - (colSnap.r + colSnap.g + colSnap.b) / 3.0, binaryIntensity);
 
