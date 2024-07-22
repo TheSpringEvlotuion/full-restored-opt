@@ -25,7 +25,7 @@ jobs:
           java-version: '11'
 
       - name: Setup Haxe
-        uses: krdlab/setup-haxe@master
+        uses: /home/runner/haxelib
         with:
           haxe-version: 4.2.5
 
