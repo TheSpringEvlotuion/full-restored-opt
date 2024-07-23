@@ -1200,7 +1200,7 @@ class PlayState extends MusicBeatState
 					addHitbox(true, DEFAULT);
 	}
 
-	if (SONG.song.toLowerCase() == 'pasta-night' && gameplayMode != PUSSY_MODE && boyfriend.curCharacter != hypno) {
+	if (SONG.song.toLowerCase() == 'pasta-night' && gameplayMode != PUSSY_MODE && boyfriend.curCharacter != 'hypno') {
 						addHitbox(true, SPACE);
 			}	else {
 					addHitbox(true, DEFAULT);
