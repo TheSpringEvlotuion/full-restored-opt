@@ -1,7 +1,7 @@
 #pragma header
 
 float PI = 3.14159265;
-uniform float time;
+//uniform float time;
 uniform float intensity;
 uniform float initial;
 
