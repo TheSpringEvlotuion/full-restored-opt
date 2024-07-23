@@ -1199,11 +1199,17 @@ class PlayState extends MusicBeatState
 			}	else {
 					addHitbox(true, DEFAULT);
 	}
+
+	if (SONG.song.toLowerCase() == 'pasta-night' && gameplayMode != PUSSY_MODE && boyfriend.curCharacter != hypno) {
+						addHitbox(true, SPACE);
+			}	else {
+					addHitbox(true, DEFAULT);
+	}
 	  
 	if (gameplayMode != HELL_MODE || gameplayMode != FUCK_YOU) {
 		switch (curStage) // better than cursong
 		{
-			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar' :
+			case 'alley' | 'cave' | 'mountain' | 'hell':
 				if (gameplayMode != PUSSY_MODE)
 					addHitbox(true, SPACE);
 				else
@@ -1216,7 +1222,7 @@ class PlayState extends MusicBeatState
 	   if (gameplayMode == HELL_MODE || gameplayMode == FUCK_YOU) {
 	     		switch (curStage) // better than cursong
 		{
-			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar' | 'none' | 'pokecenter' | 'bygone' | 'shitty-cave':
+			case 'alley' | 'cave' | 'mountain' | 'hell' | 'none' | 'pokecenter' | 'bygone' | 'shitty-cave':
 				if (gameplayMode != PUSSY_MODE)
 					addHitbox(true, SPACE);
 				else
