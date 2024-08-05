@@ -1204,7 +1204,7 @@ class PlayState extends MusicBeatState
 		switch (curStage) // better than cursong
 		{
 			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar':
-				if (gameplayMode != PUSSY_MODE)
+				if (gameplayMode != PUSSY_MODE && boyfriend.curCharacter != 'hypno-cards' && boyfriend.curCharacter != 'hypno-cards-front')
 					addHitbox(true, SPACE);
 				else
 					addHitbox(true, DEFAULT);
@@ -1217,7 +1217,7 @@ class PlayState extends MusicBeatState
 	     		switch (curStage) // better than cursong
 		{
 			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar' | 'none' | 'pokecenter' | 'bygone' | 'shitty-cave':
-				if (gameplayMode != PUSSY_MODE)
+				if (gameplayMode != PUSSY_MODE && boyfriend.curCharacter != 'hypno-cards' && boyfriend.curCharacter != 'hypno-cards-front')
 					addHitbox(true, SPACE);
 				else
 					addHitbox(true, DEFAULT);
