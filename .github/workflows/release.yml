@@ -18,8 +18,14 @@ jobs:
         with:
           ndk-version: r25c
 
+      - name: Setup Java JDK
+        uses: actions/setup-java@main
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
       - name: Setup Haxe
-        uses: krdlab/setup-haxe@master
+        uses: krdlab/setup-haxe@v1.2.0
         with:
           haxe-version: 4.3.6
 
@@ -27,11 +33,10 @@ jobs:
         run: |
           haxelib setup ~/haxelib
           haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp --quiet
-          haxelib run lime rebuild hxcpp
           haxelib install hmm
           haxelib run hmm install
           haxelib install lime 7.9.0
-          y
+          haxelib run lime rebuild hxcpp
           haxelib list
 
       - name: Configure Android
