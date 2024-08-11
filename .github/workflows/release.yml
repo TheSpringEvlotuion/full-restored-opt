@@ -18,12 +18,6 @@ jobs:
         with:
           ndk-version: r25c
 
-      - name: Setup Java JDK
-        uses: actions/setup-java@main
-        with:
-          distribution: 'zulu'
-          java-version: '18'
-
       - name: Setup Haxe
         uses: krdlab/setup-haxe@v1.4.0
         with:
@@ -36,6 +30,8 @@ jobs:
           haxelib run lime rebuild hxcpp
           haxelib install hmm
           haxelib run hmm install
+          haxelib install lime 7.9.0
+          y
           haxelib list
 
       - name: Configure Android
@@ -43,8 +39,9 @@ jobs:
           haxelib run lime setup -alias -y
           haxelib run lime config ANDROID_SDK $ANDROID_HOME
           haxelib run lime config ANDROID_NDK_ROOT $ANDROID_NDK_HOME
-          haxelib run lime config JAVA_HOME $JAVA_HOME
+          haxelib run lime config JAVA_HOME $JAVA_HOME_17_X64
           haxelib run lime config ANDROID_SETUP true
+          haxelib set lime 7.9.0
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
