@@ -16,7 +16,7 @@ jobs:
         id: setup-ndk
         uses: nttld/setup-ndk@main
         with:
-          ndk-version: r21e
+          ndk-version: r25c
       - name: Setup Java JDK
 
         uses: actions/setup-java@main
@@ -32,7 +32,8 @@ jobs:
       - name: Installing Libraries
         run: |
           haxelib setup ~/haxelib
-          haxelib install hxcpp 4.2.1 > /dev/null --quiet
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp --quiet
+          haxelib run lime rebuild hxcpp
           haxelib install hmm
           haxelib run hmm install
           haxelib list
@@ -44,7 +45,6 @@ jobs:
           haxelib run lime config ANDROID_NDK_ROOT $ANDROID_NDK_HOME
           haxelib run lime config JAVA_HOME $JAVA_HOME
           haxelib run lime config ANDROID_SETUP true
-          haxelib set hxcpp 4.2.1
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
@@ -75,4 +75,4 @@ jobs:
           prerelease: true
           automatic_release_tag: 'v1.0.0-beta'
           title: 'Android Port'
-          files: ${{github.workspace}}/Lullaby-debug.apk
+          files: ${{github.workspace}}/Hypnos Lullaby-debug.apk
