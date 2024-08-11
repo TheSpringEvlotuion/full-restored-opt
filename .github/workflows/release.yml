@@ -32,9 +32,9 @@ jobs:
       - name: Installing Libraries
         run: |
           haxelib setup ~/haxelib
-          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp --quiet
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
+          haxelib git hxcpp https://github.com/HaxeFoundation/hxcpp --quiet
           haxelib run lime rebuild hxcpp
 
       - name: Configure Android
