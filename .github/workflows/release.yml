@@ -17,8 +17,8 @@ jobs:
         uses: nttld/setup-ndk@main
         with:
           ndk-version: r25c
-      - name: Setup Java JDK
 
+      - name: Setup Java JDK
         uses: actions/setup-java@main
         with:
           distribution: 'zulu'
