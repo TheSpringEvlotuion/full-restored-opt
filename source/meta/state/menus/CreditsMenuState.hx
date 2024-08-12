@@ -288,7 +288,7 @@ frostbite,shitno,monochrome,stranged red and isotope,missingno and a few other s
 		updateText();
     
 		#if mobile
-		addVirtualPad(LEFT_FULL, A_B);
+		addVirtualPad(LEFT_FULL, B);
 		addVirtualPadCamera(false);
 		#end
     }
