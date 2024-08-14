@@ -36,6 +36,11 @@
       "version": "2.6.1"
     },
     {
+      "name": "extension-androidtools",
+      "type": "haxelib",
+      "version": "1.8.0"
+    },
+    {
       "name": "hscript",
       "type": "haxelib",
       "version": null

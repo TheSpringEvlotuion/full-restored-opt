@@ -46,6 +46,7 @@
 	<haxelib name="flixel-ui"/>
 	<!-- <haxelib name="polymod"/> -->
  	<haxelib name="discord_rpc" if="desktop"/>
+	<haxelib name="extension-androidtools" if="android"/>
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
 
 	<!-- ______________________________ Haxedefines _____________________________ -->

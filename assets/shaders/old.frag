@@ -1,6 +1,7 @@
 #pragma header
 
 uniform float iTime;
+uniform vec2 iResolution;
 
 //COMMON
 //

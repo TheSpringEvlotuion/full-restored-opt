@@ -2086,6 +2086,8 @@ class ShopState extends MusicBeatState
 
 	public function switchPortrait(song:String)
 	{
+		song = song.toLowerCase();
+
 		if (portraitThread == null)
 		{
 			portraitThread = Thread.create(function()
@@ -2100,6 +2102,7 @@ class ShopState extends MusicBeatState
 
 							if (portrait != null && portrait != curPortrait)
 							{
+								trace(portrait);
 								//  get the new portrait
 								if (!Assets.exists(Paths.getPath('images/menus/freeplay/$portrait.png', IMAGE)))
 									portrait = 'unknown';

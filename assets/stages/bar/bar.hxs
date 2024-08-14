@@ -13,7 +13,7 @@ function onCreate() {
 	var consistentPosition:Array<Float> = [-625, -100];
 	var consistentSize:Float = 1.25;
 	var sky:FNFSprite = new FNFSprite(consistentPosition[0] + 914 * consistentSize,
-		consistentPosition[1] + 263 * consistentSize).loadGraphic(Paths.image('sky'));
+		consistentPosition[1] + 263 * consistentSize).loadGraphic(Paths.image('SKY'));
 	sky.antialiasing = true;
 	sky.scrollFactor.set(0.9, 0.9);
 	sky.setGraphicSize(Std.int(sky.width * (consistentSize + 0.1)));
@@ -70,7 +70,7 @@ function onCreate() {
 	add(widemouth);
 	pastaBoppers.push(widemouth);
 
-	var machine:FNFSprite = new FNFSprite(200, 70).loadGraphic(Paths.image('Machine'));
+	var machine:FNFSprite = new FNFSprite(200, 70).loadGraphic(Paths.image('machine'));
 	machine.antialiasing = true;
 	machine.setGraphicSize(Std.int(machine.width * (consistentSize * .35)));
 	machine.scrollFactor.set(0.9, 0.9);
