@@ -10,7 +10,8 @@
 uniform float interpolation;
 
 float threshold = 0.125;
-mat2 dither_2 = mat2(0.,1.,1.,0.);
+vec2 dither_1 = vec2(0.0, 1.0);
+vec2 dither_2 = vec2(1.0, 0.0);
 
 struct dither_tile {
     float height;
@@ -25,7 +26,7 @@ vec3 tex2D(sampler2D _tex,vec2 _p)
     return col;
 }
 
-vec3[4] gb_colors() {
+vec3[4] rgb_colors() {
  	vec3 gb_colors[4];
     gb_colors[0] = vec3(8., 24., 32.) / 255.;
     gb_colors[1] = vec3(52., 104., 86.) / 255.;
@@ -36,10 +37,10 @@ vec3[4] gb_colors() {
 
 float[4] gb_colors_distance(vec3 color) {
     float distances[4];
-    distances[0] = distance(color, gb_colors()[0]);
-    distances[1] = distance(color, gb_colors()[1]);
-    distances[2] = distance(color, gb_colors()[2]);
-    distances[3] = distance(color, gb_colors()[3]);
+    distances[0] = distance(color, rgb_colors()[0]);
+    distances[1] = distance(color, rgb_colors()[1]);
+    distances[2] = distance(color, rgb_colors()[2]);
+    distances[3] = distance(color, rgb_colors()[3]);
     return distances;
 }
 
@@ -47,7 +48,7 @@ vec3 closest_gb(vec3 color) {
     int best_i = 0;
     float best_d = 2.;
 
-    vec3 gb_colors[4] = gb_colors();
+    vec3 gb_colors[4] = rgb_colors();
 
     for (int i = 0; i < 4; i++) {
         float dis = distance(gb_colors[i], color);;
@@ -84,7 +85,7 @@ vec3[2] gb_2_closest(vec3 color) {
             second_d = d;
         }
     }
-    vec3 colors[4] = gb_colors();
+    vec3 colors[4] = rgb_colors();
     vec3 result[2];
     if (first_i < second_i)
         result = vec3[2](colors[first_i], colors[second_i]);
@@ -119,8 +120,10 @@ bool needs_dither(vec3 color) {
 
 vec3 return_gbColor(vec3 sampleColor) {
     vec3 endColor;
+    float ditherMix = mix(dither_1[int(openfl_TextureCoordv.y)], dither_2[int(openfl_TextureCoordv.y)], openfl_TextureCoordv.x);
+    
     if (needs_dither(sampleColor)) {
-        endColor = vec3(gb_2_closest(sampleColor)[int(dither_2[openfl_TextureCoordv.x][openfl_TextureCoordv.y])]);
+        endColor = vec3(gb_2_closest(sampleColor)[int(ditherMix)]);
     } else
         endColor = vec3(closest_gb(tex2D(bitmap, openfl_TextureCoordv).xyz));
     return endColor;
@@ -139,7 +142,7 @@ void main() {
 
     vec3 sampleColor = color.xyz;
     // gb colors
-    vec3 colors[4] = gb_colors();
+    vec3 colors[4] = rgb_colors();
     if (color.a != 0.0) {
         vec3 colorA = sampleColor;
         vec3 colorB = return_gbColor(sampleColor);
