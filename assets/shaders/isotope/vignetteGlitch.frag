@@ -3,8 +3,8 @@
 #pragma header
 // #extension GL_EXT_gpu_shader4 : enable
 
-//uniform float time;
-//uniform float prob;
+uniform float time;
+uniform float prob;
 uniform float vignetteIntensity;
 
 float _round(float n) {
@@ -64,7 +64,7 @@ GlitchSeed glitchSeed(vec2 p, float speed) {
 }
 
 float shouldApply(GlitchSeed seed) {
-    return round(
+    return _round(
         mix(
             mix(rand(seed.seed), 1.0, seed.prob - 0.5),
             0.0,
@@ -141,7 +141,7 @@ void staticNoise(inout vec2 p, vec2 groupSize, float grainSize, float contrast) 
     if (shouldApply(seedA) == 1.0) {
         GlitchSeed seedB = glitchSeed(glitchCoord(p, vec2(grainSize)), 5.0);
         vec2 offset = vec2(rand(seedB.seed), rand(seedB.seed + 0.1));
-        offset = round(offset * 2.0 - 1.0);
+        offset = _round(offset * 2.0 - 1.0);
         offset *= contrast;
         p += offset;
     }
