@@ -2418,6 +2418,8 @@ class PlayState extends MusicBeatState
 
 			// not even forcezoom anymore but still
 			FlxG.camera.angle = FlxMath.lerp(0 + forceZoom[2], FlxG.camera.angle, easeLerp);
+
+			if(!isDead) //need testing
 			for (hud in allUIs)
 				hud.angle = FlxMath.lerp(0 + forceZoom[3], hud.angle, easeLerp);
 

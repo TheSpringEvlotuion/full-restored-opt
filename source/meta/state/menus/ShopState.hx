@@ -2131,6 +2131,8 @@ class ShopState extends MusicBeatState
 
 	public function switchOldPortrait(song:String)
 	{
+		song = song.toLowerCase();
+		
 		if (oldPortraitThread == null)
 		{
 			oldPortraitThread = Thread.create(function()

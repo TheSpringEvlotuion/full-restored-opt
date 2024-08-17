@@ -29,6 +29,7 @@ class FlxHitbox extends FlxSpriteGroup
 	public var buttonSpace:FlxButton = new FlxButton(0, 0);
 
 	var spacepos:String = 'Middle';
+    var realAlpha:Float = 0.1; //to change for custom alpha in options
 
 	/**
 	 * Create the zone.
@@ -108,8 +109,8 @@ class FlxHitbox extends FlxSpriteGroup
 		hint.alpha = 0.00001;
 		hint.onDown.callback = hint.onOver.callback = function()
 		{
-			if (hint.alpha != 0.2)
-				hint.alpha = 0.2;
+			if (hint.alpha != realAlpha)
+				hint.alpha = realAlpha;
 		}
 		hint.onUp.callback = hint.onOut.callback = function()
 		{
