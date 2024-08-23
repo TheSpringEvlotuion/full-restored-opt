@@ -325,11 +325,27 @@ class Init extends FlxState
 			'Presets for the mechanics settings. "custom" lets you set them yourself.',
 			['Off', 'Normal', 'Hell', 'Fuck You', 'Custom']
 		],
-		'Hitbox Type' => [
+		'Mechanics Type' => [
 			StringSelector,
-			'middle',
-			'Choose whether you want to display the extra hitbox.',
-			['Middle', 'Up', 'Down'] // sup
+			'Hitbox - Middle',
+			'Choose between changing the position of the Extra Hitbox or using a Button.',
+			['Hitbox - Middle', 'Hitbox - Up', 'Hitbox - Down', 'Button'] // sup
+		],
+		'Hitbox Opacity' => [
+			NumberSelector,
+			10,
+			'Choose opacity for the Hitbox.',
+			1,
+			0,
+			100
+		],
+		'Pad Opacity' => [
+			NumberSelector,
+			20,
+			'Choose opacity for the Virtual Pad.',
+			1,
+			0,
+			100
 		],
 		'Pendulum Enabled' => [
 			Checkmark,

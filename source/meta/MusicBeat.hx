@@ -10,6 +10,7 @@ import meta.data.*;
 import meta.data.Conductor.BPMChangeEvent;
 import meta.data.dependency.FNFUIState;
 #if mobile
+import mobile.MobileControls;
 import mobile.flixel.FlxHitbox;
 import mobile.flixel.FlxVirtualPad;
 import flixel.FlxCamera;
@@ -41,9 +42,11 @@ class MusicBeatState extends FNFUIState
 		return PlayerSettings.player1.controls;
 
 	#if mobile
+	var mobileControls:MobileControls;
 	var hitbox:FlxHitbox;
 	var virtualPad:FlxVirtualPad;
 	var trackedInputsHitbox:Array<FlxActionInput> = [];
+	var trackedInputsMobileControls:Array<FlxActionInput> = [];
 	var trackedInputsVirtualPad:Array<FlxActionInput> = [];
 
 	public function addVirtualPad(DPad:FlxDPadMode, Action:FlxActionMode, visible:Bool = true):Void
@@ -117,6 +120,47 @@ class MusicBeatState extends FNFUIState
 
 		if (hitbox != null)
 			remove(hitbox);
+	}
+	public function addMobileControls(usesDodge:Bool = false, DefaultDrawTarget:Bool = true)
+	{
+		if (mobileControls != null)
+			removeMobileControls();
+
+		mobileControls = new MobileControls(usesDodge);
+
+		switch (MobileControls.mode)
+		{
+			case 'Pad-Right' | 'Pad-Left' | 'Pad-Custom':
+				controls.setVirtualPadNOTES(mobileControls.virtualPad, RIGHT_FULL, if (usesDodge) DODGE else NONE);
+			case 'Pad-Duo':
+				controls.setVirtualPadNOTES(mobileControls.virtualPad, BOTH_FULL, if (usesDodge) DODGE else NONE);
+			case 'Hitbox':
+				controls.setHitBox(mobileControls.hitbox, if (usesDodge && !(Init.trueSettings.get('Mechanics Type') == "Button")) SPACE else DEFAULT);
+				if (usesDodge && Init.trueSettings.get('Mechanics Type') == "Button")
+				controls.setVirtualPadNOTES(mobileControls.virtualPad, NONE, DODGE);
+
+			case 'Keyboard': // do nothing
+		}
+
+		trackedInputsMobileControls = controls.trackedInputsNOTES;
+		controls.trackedInputsNOTES = [];
+
+		var camControls:FlxCamera = new FlxCamera();
+		FlxG.cameras.add(camControls, DefaultDrawTarget);
+		camControls.bgColor.alpha = 0;
+
+		mobileControls.cameras = [camControls];
+		mobileControls.visible = false;
+		add(mobileControls);
+	}
+
+	public function removeMobileControls()
+	{
+		if (trackedInputsMobileControls.length > 0)
+			controls.removeVirtualControlsInput(trackedInputsMobileControls);
+
+		if (mobileControls != null)
+			remove(mobileControls);
 	}
 	#end
 

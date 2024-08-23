@@ -1193,7 +1193,8 @@ class PlayState extends MusicBeatState
 
 		// call the funny intro cutscene depending on the song
 		songIntroCutscene();
-		#if mobile
+
+	/*#if mobile
 	if (SONG.song.toLowerCase() == 'rednecks' && gameplayMode != PUSSY_MODE) {
 						addHitbox(true, SPACE);
 			}	else {
@@ -1229,9 +1230,12 @@ class PlayState extends MusicBeatState
 
 		addHitboxCamera(false);
 		//hitbox.visible = false;
-		#end
-	}
+		#end*/
 
+		#if mobile
+        startMobileControls(curStage);
+	    #end
+	} 
 
 	public var minHealth:Float = 0;
 
@@ -4700,6 +4704,30 @@ class PlayState extends MusicBeatState
 		}
 	}
 
+	inline function startMobileControls(stage:String)
+	{
+        switch(stage){
+			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar':
+				if (gameplayMode != PUSSY_MODE && boyfriend.curCharacter != 'hypno-cards' && boyfriend.curCharacter != 'hypno-cards-front') {
+					addMobileControls(true);
+				} else {
+					addMobileControls(false);
+				}
+			case 'none' | 'pokecenter' | 'bygone' | 'shitty-cave':
+				if (gameplayMode == HELL_MODE || gameplayMode == FUCK_YOU) {
+					addMobileControls(true);
+				} else {
+					addMobileControls(false);
+				}
+			default:
+				if (SONG.song.toLowerCase() == 'rednecks' && gameplayMode != PUSSY_MODE) {
+					addMobileControls(true);
+				} else {
+					addMobileControls(false);
+				}
+	    }
 
+		mobileControls.visible = true;
+	}
 
 }

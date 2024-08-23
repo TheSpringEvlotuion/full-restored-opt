@@ -8,6 +8,8 @@ import mobile.flixel.FlxButton;
 import openfl.display.BitmapData;
 import openfl.display.Shape;
 
+using StringTools;
+
 enum HitboxType
 {
 	DEFAULT;
@@ -29,7 +31,7 @@ class FlxHitbox extends FlxSpriteGroup
 	public var buttonSpace:FlxButton = new FlxButton(0, 0);
 
 	var spacepos:String = 'Middle';
-    var realAlpha:Float = 0.1; //to change for custom alpha in options
+    var realAlpha:Float = Init.trueSettings.get('Hitbox Opacity') / 100; //to change for custom alpha in options
 
 	/**
 	 * Create the zone.
@@ -43,7 +45,9 @@ class FlxHitbox extends FlxSpriteGroup
 	{
 		super();
 
-		spacepos = Init.trueSettings.get('Hitbox Type');
+		spacepos = Init.trueSettings.get('Mechanics Type');
+		spacepos = spacepos.replace("Hitbox - ", "");
+        trace(spacepos);
 
 		switch (type)
 		{
@@ -54,30 +58,28 @@ class FlxHitbox extends FlxSpriteGroup
 				add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF0000));
 
 			case SPACE:
-				if (spacepos == 'Middle')
-				{
+				switch(spacepos){
+					case "Middle":
 					add(buttonLeft = createHint(0, 0, Std.int(FlxG.width / 5), FlxG.height, 0xFF00FF));
 					add(buttonDown = createHint(FlxG.width / 5, 0, Std.int(FlxG.width / 5), FlxG.height, 0x00FFFF));
 					add(buttonSpace = createHint(FlxG.width / 2.5, 0, Std.int(FlxG.width / 5), FlxG.height, 0xFFD000));
 					add(buttonUp = createHint(FlxG.width / 2.5 + (FlxG.width / 5), 0, Std.int(FlxG.width / 5), FlxG.height, 0x00FF00));
 					add(buttonRight = createHint(FlxG.width / 2.5 * 2, 0, Std.int(FlxG.width / 5), FlxG.height, 0xFF0000));
-				}
-				else if (spacepos == 'Down')
-				{
+
+					case "Down":
 					add(buttonLeft = createHint(0, 0, Std.int(FlxG.width / 4), Std.int(FlxG.height / 4) * 3, 0xFF00FF));
 					add(buttonDown = createHint(FlxG.width / 4, 0, Std.int(FlxG.width / 4), Std.int(FlxG.height / 4) * 3, 0x00FFFF));
 					add(buttonSpace = createHint(0, Std.int(FlxG.height / 4) * 3, FlxG.width, Std.int(FlxG.height / 4), 0xFF7700));
 					add(buttonUp = createHint(FlxG.width / 2, 0, Std.int(FlxG.width / 4), Std.int(FlxG.height / 4) * 3, 0x00FF00));
 					add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), 0, Std.int(FlxG.width / 4), Std.int(FlxG.height / 4) * 3, 0xFF0000));
-				}
-				else
-				{
+
+					default:
 					add(buttonLeft = createHint(0, Std.int(FlxG.height / 4), Std.int(FlxG.width / 4), Std.int(FlxG.height / 4) * 3, 0xFF00FF));
 					add(buttonDown = createHint(FlxG.width / 4, Std.int(FlxG.height / 4), Std.int(FlxG.width / 4), Std.int(FlxG.height / 4) * 3, 0x00FFFF));
 					add(buttonSpace = createHint(0, 0, FlxG.width, Std.int(FlxG.height / 4), 0xFF7700));
 					add(buttonUp = createHint(FlxG.width / 2, Std.int(FlxG.height / 4), Std.int(FlxG.width / 4), Std.int(FlxG.height / 4) * 3, 0x00FF00));
-					add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), Std.int(FlxG.height / 4), Std.int(FlxG.width / 4),
-						Std.int(FlxG.height / 4) * 3, 0xFF0000));
+					add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), Std.int(FlxG.height / 4), Std.int(FlxG.width / 4), Std.int(FlxG.height / 4) * 3, 0xFF0000));
+
 				}
 		}
 

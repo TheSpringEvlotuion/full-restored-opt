@@ -168,6 +168,7 @@ class OptionsMenuState extends MusicBeatSubState
 		categoryMap = [
 			'main' => [
 				// main page
+				["Touch Controls", loadSelectedGroup],
 				[
 					"Controls",
 					function()
@@ -183,6 +184,21 @@ class OptionsMenuState extends MusicBeatSubState
 				["Mechanics", loadSelectedGroup],
 				["Effects", loadSelectedGroup],
 				["Exit", exit]
+			],
+			"Touch Controls" => [
+				[
+					"Change Style",
+					function()
+					{
+						openSubState(new mobile.MobileControlsSubState());
+						#if mobile
+						removeVirtualPad();
+						#end
+					}
+				],
+				["Mechanics Type", confirmOption, generateExtra, updateOption],
+				["Hitbox Opacity", confirmOption, generateExtra, updateOption],
+				["Pad Opacity", confirmOption, generateExtra, updateOption],
 			],
 			"Preferences" => [
 				["Game Settings"],
@@ -221,7 +237,6 @@ class OptionsMenuState extends MusicBeatSubState
 			],
 			"Mechanics" => [
 				["Mechanics", confirmOption, generateExtra, updateOption],
-				["Hitbox Type", confirmOption, generateExtra, updateOption],
 				["Custom Settings"],
 				["Pendulum"],
 				["Pendulum Enabled", confirmOption, generateExtra, updateOption],
@@ -270,7 +285,7 @@ class OptionsMenuState extends MusicBeatSubState
 		centralTextbox.scale.set(3, 3);
 		centralTextbox.boxHeight = 0;
 		centralTextbox.boxWidth = 0;
-		expanseHorizontal = 9;
+		expanseHorizontal = 10;
 		expanseVertical = (1.5 * categoryMap.get("main").length) - 1;
 
 		defaultExpanseVertical = expanseVertical;
@@ -293,6 +308,15 @@ class OptionsMenuState extends MusicBeatSubState
 		}
 
 		loadGroup("main");
+	}
+
+	override function closeSubState():Void
+	{
+		super.closeSubState();
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B);
+		addVirtualPadCamera(false);
+		#end
 	}
 
 	var pressTimers:Map<FlxObject, Float> = [];
@@ -437,6 +461,17 @@ class OptionsMenuState extends MusicBeatSubState
 
 	function loadGroup(daGroup:String)
 	{
+
+		#if mobile
+		if(currentScreenName == "Touch Controls" && daGroup == "main") //updating vpad opacity
+		{
+		    removeVirtualPad(); 
+		    addVirtualPad(LEFT_FULL, A_B);
+		    addVirtualPadCamera(false);
+		}
+	    #end
+
+
 		if (currentDisplayed != null)
 			remove(currentDisplayed);
 
@@ -452,16 +487,17 @@ class OptionsMenuState extends MusicBeatSubState
 		currentScreenName = daGroup;
 
 		add(currentDisplayed);
-		if (daGroup == 'main')
+		switch(daGroup)
 		{
+			case "main":
 			expanseVertical = defaultExpanseVertical;
 			expanseHorizontal = defaultExpanseHorizontal;
-		}
-		else
-		{
-			expanseHorizontal = 24;
+
+			default:
+			expanseHorizontal = (daGroup == "Touch Controls") ? 25 : 24;
 			expanseVertical = 18;
 		}
+
 		for (key in currentExtras.keys())
 		{
 			var extra = currentExtras.get(key);
@@ -642,7 +678,7 @@ class OptionsMenuState extends MusicBeatSubState
 			var pressUp = controls.UI_UP_P;
 			var pressDown = controls.UI_DOWN_P;
 			var confirm = controls.ACCEPT;
-			var back = controls.BACK;
+			var back = #if desktop controls.BACK #else virtualPad.buttonB.justReleased #end;
 
 			if (back)
 			{

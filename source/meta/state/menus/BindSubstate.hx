@@ -231,14 +231,9 @@ class BindSubstate extends MusicBeatSubState
 			if (controls.UI_UP_P)
 				curSelected--;
 
-			if (controls.BACK)
+			if (#if desktop controls.BACK #else virtualPad.buttonB.justReleased #end)
 			{
-				#if desktop
 				close();
-				#else
-				Init.saveControls();
-				FlxG.resetState();
-				#end
 				return;
 			}
 
