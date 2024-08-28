@@ -130,17 +130,22 @@ function onCreate() {
 	PlayState.ratingPosition.set(600, 800);
 	PlayState.bronzongMechanic = true;
 
+  if (Init.trueSettings.get('Gaussian Enabled'))
+  {
 	gaussian = new ShaderFilter(new FlxGraphicsShader("", Paths.shader('death-toll/gaussian')));
 	gaussian.shader.data.Size.value = [8.0];
 	gaussian.shader.data.Directions.value = [8.0];
 	gaussian.shader.data.Quality.value = [8.0];
+	}
 	PlayState.camGame.width *= 2;
 	PlayState.camGame.height *= 2;
 	PlayState.camGame.x -= (PlayState.camGame.width - FlxG.width) / 2;
 	PlayState.camGame.y -= (PlayState.camGame.height - FlxG.height) / 2;
+	if (Init.trueSettings.get('Gaussian Enabled'))
+	{
 	PlayState.camGame.setFilters([gaussian]);
 	PlayState.camHUD.setFilters([gaussian]);
-
+  }
 }
 
 var missContractAnims:Array<String> = ["idle","B","O","Y","F","R","I","E","N","D"];
@@ -149,6 +154,7 @@ var cameras:Array<FlxCamera> = [];
 function onCreatePost() {
 	//PlayState.strumHUD[1].setFilters([gaussian]);
 	for(cam in PlayState.strumHUD){
+	  if (Init.trueSettings.get('Gaussian Enabled'))
 		cam.setFilters([gaussian]);
 		cameras.push(cam);
 	}
@@ -341,6 +347,7 @@ function onUpdate(elapsed) {
 	var size = (blurAmount*6) + (PlayState.instance.blurAmount*8);
 	if(size > 16)size=16;
 
+	  if (Init.trueSettings.get('Gaussian Enabled'))
 	gaussian.shader.data.Size.value[0] = size;
 }
 
