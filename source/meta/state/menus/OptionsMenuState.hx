@@ -264,6 +264,7 @@ class OptionsMenuState extends MusicBeatSubState
 				["Snowfall"],
 				["Snow Enabled", confirmOption, generateExtra, updateOption],
 				["Death Toll"],
+				["Gaussian Enabled", confirmOption, generateExtra, updateOption],
 				["Hell Mode Ear Ringing", confirmOption, generateExtra, updateOption],
 			],
 		];
