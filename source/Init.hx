@@ -369,9 +369,10 @@ class Init extends FlxState
 			0.5,
 			99.5
 		],
-		'Shaders' => [Checkmark, false, "Whether to load shaders or not",],
+		'Shaders' => [Checkmark, true, "Whether to load shaders or not",],
 		"Unfocus Pause" => [Checkmark, true, "Whether the game should pause when you unfocus"],
-		'Snow Enabled' => [Checkmark, true, "Whether to enable the snow on the Mountain stage"],
+		'Snow Enabled' => [Checkmark, false, "Whether to enable the snow on the Mountain stage"],
+		'Gaussian Enabled' => [Checkmark, false, "Whether to enable the snow on the Mountain stage"],
 		'Freezing Enabled' => [
 			Checkmark,
 			true,
