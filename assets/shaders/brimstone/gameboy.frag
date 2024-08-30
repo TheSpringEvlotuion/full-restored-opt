@@ -134,7 +134,7 @@ vec3 buried_grave_color = vec3(121.0, 133.0, 142.0) / 255.0;
 
 void main() {
 
-    vec4 color = flixel_texture2D(bitmap, openfl_TextureCoordv);
+    vec4 color = texture2D(bitmap, openfl_TextureCoordv);
     if(interpolation==0.0){
       gl_FragColor = color;
       return;
@@ -158,7 +158,3 @@ void main() {
     } else
         gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
 }
-
-/*
- *
- */
