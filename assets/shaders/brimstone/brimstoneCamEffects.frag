@@ -95,7 +95,7 @@ bool needs_dither(vec3 color) {
     return abs(first_d - second_d) <= threshold;
 }
 
-vec3 return_gbColor(vec3 sampleColor) {
+vec3 return_rgbColor(vec3 sampleColor) {
     vec3 endColor;
     if (needs_dither(sampleColor)) {
         endColor = vec3(gb_2_closest(sampleColor)[int(dither_2[int(openfl_TextureCoordv.x)][int(openfl_TextureCoordv.y)])]);
@@ -116,7 +116,7 @@ void main() {
     }*/
     vec3 colors[4] = rgb_colors();
     if (sampleColor.a != 0.0) {
-        vec3 colorB = return_gbColor(sampleColor.rgb);
+        vec3 colorB = return_rgbColor(sampleColor.rgb);
         vec4 newColor;
         if (sampleColor.rgb == buried_eye_color)
             colorB = colors[2];
