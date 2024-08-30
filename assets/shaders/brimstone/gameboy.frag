@@ -27,15 +27,15 @@ vec3 tex2D(sampler2D _tex,vec2 _p)
 }
 
 vec3[4] rgb_colors() {
- 	vec3 gb_colors[4];
-    gb_colors[0] = vec3(8., 24., 32.) / 255.;
-    gb_colors[1] = vec3(52., 104., 86.) / 255.;
-    gb_colors[2] = vec3(136., 192., 112.) / 255.;
-    gb_colors[3] = vec3(224., 248., 208.) / 255.;
-    return gb_colors;
+ 	vec3 rgb_colors[4];
+    rgb_colors[0] = vec3(8., 24., 32.) / 255.;
+    rgb_colors[1] = vec3(52., 104., 86.) / 255.;
+    rgb_colors[2] = vec3(136., 192., 112.) / 255.;
+    rgb_colors[3] = vec3(224., 248., 208.) / 255.;
+    return rgb_colors;
 }
 
-float[4] gb_colors_distance(vec3 color) {
+float[4] rgb_colors_distance(vec3 color) {
     float distances[4];
     distances[0] = distance(color, rgb_colors()[0]);
     distances[1] = distance(color, rgb_colors()[1]);
@@ -44,28 +44,28 @@ float[4] gb_colors_distance(vec3 color) {
     return distances;
 }
 
-vec3 closest_gb(vec3 color) {
+vec3 closest_rgb(vec3 color) {
     int best_i = 0;
     float best_d = 2.;
 
-    vec3 gb_colors[4] = rgb_colors();
+    vec3 rgb_colors[4] = rgb_colors();
 
     for (int i = 0; i < 4; i++) {
-        float dis = distance(gb_colors[i], color);;
+        float dis = distance(rgb_colors[i], color);;
         if (dis < best_d) {
             best_d = dis;
             best_i = i;
         }
     }
-    return gb_colors[best_i];
+    return rgb_colors[best_i];
 }
 
 vec2 get_tile_sample(vec2 coords, vec2 res) {
     return floor(coords * res / 2.) * 2. / res;
 }
 
-vec3[2] gb_2_closest(vec3 color) {
- 	float distances[4] = gb_colors_distance(color);
+vec3[2] rgb_2_closest(vec3 color) {
+ 	float distances[4] = rgb_colors_distance(color);
 
     int first_i = 0;
     float first_d = 2.;
@@ -95,7 +95,7 @@ vec3[2] gb_2_closest(vec3 color) {
 }
 
 bool needs_dither(vec3 color) {
-    float distances[4] = gb_colors_distance(color);
+    float distances[4] = rgb_colors_distance(color);
 
     int first_i = 0;
     float first_d = 2.;
@@ -118,14 +118,14 @@ bool needs_dither(vec3 color) {
     return abs(first_d - second_d) <= threshold;
 }
 
-vec3 return_gbColor(vec3 sampleColor) {
+vec3 return_rgbColor(vec3 sampleColor) {
     vec3 endColor;
     float ditherMix = mix(dither_1[int(openfl_TextureCoordv.y)], dither_2[int(openfl_TextureCoordv.y)], openfl_TextureCoordv.x);
     
     if (needs_dither(sampleColor)) {
-        endColor = vec3(gb_2_closest(sampleColor)[int(ditherMix)]);
+        endColor = vec3(rgb_2_closest(sampleColor)[int(ditherMix)]);
     } else
-        endColor = vec3(closest_gb(tex2D(bitmap, openfl_TextureCoordv).xyz));
+        endColor = vec3(closest_rgb(tex2D(bitmap, openfl_TextureCoordv).xyz));
     return endColor;
 }
 
@@ -141,7 +141,7 @@ void main() {
     }
 
     vec3 sampleColor = color.xyz;
-    // gb colors
+    // rgb colors
     vec3 colors[4] = rgb_colors();
     if (color.a != 0.0) {
         vec3 colorA = sampleColor;
