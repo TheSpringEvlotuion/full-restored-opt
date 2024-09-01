@@ -71,7 +71,7 @@ class CoolUtil
 		{
 			var sus:String = folder.split('/')[3];
 
-			if (!sus.startsWith('.')) libraryArray.push(sus);
+			if (!sus.startsWith('.') && !libraryArray.contains(sus)) libraryArray.push(sus);
 
 		}
 		trace(libraryArray);

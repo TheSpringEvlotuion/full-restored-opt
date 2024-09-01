@@ -46,8 +46,10 @@ class MobileControls extends FlxSpriteGroup
 			case 'Hitbox':
 				hitbox = new FlxHitbox(3, Std.int(FlxG.width / 4), FlxG.height, [0xFF00FF, 0x00FFFF, 0x00FF00, 0xFF0000], (usesDodge && !isExtraButton) ? SPACE : DEFAULT);
 				add(hitbox);
+				if(usesDodge && isExtraButton){ //prevent to add button and hitbox
 				virtualPad = MobileControls.customVirtualPad;
 				add(virtualPad);
+				}
 			case 'Keyboard': // do nothing
 		}
 	}
