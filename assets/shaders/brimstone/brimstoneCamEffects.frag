@@ -41,7 +41,7 @@ vec3 closest_rgb(vec3 color) {
     return rgb_colors[best_i];
 }
 
-vec3[2] gb_2_closest(vec3 color) {
+vec3[2] rgb_2_closest(vec3 color) {
  	float distances[4] = rgb_colors_distance(color);
 
     int first_i = 0;
@@ -98,7 +98,7 @@ bool needs_dither(vec3 color) {
 vec3 return_rgbColor(vec3 sampleColor) {
     vec3 endColor;
     if (needs_dither(sampleColor)) {
-        endColor = vec3(gb_2_closest(sampleColor)[int(dither_2[int(openfl_TextureCoordv.x)][int(openfl_TextureCoordv.y)])]);
+        endColor = vec3(rgb_2_closest(sampleColor)[int(dither_2[int(openfl_TextureCoordv.x)][int(openfl_TextureCoordv.y)])]);
     } else
         endColor = vec3(closest_rgb(texture2D(bitmap, openfl_TextureCoordv).rgb));
     return endColor;
