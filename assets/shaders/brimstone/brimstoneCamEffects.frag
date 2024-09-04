@@ -2,7 +2,7 @@
 
 float threshold = 0.125; // Threshold for dithering (0.0045 found to be optimal)
 uniform float intensity;
-mat2 dither_2 = mat2(0.,1.,1.,0.);
+vec4 dither_2 = vec4(0.,1.,1.,0.);
 
 struct dither_tile {
     float height;
@@ -98,7 +98,7 @@ bool needs_dither(vec3 color) {
 vec3 return_rgbColor(vec3 sampleColor) {
     vec3 endColor;
     if (needs_dither(sampleColor)) {
-        endColor = vec3(rgb_2_closest(sampleColor)[int(dither_2[int(openfl_TextureCoordv.x)][int(openfl_TextureCoordv.y)])]);
+        endColor = vec3(rgb_2_closest(sampleColor)[int(dither_2[int(openfl_TextureCoordv.x) * 2 + int(openfl_TextureCoordv.y)])]);
     } else
         endColor = vec3(closest_rgb(texture2D(bitmap, openfl_TextureCoordv).rgb));
     return endColor;
