@@ -266,6 +266,8 @@ class OptionsMenuState extends MusicBeatSubState
 				["Death Toll"],
 				["Gaussian Enabled", confirmOption, generateExtra, updateOption],
 				["Hell Mode Ear Ringing", confirmOption, generateExtra, updateOption],
+				["Missingno"],
+				["Missingno Shaders", confirmOption, generateExtra, updateOption],
 			],
 		];
 		super.create();
