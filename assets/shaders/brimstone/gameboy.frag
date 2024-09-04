@@ -18,7 +18,7 @@ struct dither_tile {
 
 vec3 tex2D(sampler2D _tex,vec2 _p)
 {
-    vec3 col=texture(_tex,_p).xyz;
+    vec3 col=texture2D(_tex,_p).xyz;
     if(.5<abs(_p.x-.5)){
         col=vec3(.1);
     }
@@ -138,7 +138,7 @@ vec3 buried_grave_color = vec3(121.0, 133.0, 142.0) / 255.0;
 
 void main() {
 
-    vec4 color = flixel_texture2D(bitmap, openfl_TextureCoordv);
+    vec4 color = texture2D(bitmap, openfl_TextureCoordv);
     if(interpolation==0.0){
       gl_FragColor = color;
       return;
