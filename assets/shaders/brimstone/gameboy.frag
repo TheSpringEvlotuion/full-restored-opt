@@ -7,7 +7,7 @@
  *
  */
 
-uniform float interpolation = 0.5;
+uniform float interpolation;
 
 float threshold = 0.125;
 vec4 dither_2 = vec4(0.,1.,1.,0.);
