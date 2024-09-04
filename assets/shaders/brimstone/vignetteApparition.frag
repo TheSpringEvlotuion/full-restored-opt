@@ -6,7 +6,7 @@ uniform float vignetteIntensity;
 
 void main() {
     float amount = (0.25 * sin(time * PI) + vignetteIntensity);
-    vec4 color = flixel_texture2D(bitmap, openfl_TextureCoordv);
+    vec4 color = texture2D(bitmap, openfl_TextureCoordv);
     float vignette = distance(openfl_TextureCoordv, vec2(0.5));
     vignette = mix(1.0, 1.0 - amount, vignette);
 	gl_FragColor = vec4(mix(vec3(1.0, 0.0, 0.0), color.rgb, vignette), 1.0 - vignette);
