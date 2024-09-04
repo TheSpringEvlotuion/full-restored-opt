@@ -107,15 +107,18 @@ function onCreatePost() {
 		PlayState.instance.camPos.y += 80;
 		PlayState.dadOpponent.x += 66;
 
+    if (Init.trueSettings.get('Missingno Shaders") {
 		boyfrebShader = new FlxGraphicsShader("", Paths.shader('missingno/individualGlitches'));
 		boyfrebShader.data.binaryIntensity.value = [1000];
 		PlayState.boyfriend.shader = boyfrebShader;
+		}
 	}
 }
 
 function onEvent(event) {
 	switch (event) {
 		case 'Missingno Tempo Change':
+      if (Init.trueSettings.get("Missingno Shaders") {
 			startGlitching = true;
 
 			backgroundShader = new FlxGraphicsShader("", Paths.shader('glitch'));
@@ -134,10 +137,14 @@ function onEvent(event) {
 			}, onComplete: function(tween:FlxTween){
 				endGlitching = true;
 			}});
+			}
 		case 'Missingno':
+      if (Init.trueSettings.get("Missingno Shaders") {
 			if (endGlitching)
 				backgroundShader.data.time.value = [Conductor.songPosition / 1000];
+				}
 		case 'Missingno Play Random Shit':
+      if (Init.trueSettings.get("Missingno Shaders") {
 			if (randomShitTimer == null || randomShitTimer.active == false || randomShitTimer.finished) {
 				randomShitTimer = new FlxTimer().start(Conductor.crochet / 1000, function(timer:FlxTimer){
 					boyfrebShader.data.binaryIntensity.value = [1000];
@@ -147,10 +154,12 @@ function onEvent(event) {
 			boyfrebShader.data.binaryIntensity.value = [1 / FlxG.random.int(1, 4)];
 	}
 }
+}
 
 function onUpdate(elapsed) {
     groundNoShadow.visible = !PlayState.dadOpponent.visible;
 
+  if (Init.trueSettings.get("Missingno Shaders") {
 	if (startGlitching) {
 		backgroundShader.data.prob.value = [glitchAmount / 4];
 		if (!endGlitching)
@@ -162,4 +171,5 @@ function onUpdate(elapsed) {
 			newShader.shader.data.time.value = [(Math.floor((Conductor.songPosition / Conductor.crochet)) * Conductor.crochet) / 1000];
 		missingnoShader.data.binaryIntensity.value = [(10 - ((Math.floor(glitchAmount / 20) * 20) * 9)) / 8];
 	}
+}
 }
