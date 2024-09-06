@@ -361,7 +361,7 @@ function onEvent(eventName) {
             gengar.visible = false;
             hudGengar.visible = true;
             hudGengar.playAnim('leave', true);
-            hudGengar.y += 150;
+            hudGengar.y += 200;
             hudGengar.x += 225;
             hudGengar.animation.finishCallback = function(name:String){
                 if (name == 'leave')

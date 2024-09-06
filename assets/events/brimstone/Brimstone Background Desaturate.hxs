@@ -5,6 +5,10 @@ function eventFunction(params) {
 	PlayState.instance.stageBuild.forEach(function(sprite:FlxSprite){
 		var desaturateShader = new FlxGraphicsShader("", Paths.shader('desaturation'));
 		sprite.shader = desaturateShader;
+		sprite.shader.data.amplitude.value = [-0.1];
+		sprite.shader.data.frequency.value = [8.0]; //angri
+		sprite.shader.data.distortionTime.value = [0.0];
+		sprite.shader.data.desaturationAmount.value = [0.0];
 	});
 
 	var originalCameraPlacement:FlxPoint = new FlxPoint().copyFrom(PlayState.instance.manualCameraPosition);

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="no_glitchyred.png">
+  <SubTexture name="no0000" x="1" y="1" width="717" height="382" rotated="true"  frameX="-13" frameY="-15" frameWidth="399" frameHeight="732"/>
+  <SubTexture name="no0001" x="733" y="1562" width="732" height="398" rotated="true"  frameX="-0" frameY="-0" frameWidth="399" frameHeight="732"/>
+  <SubTexture name="no0002" x="1467" y="1562" width="732" height="398" rotated="true"  frameX="-0" frameY="-0" frameWidth="399" frameHeight="732"/>
+  <SubTexture name="no0003" x="729" y="1163" width="730" height="397" rotated="true"  frameX="-1" frameY="-2" frameWidth="399" frameHeight="732"/>
+  <SubTexture name="no0004" x="1461" y="1163" width="730" height="397" rotated="true"  frameX="-1" frameY="-2" frameWidth="399" frameHeight="732"/>
+  <SubTexture name="no0005" x="1" y="1562" width="730" height="397" rotated="true"  frameX="-1" frameY="-2" frameWidth="399" frameHeight="732"/>
+  <SubTexture name="no0006" x="733" y="769" width="726" height="392" rotated="true"  frameX="-7" frameY="-6" frameWidth="399" frameHeight="732"/>
+  <SubTexture name="no0007" x="1461" y="769" width="726" height="392" rotated="true"  frameX="-7" frameY="-6" frameWidth="399" frameHeight="732"/>
+  <SubTexture name="no0008" x="1" y="1153" width="726" height="392" rotated="true"  frameX="-7" frameY="-6" frameWidth="399" frameHeight="732"/>
+  <SubTexture name="no0009" x="720" y="1" width="730" height="382" rotated="true"  frameX="-13" frameY="-2" frameWidth="399" frameHeight="732"/>
+  <SubTexture name="no0010" x="1452" y="1" width="730" height="382" rotated="true"  frameX="-13" frameY="-2" frameWidth="399" frameHeight="732"/>
+  <SubTexture name="no0011" x="1" y="385" width="730" height="382" rotated="true"  frameX="-13" frameY="-2" frameWidth="399" frameHeight="732"/>
+  <SubTexture name="no0012" x="733" y="385" width="730" height="382" rotated="true"  frameX="-13" frameY="-2" frameWidth="399" frameHeight="732"/>
+  <SubTexture name="no0013" x="1465" y="385" width="730" height="382" rotated="true"  frameX="-13" frameY="-2" frameWidth="399" frameHeight="732"/>
+  <SubTexture name="no0014" x="1" y="769" width="730" height="382" rotated="true"  frameX="-13" frameY="-2" frameWidth="399" frameHeight="732"/>
+</TextureAtlas>

@@ -11,6 +11,9 @@ var clickedGirl:Bool = false;
 var clickedCart:Bool = false;
 var legacyCutscene:FNFSprite;
 
+var joketoyou:FNFSprite;
+var no:FNFSprite;
+
 function onCreate() {
 	PlayState.defaultCamZoom = 0.7;
 	stage.curStage = 'glitchy';
@@ -64,13 +67,28 @@ function onCreate() {
 	floor.visible = false;
 	add(floor);
 
+	joketoyou = new FNFSprite();
+	joketoyou.frames = Paths.getSparrowAtlas('joke_glitchyred');
+	joketoyou.animation.addByPrefix('joke', 'joke', 24, false);
+	joketoyou.antialiasing = true;
+	joketoyou.scale.set(0.8, 0.8);
+	joketoyou.alpha = 0.0001;
+	add(joketoyou);
 
+	no = new FNFSprite();
+	no.frames = Paths.getSparrowAtlas('no_glitchyred');
+	no.animation.addByPrefix('no', 'no', 24, false);
+	no.antialiasing = true;
+	no.scale.set(0.8, 0.8);
+	no.alpha = 0.0001;
+	add(no);
+	
 	legacyCutscene = new FNFSprite(500, 50);
 	legacyCutscene.frames = Paths.getSparrowAtlas('they_took_everything_from_me');
 	legacyCutscene.animation.addByPrefix('speech', 'GlitchySpeak', 24, false);
 	legacyCutscene.updateHitbox();
 	legacyCutscene.antialiasing = true;
-	legacyCutscene.visible = false;
+	//legacyCutscene.visible = false;
 	legacyCutscene.alpha = 0.0001;
 	add(legacyCutscene);
 	legacyCutscene.setGraphicSize(Std.int(legacyCutscene.width * 1.25));
@@ -143,6 +161,28 @@ function onBeat(beat) {
 	girlTits.animation.play('idle');
 }
 
+function onStep(step) {
+	switch(step){
+		case 234:
+		PlayState.dadOpponent.visible = false;
+		joketoyou.alpha = 1;
+		joketoyou.animation.play("joke", false);
+
+		case 257:
+		PlayState.dadOpponent.visible = true;
+		joketoyou.alpha = 0;	
+
+		case 1084:
+		PlayState.dadOpponent.visible = false;
+		no.alpha = 1;
+		no.animation.play("no", false);
+
+		case 1105:
+		PlayState.dadOpponent.visible = true;
+		no.alpha = 0;
+	}
+}
+
 function onCreatePost() {
 	PlayState.instance.flipCharacters();
 
@@ -160,6 +200,12 @@ function onCreatePost() {
 
 	legacyCutscene.cameras = [PlayState.dialogueHUD];
 
+	//offsets :3
+	joketoyou.x = PlayState.dadOpponent.x - 2;
+	joketoyou.y = PlayState.dadOpponent.y - 20;
+	no.x = PlayState.dadOpponent.x - 2; 
+	no.y = PlayState.dadOpponent.y - 2;
+
 	//FlxG.mouse.visible = true;
 	//FlxG.mouse.useSystemCursor = true;
 }
@@ -167,9 +213,11 @@ function onCreatePost() {
 function onEvent(event) {
 	switch (event){
 		case 'Change Character':
+			trace("changed");
 			PlayState.dadOpponent.scale.set(0.8, 0.8);
 			PlayState.dadOpponent.resizeOffsets();
 			PlayState.instance.iconP2.changeIcon(PlayState.dadOpponent.curCharacter);
+			PlayState.dadOpponent.y -= 2; //more offset
 			trace(PlayState.strumHUD[1].y);
 
 		case 'Glitchy Red Speech':
@@ -194,7 +242,7 @@ function onEvent(event) {
 			PlayState.dadOpponent.visible = false;
 			girlTits.visible = false;
 			FlxG.mouse.visible = false;
-			legacyCutscene.visible = true;
+			//legacyCutscene.visible = true;
 			legacyCutscene.animation.play('speech');
 			legacyCutscene.animation.finishCallback = function(name:String) 
 			{
