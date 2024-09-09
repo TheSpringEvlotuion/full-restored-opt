@@ -62,12 +62,11 @@ class InfoHud extends TextField
 		mem /= Math.pow(1000, memInterval);
 		mem = Math.round(mem * 100) / 100;
 
-	 if (mem > memPeak || memInterval >= memPeakInterval)
-    {
-      memPeak = mem;
-      if (memInterval > memPeakInterval)
-      memPeakInterval = memInterval;
-    }
+		if (mem > memPeak)
+		{
+			memPeak = mem;
+			memPeakInterval = memInterval;
+		}
 
 		if (visible)
 		{
