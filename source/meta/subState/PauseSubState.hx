@@ -68,7 +68,7 @@ class PauseSubState extends MusicBeatSubState
 		pausePortraitLeft = new FlxSprite(portraitDistance * -1, 0);
 		pausePortraitLeft.loadGraphic(Paths.image('pause/' + PlayState.SONG.song.toLowerCase() + '/left' + PlayState.instance.pausePortraitPrefix[0]));
 		pausePortraitLeft.scrollFactor.set();
-		if (!Assets.exists(Paths.getPath('pause/' + PlayState.SONG.song.toLowerCase() + '/left' + PlayState.instance.pausePortraitPrefix[0] + '.png', IMAGE)))
+		if (Assets.exists(Paths.getPath('images/pause/' + PlayState.SONG.song.toLowerCase() + '/left' + PlayState.instance.pausePortraitPrefix[0] + '.png', IMAGE)))
 			add(pausePortraitLeft);
 		pausePortraitLeft.x = portraitDistance * -1;
 		pausePortraitLeft.alpha = 0;
@@ -78,7 +78,7 @@ class PauseSubState extends MusicBeatSubState
 		pausePortraitRight = new FlxSprite((FlxG.width / 2) + portraitDistance, 0);
 		pausePortraitRight.loadGraphic(Paths.image('pause/' + PlayState.SONG.song.toLowerCase() + '/right' + PlayState.instance.pausePortraitPrefix[1]));
 		pausePortraitRight.scrollFactor.set();
-		if (!Assets.exists(Paths.getPath('pause/' + PlayState.SONG.song.toLowerCase() + '/right' + PlayState.instance.pausePortraitPrefix[1] + '.png', IMAGE)))
+		if (Assets.exists(Paths.getPath('images/pause/' + PlayState.SONG.song.toLowerCase() + '/right' + PlayState.instance.pausePortraitPrefix[1] + '.png', IMAGE)))
 			add(pausePortraitRight);
 		pausePortraitRight.x = (FlxG.width / 2) + portraitDistance;
 		pausePortraitRight.alpha = 0;

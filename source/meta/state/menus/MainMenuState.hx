@@ -358,7 +358,7 @@ class MainMenuState extends MusicBeatState
 			}
 		}
 
-		if (/*Main.hypnoDebug*/ && FlxG.keys.justPressed.SEVEN #if mobile || FlxG.android.justReleased.BACK #end) // DEBUG UNLOCKS ALL PROGRESSION
+		if (Main.hypnoDebug && (FlxG.keys.justPressed.SEVEN #if mobile || FlxG.android.justReleased.BACK #end)) // DEBUG UNLOCKS ALL PROGRESSION
 		{
 			FlxG.save.data.mainMenuOptionsUnlocked = ['story', 'freeplay', 'credits', 'pokedex', 'options'];
 			FlxG.save.data.cartridgesOwned = ['HypnoWeek', 'LostSilverWeek', 'GlitchWeek'];
