@@ -1194,44 +1194,6 @@ class PlayState extends MusicBeatState
 		// call the funny intro cutscene depending on the song
 		songIntroCutscene();
 
-	/*#if mobile
-	if (SONG.song.toLowerCase() == 'rednecks' && gameplayMode != PUSSY_MODE) {
-						addHitbox(true, SPACE);
-			}	else {
-					addHitbox(true, DEFAULT);
-	}
-	  
-	if (gameplayMode != HELL_MODE || gameplayMode != FUCK_YOU) {
-		switch (curStage) // better than cursong
-		{
-			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar':
-				if (gameplayMode != PUSSY_MODE && boyfriend.curCharacter != 'hypno-cards' && boyfriend.curCharacter != 'hypno-cards-front')
-					addHitbox(true, SPACE);
-				else
-					addHitbox(true, DEFAULT);
-
-			default: // What other songs use 5keys?
-				addHitbox(true, DEFAULT);
-		  }
-	}
-	   if (gameplayMode == HELL_MODE || gameplayMode == FUCK_YOU) {
-	     		switch (curStage) // better than cursong
-		{
-			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar' | 'none' | 'pokecenter' | 'bygone' | 'shitty-cave':
-				if (gameplayMode != PUSSY_MODE && boyfriend.curCharacter != 'hypno-cards' && boyfriend.curCharacter != 'hypno-cards-front')
-					addHitbox(true, SPACE);
-				else
-					addHitbox(true, DEFAULT);
-
-				 default: // What other songs use 5keys?
-				addHitbox(true, DEFAULT);
-		}
- }
-
-		addHitboxCamera(false);
-		//hitbox.visible = false;
-		#end*/
-
 		#if mobile
         startMobileControls(curStage);
 	    #end
@@ -4707,7 +4669,7 @@ class PlayState extends MusicBeatState
 	inline function startMobileControls(stage:String)
 	{
         switch(stage){
-			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar':
+			case 'alley' | 'cave' | 'mountain' | 'hell' | 'bar' | 'ttfatf':
 				if (gameplayMode != PUSSY_MODE && boyfriend.curCharacter != 'hypno-cards' && boyfriend.curCharacter != 'hypno-cards-front') {
 					addMobileControls(true);
 				} else {
@@ -4729,5 +4691,4 @@ class PlayState extends MusicBeatState
 
 		mobileControls.visible = true;
 	}
-
 }
