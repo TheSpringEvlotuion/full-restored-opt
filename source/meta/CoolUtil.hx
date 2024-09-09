@@ -69,7 +69,14 @@ class CoolUtil
 
 		for (folder in unfilteredLibrary)
 		{
-			var sus:String = folder.split('/')[3];
+			var sussy:Array<String> = folder.split('/');
+			trace(sussy);
+
+			var sussiest:String = library.split('/').pop();
+			trace(sussiest);
+			
+			var sus:String = folder.split('/')[sussy.indexOf(sussiest) + 1];
+			trace(sus);
 
 			if (!sus.startsWith('.') && !libraryArray.contains(sus)) libraryArray.push(sus);
 
