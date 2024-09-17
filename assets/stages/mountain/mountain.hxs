@@ -240,7 +240,7 @@ function onUpdate(elapsed)
 		if (controls.SPACE_P)
 			{
 				shownOnce = true;
-				if (showingGuide) FlxTween.tween(frostbiteGuide, {alpha: 0.0001}, 0.5, {ease: FlxEase.cubeInOut});
+				FlxTween.tween(frostbiteGuide, {alpha: 0.0001}, 0.5, {ease: FlxEase.cubeInOut});
 			}
 			
 		if (PlayState.strumLines.members[PlayState.playerLane].autoplay)
