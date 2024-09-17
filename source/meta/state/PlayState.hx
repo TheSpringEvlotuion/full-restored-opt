@@ -1202,7 +1202,7 @@ class PlayState extends MusicBeatState
 	public var minHealth:Float = 0;
 
 	var groupIcons:Array<String> = ['mx', 'lord-x', 'hypno-cards'];
-	function fpSong(dadNotes:Bool = false) {
+	public function fpSong(dadNotes:Bool = false) {
 		firstPerson = true;
 		staticCamera = true;
 		manualCameraPosition.set(dadOpponent.getMidpoint().x + 100 + dadOpponent.characterData.camOffsetX,
@@ -3852,6 +3852,8 @@ class PlayState extends MusicBeatState
 			updateRPC(false);
 			#end
 		}
+
+		stageBuild.stageStartSong();
 	}
 
 	function doSongEnd(){

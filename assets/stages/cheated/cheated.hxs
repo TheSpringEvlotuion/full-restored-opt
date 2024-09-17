@@ -1,0 +1,297 @@
+var stiviparado:Character;
+var stiviahorcando:Character;
+var normalBG:FNFSprite;
+var ahorcadoBG:FNFSprite;
+var frontBG:FNFSprite;
+var tweensito:FlxTween;
+var redOverlay:FlxSprite;
+
+var lowHealthFX:Bool = false;
+var shakewaaaaaaaaaaaaaaaaa:Bool = false;
+
+var bfanimoffsets:Array<{anim:String, offset:Array<Float>}> = [
+    {anim: "singDOWN", offset: [200, -40]},
+    {anim: "singLEFTmiss", offset: [170, 170]}
+];
+
+function onCreate() {
+    PlayState.defaultCamZoom = 1.2;
+    stage.curStage = 'cheated';
+
+    normalBG = new FNFSprite(-460, 50);
+	normalBG.frames = Paths.getSparrowAtlas('bgCheated');
+	normalBG.animation.addByPrefix('idle', 'idle', 2, true);
+    normalBG.animation.play('idle', true);
+	normalBG.antialiasing = true;
+    normalBG.visible = false;
+	add(normalBG);
+
+    ahorcadoBG = new FNFSprite(-560, 50);
+	ahorcadoBG.frames = Paths.getSparrowAtlas('bgCheatedStrangled');
+	ahorcadoBG.animation.addByPrefix('idle', 'idle', 2, true);
+    ahorcadoBG.animation.play('idle', true);
+	ahorcadoBG.antialiasing = true;
+    ahorcadoBG.scale.set(0.8, 0.8);
+    ahorcadoBG.updateHitbox();
+    ahorcadoBG.visible = false;
+	add(ahorcadoBG);
+
+    frontBG = new FNFSprite(-460, 50).loadGraphic(Paths.image('bgFrontSteven'));
+	frontBG.antialiasing = true;
+    frontBG.visible = false;
+
+    redOverlay = new FlxSprite().loadGraphic(Paths.image('redoverlay'));	
+	redOverlay.antialiasing = true;
+	redOverlay.scrollFactor.set(0.0, 0.0);
+	redOverlay.screenCenter();
+	redOverlay.visible = true;
+	redOverlay.alpha = 0.04;
+    PlayState.instance.add(redOverlay);
+}
+
+function onCreatePost() {
+    redOverlay.cameras = [PlayState.camHUD];
+
+    PlayState.camGame.alpha = 0.0;
+    PlayState.dadOpponent.characterData.camOffsetX += 40;
+    PlayState.instance.fpSong();
+
+    PlayState.instance.remove(PlayState.boyfriend);
+
+    stiviparado = new Character().setCharacter(0, 0, 'steven-bed');
+	stiviparado.setGraphicSize(Std.int(stiviparado.width * 1.5));
+	stiviparado.resizeOffsets();
+	stiviparado.flipLeftRight();
+	stiviparado.flipX = false;
+	stiviparado.visible = false;
+	stiviparado.antialiasing = true;
+	stiviparado.playAnim('idle');
+    PlayState.instance.add(stiviparado);
+	add(frontBG);
+
+    stiviahorcando = new Character().setCharacter(PlayState.dadOpponent.x, PlayState.dadOpponent.y, 'steven-fp');
+	stiviahorcando.setGraphicSize(Std.int(stiviahorcando.width * 1.2));
+	stiviahorcando.resizeOffsets();
+	stiviahorcando.flipLeftRight();
+	stiviahorcando.flipX = false;
+	stiviahorcando.alpha = 0.0001;
+	stiviahorcando.antialiasing = true;
+	stiviahorcando.playAnim('idle');
+    PlayState.instance.add(stiviahorcando);
+
+    PlayState.instance.add(PlayState.boyfriend);
+
+    PlayState.boyfriend.visible = true;
+    PlayState.boyfriend.alpha = 0.0001;
+
+    //OFFSETTING AND STUFFFFF
+    PlayState.ratingPosition.y -= 1000;
+    stiviparado.setPosition(-100, 304);
+    stiviahorcando.setPosition(stiviparado.x, stiviparado.y);
+
+    for (set in bfanimoffsets)
+        PlayState.boyfriend.addOffset(set.anim, set.offset[0], set.offset[1]);
+
+    PlayState.boyfriend.characterData.camOffsetX += 300;
+    PlayState.boyfriend.characterData.camOffsetY -= 120;
+}
+
+function onSongStart() {
+    FlxTween.tween(PlayState.camGame, {alpha: 1.0}, 1, {ease: FlxEase.quadInOut});
+}
+
+function onBeat(beat) {
+    if (lowHealthFX){
+        redOverlay.alpha = 0.85;
+        FlxTween.tween(redOverlay, {alpha: 0.65}, 0.25, {ease: FlxEase.quadInOut});
+    }
+}
+
+function onUpdate(elapsed) {
+    if (strangling)
+    {
+        if (PlayState.gameplayMode == 'HELL_MODE')
+            {
+                if (PlayState.health > 0.050) {
+                    PlayState.health -= 0.0035 * ((elapsed) * 120);
+                    if(PlayState.health < 0.050)
+                        PlayState.health = 0.050;
+                }
+            }
+        else if (PlayState.gameplayMode == 'FUCK_YOU')
+            {
+                if (PlayState.health > 0.001) {
+                    PlayState.health -= 0.0075 * ((elapsed) * 120);
+                    if(PlayState.health < 0.001)
+                        PlayState.health = 0.001;
+                }
+            }
+        else
+            {
+                if (PlayState.health > 0.395) {
+                    PlayState.health -= 0.0020 * ((elapsed) * 120);
+                    if(PlayState.health < 0.395)
+                        PlayState.health = 0.395;
+                }
+            }
+    }
+    
+    if (lowHealthFX && shakewaaaaaaaaaaaaaaaaa)
+    {
+        PlayState.camGame.shake(0.005, 0.01);
+        PlayState.camHUD.shake(0.005, 0.01);
+        PlayState.strumHUD[1].shake(0.005, 0.01);
+    }
+}
+
+function onStep(step) {
+    //trace(step);
+    switch(step){
+        case 246:
+            tweensito = FlxTween.tween(PlayState.camGame, {alpha: 0, zoom: 1.9}, 0.8, {ease: FlxEase.quadInOut});
+        case 257:
+            tweensito = FlxTween.tween(PlayState.camGame, {alpha: 1, zoom: 1.1}, 0.5, {ease: FlxEase.quadInOut});
+            changetonormal();
+        case 928:
+            colorthingy(false);
+        case 1296:
+            tweensito = FlxTween.tween(PlayState.camGame, {alpha: 0, zoom: 1.5}, 1, {ease: FlxEase.quadInOut});
+            PlayState.cameraSpeed = 10;
+        case 1310:
+            stranglephase();
+            colorthingy(true);
+        case 1312:
+            tweensito = FlxTween.tween(PlayState.camGame, {alpha: 1, zoom: 1.0}, 0.3, {ease: FlxEase.quadInOut});
+            PlayState.cameraSpeed = 1;
+            lowHealthFX = true;
+        case 1816:
+            tweensito = FlxTween.tween(PlayState.camGame, {alpha: 0}, 0.3, {ease: FlxEase.quadInOut});
+        case 1824:
+            tweensito = FlxTween.tween(PlayState.camGame, {alpha: 1}, 0.2, {ease: FlxEase.quadInOut});
+            colorthingy(false);
+            shakewaaaaaaaaaaaaaaaaa = true;
+        case 2080:
+            colorthingy(true);
+            shakewaaaaaaaaaaaaaaaaa = false;
+            lowHealthFX = false;
+            strangling = false;
+            if(redOverlay.alpha > 0.1) FlxTween.tween(redOverlay, {alpha: 0}, 0.25, {ease: FlxEase.quadInOut});
+        case 2218:
+            tweensito = FlxTween.tween(PlayState.camGame, {alpha: 0}, 1.7, {ease: FlxEase.quadInOut});
+        case 2238:
+            muelte();
+
+        //note stuff
+        case 537, 539, 541, 543:
+            mecanica(false, false, true);
+        case 600, 602, 604, 606, 632, 634, 636, 638, 1848, 1850, 1852, 1854, 1914, 1916, 1920, 1918, 1975, 1977, 1979, 1981, 2041, 2043, 2045, 2047: //wa
+            mecanica(false, true, false);
+        case 641, 1952, 2081:
+            mecanica(true, false, false);
+        case 1889:
+            mecanica(true, false, true);
+    }
+}
+
+
+function changetonormal() {
+    PlayState.boyfriend.setPosition(870, 532);
+    PlayState.boyfriend.alpha = 1;
+    setVisible(true, [normalBG, frontBG, stiviparado]);
+    PlayState.dadOpponent.visible = false;
+    PlayState.defaultCamZoom = 0.9;
+    PlayState.instance.dadStrums.character.push(stiviparado);
+	PlayState.instance.dadStrums.singingCharacters = [stiviparado];
+    PlayState.instance.firstPerson = false;
+	PlayState.instance.staticCamera = false;
+    PlayState.dadOpponent.characterData.camOffsetX = -275;
+	PlayState.dadOpponent.characterData.camOffsetY = 35;
+	PlayState.dadOpponent.characterData.zoomOffset = 0.20;
+}
+
+function stranglephase() {
+    setVisible(false, [stiviparado, normalBG, frontBG, PlayState.boyfriend]);
+    stiviahorcando.alpha = 1;
+    ahorcadoBG.visible = true;
+    strangling = true;
+    PlayState.instance.iconP2.changeIcon('steven-evil');
+    PlayState.defaultCamZoom = 1.0;
+    PlayState.instance.firstPerson = true;
+    PlayState.instance.staticCamera = true;
+    PlayState.instance.manualCameraPosition.set(stiviahorcando.getMidpoint().x - 80, stiviahorcando.getMidpoint().y - 150);
+    PlayState.instance.dadStrums.character.push(stiviahorcando);
+	PlayState.instance.dadStrums.singingCharacters = [stiviahorcando];
+}
+
+function colorthingy(revert:Bool = false) {
+    trace(revert);
+    if(!revert){
+        FlxTween.color(normalBG, 0.5, normalBG.color, Std.parseInt('0xff636363'));
+        FlxTween.color(frontBG, 0.5, frontBG.color, Std.parseInt('0xff636363'));
+        if(ahorcadoBG.visible) FlxTween.color(ahorcadoBG, 0.5, ahorcadoBG.color, Std.parseInt('0xff636363'));
+        if(PlayState.boyfriend.visible) FlxTween.color(PlayState.boyfriend, 0.5, PlayState.boyfriend.color, Std.parseInt('0xff00aae4'));
+        if(stiviparado.visible) FlxTween.color(stiviparado, 0.5, stiviparado.color, Std.parseInt('0xffff0000'));
+        if(stiviahorcando.alpha >= 0.1) FlxTween.color(stiviahorcando, 0.5, stiviahorcando.color, Std.parseInt('0xffff0000'));
+    } else {
+        FlxTween.color(normalBG, 0.2, normalBG.color, Std.parseInt('0xffffffff'));
+        FlxTween.color(frontBG, 0.2, frontBG.color, Std.parseInt('0xffffffff'));
+        if(ahorcadoBG.visible) FlxTween.color(ahorcadoBG, 0.2, ahorcadoBG.color, Std.parseInt('0xffffffff'));
+        if(PlayState.boyfriend.visible) FlxTween.color(PlayState.boyfriend, 0.2, PlayState.boyfriend.color, Std.parseInt('0xffffffff'));
+        if(stiviparado.visible) FlxTween.color(stiviparado, 0.2, stiviparado.color, Std.parseInt('0xffffffff'));
+        if(stiviahorcando.alpha >= 0.1) FlxTween.color(stiviahorcando, 0.2, stiviahorcando.color, Std.parseInt('0xffffffff'));
+    }
+}
+
+function mecanica(revert:Bool, partial:Bool, upside:Bool = false) {
+    if(PlayState.gameplayMode == 'PUSSY_MODE')return;
+
+    var strums:Strumline = PlayState.strumLines.members[PlayState.playerLane];
+    var offset:Int = (strums.downscroll ? -130 : 130);
+    var originalPos:Int = (PlayState.defaultDownscroll ? 545 : 25);
+    var arribalimite:Int = 25;
+    var abajolimite:Int = 545;
+    
+    if (partial) offset /= 4;
+    if (upside) originalPos = (!PlayState.defaultDownscroll ? 545 : 25);
+
+    if (revert) {
+        for (i in 0...strums.receptors.members.length) {
+            var arrow:UIStaticArrow = strums.receptors.members[i];
+            FlxTween.tween(arrow, {y: originalPos, angle: -360}, 0.35, { ease: FlxEase.quadInOut, onComplete: function() { arrow.angle = 0;} });
+            
+        }
+        strums.downscroll = (upside ? !PlayState.defaultDownscroll : PlayState.defaultDownscroll);
+    } else {
+        for (i in 0...strums.receptors.members.length) {
+            var arrow:UIStaticArrow = strums.receptors.members[i];
+
+            if(upside && arrow.y == originalPos) return;
+
+            arrow.y += offset;
+            arrow.y = Std.int(FlxMath.bound(arrow.y, 25, 545));
+
+            if (arrow.y >= abajolimite) {
+                strums.downscroll = true;
+            } else if (arrow.y <= arribalimite) {
+                strums.downscroll = false;
+            }
+        }
+    }
+}
+
+
+function muelte() {
+    redOverlay.alpha = 1.0;
+	FlxTween.tween(redOverlay, {alpha: 0.001}, 1.5, {ease: FlxEase.quadInOut});
+	PlayState.camGame.shake(0.008, 0.04);
+	PlayState.strumHUD[1].shake(0.008, 0.04);
+    FlxG.sound.play(Paths.sound('DissensionDeath'));
+	PlayState.health = 0.01;
+	PlayState.camGame.zoom += 0.2;			
+}
+
+function setVisible(visible:Bool, elements:Array<Dynamic>) {
+    for (element in elements) {
+        element.visible = visible;
+    }
+}

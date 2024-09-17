@@ -5,7 +5,7 @@
         "price": 200,
         "animName": "megalink",
         "songUnlock": "missingcraft",
-        "songsUnlock": ["missingcraft", "rednecks", "sansno", "through-the-fire-and-flames"],
+        "songsUnlock": ["missingcraft", "rednecks", "sansno", "through-the-fire-and-flames", "cheated"],
         "songDescription": "I got this for 20 bucks, but you'll pay 10 times that for it.",
         "unlockRequirements": [""],
         "xOffset": 5,
