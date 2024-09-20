@@ -1540,6 +1540,7 @@ class PlayState extends MusicBeatState
 	{
 		if (canChangeIntensity) {
 			snowIntensity = value;
+			if(!Init.trueSettings.get("Snow Enabled")) return snowIntensity;
 
 			if(!Init.trueSettings.get("Shaders"))
 			frostbiteSnow.velocity.set(snowspeed[0] * (snowIntensity / 0.1), snowspeed[1] * (snowIntensity / 0.1), snowspeed[2] * (snowIntensity / 0.1), snowspeed[3] * (snowIntensity / 0.1), snowspeed[4] * (snowIntensity / 0.1), snowspeed[5] * (snowIntensity / 0.1), snowspeed[6] * (snowIntensity / 0.1), snowspeed[7] * (snowIntensity / 0.1));
@@ -1559,6 +1560,7 @@ class PlayState extends MusicBeatState
 		if (canChangeAmount)
 		{
 			snowAmount = value;
+			if(!Init.trueSettings.get("Snow Enabled")) return snowAmount;
 			
 			if(!Init.trueSettings.get("Shaders")){
 				if(snowAmount <= 74)

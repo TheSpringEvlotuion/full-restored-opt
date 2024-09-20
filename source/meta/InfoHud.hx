@@ -59,22 +59,33 @@ class InfoHud extends TextField
 				memInterval = i;
 		}
 		//  */
+		/*
 		mem /= Math.pow(1000, memInterval);
 		mem = Math.round(mem * 100) / 100;
-
+        */
+		
 		if (mem > memPeak)
 		{
 			memPeak = mem;
 			memPeakInterval = memInterval;
 		}
 
+		/*if(mem * Math.pow(1000, memInterval) > memPeak * Math.pow(1000, memPeakInterval))
+		{
+			memPeak = mem;
+			memPeakInterval = memInterval;
+		}*/
+
+		var finalmem = Math.round(mem / Math.pow(1000, memInterval) * 100) / 100;
+		var finalmemPeak = Math.round(memPeak / Math.pow(1000, memPeakInterval) * 100) / 100;
+
 		if (visible)
 		{
 			text = '' // set up the text itself
 			+ (displayFps ? times.length + " FPS\n" : '') // Framerate
 			+ (displayExtra ? Main.mainClassState + "\n" : '') // Current Game State
-			+ (displayMemory ? mem + ' ${intervalArray[memInterval]} / ' // Current Memory Usage
-			+ memPeak + ' ${intervalArray[memPeakInterval]}\n' : ''); // Total Memory Usage
+			+ (displayMemory ? finalmem + ' ${intervalArray[memInterval]} / ' // Current Memory Usage
+			+ finalmemPeak + ' ${intervalArray[memPeakInterval]}\n' : ''); // Total Memory Usage
 		}
 	}
 

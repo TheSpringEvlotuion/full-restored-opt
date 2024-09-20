@@ -63,6 +63,9 @@ class UnownSubstate extends MusicBeatSubState
 		overlay.alpha = 0.4;
 		add(overlay);
 
+		//e
+		FlxG.stage.window.textInputEnabled = true;
+
 		words = publicWords;
         /*
 		if (PlayState.gameplayMode == HELL_MODE) {
@@ -177,7 +180,6 @@ class UnownSubstate extends MusicBeatSubState
 		#if mobile
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress); // detalhe super importante
 		#end
-		FlxG.stage.window.textInputEnabled = true;
 	}
 	static var wordsList:MonochromeWords;
     public static function init(?song:String) {
