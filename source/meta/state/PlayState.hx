@@ -4727,4 +4727,12 @@ class PlayState extends MusicBeatState
 
 		mobileControls.visible = true;
 	}
+
+	public function amusiadialogue(){
+		if(mobileControls.visible == false) return;
+
+		mobileControls.visible = false;
+		addVirtualPad(UP_DOWN, A);
+		addVirtualPadCamera(false);
+	}
 }

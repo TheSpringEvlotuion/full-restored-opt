@@ -280,6 +280,7 @@ function amusiaProgress(forced:Bool=false){
     if(forced)amusiaStage=amusiaDialogue.length-1;
     if(amusiaStage > amusiaDialogue.length-1)amusiaStage = amusiaDialogue.length-1;
     trace(amusiaDialogue[amusiaStage]);
+
     questionareTextBox.visible = true;
     questionareText.visible = true;
     questionareText.resetText(amusiaDialogue[amusiaStage]);
@@ -334,6 +335,9 @@ function amusiaProgress(forced:Bool=false){
                 });
             });
     }
+
+    
+    PlayState.instance.amusiadialogue();
 }
 
 var hellAutoSelectTimer:Float = 0;
@@ -424,7 +428,7 @@ function onUpdate(elapsed) {
             }
         }else{
             var controls = PlayState.instance.controls;
-            if (controls.LEFT || controls.RIGHT)
+            if (controls.ACCEPT)
                 {
                     if (!amusiaNoSelected)
                     {
@@ -436,7 +440,7 @@ function onUpdate(elapsed) {
                         FlxG.sound.play(Paths.sound('errorMenu'), 0.6);
                     }
                 }
-            else if (controls.UP_P || controls.DOWN_P)
+            else if (controls.UI_UP_P || controls.UI_DOWN_P)
             {
                 amusiaChangeSelection();
             }
