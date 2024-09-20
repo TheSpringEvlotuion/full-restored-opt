@@ -231,21 +231,17 @@ function onUpdate(elapsed)
 		if((PlayState.gameplayMode == 'HELL_MODE'))showThreshold=0.75;
 
 		if (PlayState.instance.coldness >= showThreshold && !shownOnce)
-			{
-				if (!shownOnce) FlxTween.tween(frostbiteGuide, {alpha: 1.0}, 0.5, {ease: FlxEase.cubeInOut});
-				shownOnce = true;
-				showingGuide = true;
-			}
-		if (curStep >= 200) {
-				shownOnce = true;
-				frostbiteGuide.alpha = 0.0001;
-			}
+		{
+			if (!shownOnce) FlxTween.tween(frostbiteGuide, {alpha: 1.0}, 0.5, {ease: FlxEase.cubeInOut});
+			shownOnce = true;
+			showingGuide = true;
+		}
 
-		if (controls.SPACE_P)
-			{
-				shownOnce = true;
-				FlxTween.tween(frostbiteGuide, {alpha: 0.0001}, 0.5, {ease: FlxEase.cubeInOut});
-			}
+		if (PlayState.instance.controls.SPACE_P)
+		{
+			shownOnce = true;
+			FlxTween.tween(frostbiteGuide, {alpha: 0.0001}, 0.5, {ease: FlxEase.cubeInOut});
+		}
 			
 		if (PlayState.strumLines.members[PlayState.playerLane].autoplay)
 			{

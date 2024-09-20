@@ -63,6 +63,9 @@ import openfl.filters.ShaderFilter;
 import openfl.media.Sound;
 import openfl.utils.Assets;
 import meta.data.dependency.Discord;
+import flixel.effects.particles.FlxEmitter.FlxEmitterMode;
+import flixel.effects.particles.FlxEmitter.FlxTypedEmitter;
+import gameObjects.background.SnowParticle;
 
 import hxcodec.VideoHandler as MP4Handler;
 
@@ -364,6 +367,8 @@ class PlayState extends MusicBeatState
 	var coldnessRate:Float = 0.0;
 	var maxTyphlosion:Int = 10;
 	var typhlosionUses:Int = 10;
+	var frostbiteSnow:FlxTypedEmitter<SnowParticle>;
+	var snowspeed:Array<Int> = [-200, 50, -50, 250, -200, 350, -400, 550];
 
 	//Brimstone Gengar Notes
 	var gengarNoteInvis:Float = 0.0;
@@ -1500,10 +1505,28 @@ class PlayState extends MusicBeatState
 		if (!frostSet)
 		{
 			frostbiteShader = new ShaderFilter(new GraphicsShader("", Paths.shader('snowfall')));
-			if(Init.trueSettings.get("Snow Enabled"))
-				vignetteCam.setFilters([frostbiteShader]);
+
+			if(Init.trueSettings.get("Snow Enabled")){
+
+				if(Init.trueSettings.get("Shaders"))
+					vignetteCam.setFilters([frostbiteShader]);
+				else{
+					frostbiteSnow = new FlxTypedEmitter<SnowParticle>(0, 0);
+					frostbiteSnow.particleClass = SnowParticle;
+					frostbiteSnow.launchMode = FlxEmitterMode.SQUARE;
+					frostbiteSnow.width = FlxG.width;
+					frostbiteSnow.velocity.set(snowspeed[0], snowspeed[1], snowspeed[2], snowspeed[3], snowspeed[4], snowspeed[5], snowspeed[6], snowspeed[7]);
+					frostbiteSnow.alpha.set(1, 0);
+					frostbiteSnow.cameras = [vignetteCam];
+					add(frostbiteSnow);
+		
+					frostbiteSnow.start(false, 0.15);
+				}
+
+			}
 			else
 				frostbiteShader.shader.data.amount.value = [0];
+
 			frostSet = true;
 		}
 	}
@@ -1517,7 +1540,11 @@ class PlayState extends MusicBeatState
 	{
 		if (canChangeIntensity) {
 			snowIntensity = value;
-			frostbiteShader.shader.data.intensity.value = [snowIntensity];
+
+			if(!Init.trueSettings.get("Shaders"))
+			frostbiteSnow.velocity.set(snowspeed[0] * (snowIntensity / 0.1), snowspeed[1] * (snowIntensity / 0.1), snowspeed[2] * (snowIntensity / 0.1), snowspeed[3] * (snowIntensity / 0.1), snowspeed[4] * (snowIntensity / 0.1), snowspeed[5] * (snowIntensity / 0.1), snowspeed[6] * (snowIntensity / 0.1), snowspeed[7] * (snowIntensity / 0.1));
+			else
+            frostbiteShader.shader.data.intensity.value = [snowIntensity];
 		}
 		return snowIntensity;
 	}
@@ -1529,12 +1556,19 @@ class PlayState extends MusicBeatState
 
 	function set_snowAmount(value:Float):Float
 	{
-		if (!Init.trueSettings.get("Snow Enabled"))
-			value = 0;
 		if (canChangeAmount)
 		{
 			snowAmount = value;
-			frostbiteShader.shader.data.amount.value = [Std.int(snowAmount)];
+			
+			if(!Init.trueSettings.get("Shaders")){
+				if(snowAmount <= 74)
+				frostbiteSnow.frequency = 100;
+				else
+				frostbiteSnow.frequency = (0.1 * (150 - snowAmount)) / 150;
+			}
+			else
+			    frostbiteShader.shader.data.amount.value = [Std.int(snowAmount)];
+
 		}
 		return snowAmount;
 	}
