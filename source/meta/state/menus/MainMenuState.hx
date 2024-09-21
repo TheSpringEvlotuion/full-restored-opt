@@ -65,6 +65,8 @@ class MainMenuState extends MusicBeatState
 	var didCinnabar:Bool = false;
 	var cinnabarSuccess:Int = 0;
 	var cinnabarStep:Int = 0;
+	var tecla:FlxSprite;
+	var typin:String = '';
 
 	public var lockMap:Map<String, LockSprite> = [];
 
@@ -174,6 +176,17 @@ class MainMenuState extends MusicBeatState
 		blackScreen.visible = false;
 		add(blackScreen);
 
+		tecla = new FlxSprite().loadGraphic(Paths.image('teclado'));
+		tecla.setGraphicSize(140,140);
+		tecla.updateHitbox();
+		tecla.x = 200;
+		tecla.y = 200;
+		tecla.color = FlxColor.WHITE;
+		tecla.visible = true;
+		add(tecla);
+
+   	FlxG.stage.window.onTextInput.add(idkwhattosayhere);
+
 		#if mobile
 		addVirtualPad(UP_DOWN, A);
 		#end
@@ -186,6 +199,14 @@ class MainMenuState extends MusicBeatState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+			#if mobile
+			if(TouchFunctions.touchOverlapObject(tecla))
+			if(TouchFunctions.touchJustPressed)
+			{
+				FlxG.stage.window.textInputEnabled = true;
+			}
+			#end
 
 		var elapsedLerp:Float = (elapsed / (1 / 10));
 		for (i in 0...textGroup.members.length)
@@ -359,7 +380,7 @@ class MainMenuState extends MusicBeatState
 			}
 		}
 
-		if (Main.hypnoDebug && (FlxG.keys.justPressed.SEVEN #if mobile || FlxG.android.justReleased.BACK #end)) // DEBUG UNLOCKS ALL PROGRESSION
+		if (Main.hypnoDebug && (FlxG.keys.justPressed.SEVEN /*#if mobile || FlxG.android.justReleased.BACK #end*/)) // DEBUG UNLOCKS ALL PROGRESSION
 		{
 			FlxG.save.data.mainMenuOptionsUnlocked = ['story', 'freeplay', 'credits', 'pokedex', 'options'];
 			FlxG.save.data.cartridgesOwned = ['HypnoWeek', 'LostSilverWeek', 'GlitchWeek'];
@@ -424,4 +445,46 @@ class MainMenuState extends MusicBeatState
 		}
 		//
 	}
+
+function idkwhattosayhere(letter:String) {
+		typin += letter.toUpperCase();
+		trace(typin.toUpperCase());
+		if (typin.contains("MASTER")) {
+			typin = '';
+			FlxG.save.data.mainMenuOptionsUnlocked = ['story', 'freeplay', 'credits', 'pokedex', 'options'];
+			FlxG.save.data.cartridgesOwned = ['HypnoWeek', 'LostSilverWeek', 'GlitchWeek'];
+			FlxG.save.data.unlockedSongs = [
+				'safety-lullaby',
+				'left-unchecked',
+				'lost-cause',
+				'frostbite',
+				'insomnia',
+				'monochrome',
+				'missingno',
+				'brimstone',
+				'amusia',
+				'dissension',
+				'purin',
+				'death-toll',
+				'isotope',
+				'bygone-purpose',
+				'pasta-night',
+				'shinto',
+				'shitno',
+				'missingcraft',
+				'through-the-fire-and-flames',
+				'sansno',
+				'cheated',
+				'rednecks'
+			];
+			FlxG.stage.window.textInputEnabled = false;
+	}
+	else if (typin.contains("RESET")) {
+			typin = '';
+			FlxG.save.erase();
+			FlxG.save.flush();
+			FlxG.resetGame();
+			FlxG.stage.window.textInputEnabled = false;
+	}
+ }
 }
