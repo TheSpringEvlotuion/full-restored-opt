@@ -98,6 +98,7 @@ class MainMenuState extends MusicBeatState
 			'missingcraft',
 			'through-the-fire-and-flames',
 			'sansno',
+			'cheated',
 			'rednecks'
 		];
 		#end
@@ -383,6 +384,7 @@ class MainMenuState extends MusicBeatState
 				'missingcraft',
 				'through-the-fire-and-flames',
 				'sansno',
+				'cheated',
 				'rednecks'
 			];
 		}
