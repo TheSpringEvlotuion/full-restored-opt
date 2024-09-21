@@ -180,8 +180,8 @@ class MainMenuState extends MusicBeatState
 		tecla = new FlxSprite().loadGraphic(Paths.image('teclado'));
 		tecla.setGraphicSize(140,140);
 		tecla.updateHitbox();
-		tecla.x = 890;
-		tecla.y = 10;
+		tecla.x = 1190;
+		tecla.y = 15;
 		tecla.color = FlxColor.WHITE;
 		tecla.visible = true;
 		add(tecla);
