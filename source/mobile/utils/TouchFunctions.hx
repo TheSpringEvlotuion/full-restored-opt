@@ -1,6 +1,7 @@
-package mobile;
+package mobile.utils;
 
 import flixel.FlxBasic;
+import flixel.FlxG;
 import flixel.input.touch.FlxTouch;
 
 class TouchFunctions
