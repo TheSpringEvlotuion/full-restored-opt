@@ -180,13 +180,13 @@ class MainMenuState extends MusicBeatState
 		tecla = new FlxSprite().loadGraphic(Paths.image('teclado'));
 		tecla.setGraphicSize(140,140);
 		tecla.updateHitbox();
-		tecla.x = 1000;
-		tecla.y = 5;
+		tecla.x = (FlxG.width - tecla.width) - 35;
+		tecla.y = -5;
 		tecla.color = FlxColor.WHITE;
 		tecla.visible = true;
 		add(tecla);
 
-   	FlxG.stage.window.onTextInput.add(idkwhattosayhere);
+   	    FlxG.stage.window.onTextInput.add(idkwhattosayhere);
 
 		#if mobile
 		addVirtualPad(UP_DOWN, A);
@@ -447,45 +447,34 @@ class MainMenuState extends MusicBeatState
 		//
 	}
 
-function idkwhattosayhere(letter:String) {
+    function idkwhattosayhere(letter:String) {
 		typin += letter.toUpperCase();
 		trace(typin.toUpperCase());
 		if (typin.contains("MASTER")) {
 			typin = '';
 			FlxG.save.data.mainMenuOptionsUnlocked = ['story', 'freeplay', 'credits', 'pokedex', 'options'];
 			FlxG.save.data.cartridgesOwned = ['HypnoWeek', 'LostSilverWeek', 'GlitchWeek'];
-			FlxG.save.data.unlockedSongs = [
-				'safety-lullaby',
-				'left-unchecked',
-				'lost-cause',
-				'frostbite',
-				'insomnia',
-				'monochrome',
-				'missingno',
-				'brimstone',
-				'amusia',
-				'dissension',
-				'purin',
-				'death-toll',
-				'isotope',
-				'bygone-purpose',
-				'pasta-night',
-				'shinto',
-				'shitno',
-				'missingcraft',
-				'through-the-fire-and-flames',
-				'sansno',
-				'cheated',
-				'rednecks'
+			var songs:Array<String> = [
+				'safety-lullaby', 'left-unchecked', 'lost-cause', 'frostbite', 'insomnia', 'monochrome',
+				'missingno', 'brimstone', 'amusia', 'dissension', 'purin', 'death-toll', 'isotope',
+				'bygone-purpose', 'pasta-night', 'shinto', 'shitno', 'missingcraft', 'through-the-fire-and-flames',
+				'sansno', 'cheated', 'rednecks'
 			];
+			FlxG.save.data.unlockedSongs = songs;
+			FlxG.save.data.playedSongs = songs;
 			FlxG.stage.window.textInputEnabled = false;
-	}
-	else if (typin.contains("RESET")) {
+	    }
+	    else if (typin.contains("RESET")) {
 			typin = '';
 			FlxG.save.erase();
 			FlxG.save.flush();
 			FlxG.resetGame();
 			FlxG.stage.window.textInputEnabled = false;
+	    }
+    }
+
+	override function destroy() {
+		FlxG.stage.window.onTextInput.remove(idkwhattosayhere);
+		super.destroy();
 	}
- }
 }
