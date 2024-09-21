@@ -24,6 +24,7 @@ import meta.data.Song;
 import meta.data.dependency.Discord;
 import meta.data.font.Alphabet;
 import meta.subState.UnlockSubstate;
+import mobile.utils.TouchFunctions;
 
 using StringTools;
 
