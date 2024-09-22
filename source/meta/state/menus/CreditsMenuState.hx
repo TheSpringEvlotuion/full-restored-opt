@@ -29,6 +29,42 @@ class CreditsMenuState extends MusicBeatState {
 
 	public var templist:Array<Credits> = [
 		{
+			name: 'MaysLastPlay',
+			quote: "i exist so yea",
+			profession: 'Android Porter',
+			description: "yeee the real one"
+		},
+		{
+			name: 'MarioMaster',
+			quote: "i am mariomaster",
+			profession: 'Android Porter',
+			description: "mariomaster"
+		},
+		{
+			name: 'Idklool',
+			quote: "",
+			profession: 'Android Porter',
+			description: ""
+		},
+		{
+			name: 'FNF BR',
+			quote: "",
+			profession: 'Android Porter',
+			description: ""
+		},
+		{
+			name: 'Dxgamer',
+			quote: "",
+			profession: 'Android Porter',
+			description: ""
+		},
+		{
+			name: 'The Orda',
+			quote: "",
+			profession: 'Android Porter',
+			description: ""
+		},
+		{
 			name: 'KadeDeveloper',
 			quote: "",
 			profession: 'Programmer',
