@@ -103,18 +103,25 @@ class MobileControls extends FlxSpriteGroup
 
 	private static function saveData(type:String, virtualPad:FlxVirtualPad):Void {
 		var sussy = FlxG.save.data.buttons;
-		if(type == "Hitbox") var sussy = FlxG.save.data.dodgepos;
+		if(type == "Hitbox") sussy = FlxG.save.data.dodgepos;
 
 		if (sussy == null)
 		{
 			trace("no data found creating one");
 
 			sussy = new Array();
+
 			for (buttons in virtualPad)
-			{
 				sussy.push(FlxPoint.get(buttons.x, buttons.y));
-				FlxG.save.flush();
-			}
+
+			if(type == "Hitbox") //en flixel antiguos funcionaba sin esto la ptmr
+			FlxG.save.data.dodgepos = sussy;
+			else
+			FlxG.save.data.buttons = sussy;	
+
+			trace(FlxG.save.data.dodgepos);
+			trace(FlxG.save.data.buttons);
+
 		}
 		else
 		{
@@ -124,16 +131,22 @@ class MobileControls extends FlxSpriteGroup
 			for (buttons in virtualPad)
 			{
 				sussy[tempCount] = FlxPoint.get(buttons.x, buttons.y);
-				FlxG.save.flush();
 				tempCount++;
 			}
+
+			if(type == "Hitbox") //en flixel antiguos funcionaba sin esto la ptmr
+			FlxG.save.data.dodgepos = sussy;
+			else
+			FlxG.save.data.buttons = sussy;	
 		}
+
+		FlxG.save.flush();
 
 	}
 
 	private static function loadData(type:String, virtualPad:FlxVirtualPad):Void {
 		var sussy = FlxG.save.data.buttons;
-		if(type == "Hitbox") var sussy = FlxG.save.data.dodgepos; //why it needs to create the var again :cccccccccccccccc
+		if(type == "Hitbox") sussy = FlxG.save.data.dodgepos;
 
 		if (sussy == null) return;
 
