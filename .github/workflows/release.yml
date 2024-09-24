@@ -72,6 +72,6 @@ jobs:
         with:
           repo_token: ${{secrets.GITHUB_TOKEN}}
           prerelease: false
-          automatic_release_tag: 'v1.0.0'
-          title: 'Android Port'
+          automatic_release_tag: 'v1.1.0'
+          title: 'Android Port Bugfix'
           files: ${{github.workspace}}/Hypnos Lullaby-debug.apk
