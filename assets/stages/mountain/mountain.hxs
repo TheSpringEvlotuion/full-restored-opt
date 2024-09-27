@@ -7,7 +7,6 @@ var freakachuJumpscare:FlxSprite;
 var imgScaleCur:Float = 0.65;
 var imgScaleTarget:Float = 0.65;
 
-var aberrationShader:GraphicsShader;
 var abbCur:Float = 0.75;
 var abbTarget:Float = 0.75;
 
@@ -74,7 +73,7 @@ function onCreate() {
 	fog.visible = true;
 	fog.alpha = 0.25;
 
-	camZoomTween = FlxTween.tween(this, {}, 0);
+	camZoomTween = FlxTween.tween(0.8, {}, 0);
 }
 
 function onCreatePost() {
@@ -97,7 +96,8 @@ function onCreatePost() {
 	summonFreak.frames = Paths.getSparrowAtlas('characters/red/freakachu_entrance');
 	summonFreak.animation.addByPrefix('summon', "Freakachu entrance instance 1", 24, false);
 	PlayState.instance.add(summonFreak);
-	summonFreak.setGraphicSize(Std.int(summonFreak.width * 0.76));
+	summonFreak.setGraphicSize(Std.int(summonFreak.width * 1.52));
+	summonFreak.updateHitbox();
 	summonFreak.flipX = false;
 	summonFreak.antialiasing = true;
 	summonFreak.visible = false;
@@ -154,67 +154,40 @@ function onCreatePost() {
 	PlayState.instance.add(PlayState.instance.typhlosion);
 	PlayState.instance.typhlosion.playAnim('idle');
 
-	PlayState.instance.setupFrostbite();
-
 	introFog = new FlxSprite().makeGraphic(1280, 720, 0xFFF0E9FB);
 	introFog.setGraphicSize(Std.int(FlxG.width * 3), Std.int(FlxG.height * 3));
 	introFog.screenCenter();
 	introFog.scrollFactor.set();
 	introFog.alpha = 1.0;
 	add(introFog);
-	setPainStuff();
 }
 
 function onBeat(beat) {
 	if (PlayState.instance.useFrostbiteMechanic)
 		{
-			if (PlayState.instance.coldness < 1.0){
-				if(PlayState.gameplayMode == 'CUSTOM')
-					PlayState.instance.coldness += PlayState.instance.coldnessRate * (Init.trueSettings.get("Freezing Rate Percent")/100);
-				else if(PlayState.gameplayMode == 'HELL_MODE')
-					PlayState.instance.coldness += PlayState.instance.coldnessRate * 1.5;
-				else if(PlayState.gameplayMode == 'FUCK_YOU')
-					PlayState.instance.coldness += PlayState.instance.coldnessRate * 1.35; // a little bit less, to adjust for the 2 less typhlosions. should still be harder than hell mode tho	
-				else
-					PlayState.instance.coldness += PlayState.instance.coldnessRate;
-			}
+			if (PlayState.instance.coldness < 1.0) 
+				PlayState.instance.coldness += PlayState.instance.coldnessRate;
 		}
 
 		if (freakachu != null && beat % 2 == 0 && freakachu.animation.curAnim.name != 'painsplit')
 			freakachu.playAnim('idle');
 
 		if (freakachuActive)
-		{
-			painSplitChance += 0.1;
-			painSplitCooldown -= 1;
-		}
+			{
+				painSplitChance += 0.1;
+				painSplitCooldown -= 1;
+			}
 			
 		if (FlxG.random.bool(painSplitChance) && freakachuActive && painSplitCooldown <= 0 && PlayState.health >= 1.25) //feel free to change this
-		{
-			
-
-			setPainStuff();
-			if(PlayState.gameplayMode == 'FUCK_YOU')
-				doPainSplit(0.75); // does this make sense? not really, but who cares. crueler pain splits on fuck you!!!
-			else
+			{
+				painSplitChance = 0.5;
+				painSplitCooldown = 30;
 				doPainSplit(0.5);
-		}
+			}
+		trace(painSplitChance);
 
 	}
 
-function setPainStuff(){
-	if(PlayState.gameplayMode == 'HELL_MODE' || PlayState.gameplayMode == 'FUCK_YOU'){
-		painSplitChance = 100; // on hell mode and above he will always pain split when given a chance
-		// however longer cooldown, this is just to make runs a bit more consistent
-		if(PlayState.gameplayMode == 'FUCK_YOU')
-			painSplitCooldown = 100; 
-		else if(PlayState.gameplayMode == 'HELL_MODE')	
-			painSplitCooldown = 80; 
-	}else{
-		painSplitCooldown = 30;
-		painSplitChance = 0.5;
-	}
-}
 function onUpdate(elapsed)
 	{
 		if (PlayState.instance.coldness < 0.0) PlayState.instance.coldness = 0.0;
@@ -222,26 +195,26 @@ function onUpdate(elapsed)
 		if (PlayState.instance.coldness != 0.0 && !PlayState.inCutscene && PlayState.camHUD.alpha == 1.0) PlayState.health -= (PlayState.instance.coldness * 0.00300) * ((elapsed) * 120);
 
 		if (PlayState.instance.coldness >= 1.0) PlayState.health = PlayState.minHealth;
+
+   		if (PlayState.gameplayMode != 'PUSSY_MODE') 
+		{
+			if (PlayState.instance.coldnessDisplay < 0.33) PlayState.instance.frostbiteTheromometer.animation.play('stage1'); //this code kinda lazy, i'll rewrite it?
+			if (PlayState.instance.coldnessDisplay >= 0.33) PlayState.instance.frostbiteTheromometer.animation.play('stage2');
+			if (PlayState.instance.coldnessDisplay >= 0.66) PlayState.instance.frostbiteTheromometer.animation.play('stage3');
+		}
 		
-		if (PlayState.instance.coldnessDisplay < 0.33) PlayState.instance.frostbiteTheromometer.animation.play('stage1'); //this code kinda lazy, i'll rewrite it?
-		if (PlayState.instance.coldnessDisplay >= 0.33) PlayState.instance.frostbiteTheromometer.animation.play('stage2');
-		if (PlayState.instance.coldnessDisplay >= 0.66) PlayState.instance.frostbiteTheromometer.animation.play('stage3');
-
-		var showThreshold = 0.35;
-		if((PlayState.gameplayMode == 'HELL_MODE'))showThreshold=0.75;
-
-		if (PlayState.instance.coldness >= showThreshold && !shownOnce)
-		{
-			if (!shownOnce) FlxTween.tween(frostbiteGuide, {alpha: 1.0}, 0.5, {ease: FlxEase.cubeInOut});
-			shownOnce = true;
-			showingGuide = true;
-		}
-
-		if (PlayState.instance.controls.SPACE_P)
-		{
-			shownOnce = true;
-			FlxTween.tween(frostbiteGuide, {alpha: 0.0001}, 0.5, {ease: FlxEase.cubeInOut});
-		}
+		if (PlayState.instance.coldness >= 0.35 && !shownOnce)
+			{
+				if (!shownOnce) FlxTween.tween(frostbiteGuide, {alpha: 1.0}, 0.5, {ease: FlxEase.cubeInOut});
+				shownOnce = true;
+				showingGuide = true;
+			}
+		
+		if (PlayState.pressSpace)
+			{
+				shownOnce = true;
+				if (showingGuide) FlxTween.tween(frostbiteGuide, {alpha: 0.0001}, 0.5, {ease: FlxEase.cubeInOut});
+			}
 			
 		if (PlayState.strumLines.members[PlayState.playerLane].autoplay)
 			{
@@ -269,15 +242,6 @@ function onUpdate(elapsed)
 			{
 				imgScaleCur = FlxMath.lerp(imgScaleCur, imgScaleTarget, (elapsed / (1 / 120)) * 0.15);
 				freakachuJumpscare.scale.set(imgScaleCur, imgScaleCur);
-			}
-			
-		if (aberrationShader != null)
-			{
-				abbCur = FlxMath.lerp(abbCur, abbTarget, (elapsed / (1 / 120)) * 0.06);
-
-				aberrationShader.shader.data.aberration.value = [abbCur];
-				aberrationShader.shader.data.effectTime.value = [abbCur];
-				trace(abbCur);
 			}
 	}
 
@@ -347,9 +311,6 @@ function onEvent(eventName) {
 			freakachuActive = false;
 			//blackScreenCover.visible = true;
 
-			aberrationShader = new ShaderFilter(new GraphicsShader("", Paths.shader('aberration')));
-			PlayState.dialogueHUD.setFilters([aberrationShader]);
-
 			new FlxTimer().start(10.12, function(tmr:FlxTimer)
 				{
 					imgScaleTarget = 0.35;
@@ -383,7 +344,7 @@ function doPainSplit(amount:Float)
 		trace('yum');
 		new FlxTimer().start(0.46, function(tmr:FlxTimer)
 			{
-				PlayState.health = PlayState.health * (1-amount);
+				PlayState.health -= 0.2 + (PlayState.health / 2.856); //feel free to change this
 				PlayState.boyfriend.playAnim('singDOWNmiss');
 				FlxG.sound.play(Paths.sound('Frostbite_bite'));
 			});
