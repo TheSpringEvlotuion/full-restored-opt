@@ -111,7 +111,7 @@ class Character extends FNFSprite
 				addOffset("idle-alt", -195, -108);
 				addOffset("idle-alt2", -151, -123);
 
-				addOffset("singUP", -225, 149);
+				addOffset("singUP", -225, -51);
 				addOffset("singLEFT", -132, -124);
 				addOffset("singRIGHT", -210, -143);
 				addOffset("singDOWN", -216, -225);
@@ -870,13 +870,13 @@ class Character extends FNFSprite
 				animation.addByPrefix('psyshock', 'Psyshock Full', 24, false);
 				animation.addByIndices('psyshock particle', "Full Psyshock Particle", [0, 1, 2, 3, 4, 5, 6], "", 24, false);
 
-				addOffset('idle');
-				addOffset('singLEFT', 144, 22);
-				addOffset('singRIGHT', -338, 93);
-				addOffset('singDOWN', -150, -120);
-				addOffset('singUP', -89, 267);
-				addOffset('psyshock', -312, 22);
-				addOffset('psyshock particle', -940, 190);
+				addOffset('idle', -200, -100);
+				addOffset('singLEFT', -56, -78);
+				addOffset('singRIGHT', -538, -7);
+				addOffset('singDOWN', -350, -220);
+				addOffset('singUP', -289, 167);
+				addOffset('psyshock', -512, -78);
+				addOffset('psyshock particle', -1140, 90);
 
 				setGraphicSize(Std.int(width * 2.6));
 				updateHitbox();
