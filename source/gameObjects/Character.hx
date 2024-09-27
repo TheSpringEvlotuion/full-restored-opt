@@ -713,11 +713,14 @@ class Character extends FNFSprite
 				animation.addByPrefix('singRIGHT', 'DEAD RED right', 24, false);
 				animation.addByPrefix('singDOWN', 'DEAD RED down', 24, false);
 
-				addOffset('idle');
-				addOffset('singLEFT', 176, 3);
-				addOffset('singRIGHT', -86, -1);
-				addOffset('singDOWN', 19, -8);
-				addOffset('singUP', -1, 59);
+				addOffset('idle', -200, -100);
+				addOffset('singLEFT', -24, -97);
+				addOffset('singRIGHT', -286, -101);
+				addOffset('singDOWN', -181, -108);
+				addOffset('singUP', -101, -41);
+
+				scale.set(2.0, 2.0);
+				updateHitbox();
 
 				playAnim('idle');
 
@@ -731,11 +734,14 @@ class Character extends FNFSprite
 				animation.addByPrefix('singRIGHT', 'Norm Red right', 24, false);
 				animation.addByPrefix('singDOWN', 'Norm Red down', 24, false);
 
-				addOffset('idle');
-				addOffset('singLEFT', 20);
-				addOffset('singRIGHT', -59);
-				addOffset('singDOWN', 11, 6);
-				addOffset('singUP', 0, 36);
+				addOffset('idle', -200, -100);
+				addOffset('singLEFT', -180, -100);
+				addOffset('singRIGHT', -259, -100);
+				addOffset('singDOWN', -189, -94);
+				addOffset('singUP', -200, -64);
+
+				scale.set(2.0, 2.0);
+				updateHitbox();
 
 				playAnim('idle');
 
@@ -748,6 +754,8 @@ class Character extends FNFSprite
 				animation.addByIndices('idle', 'TYPHLOSION MECHANIC', generateIndicesAtPoint(1, 15), "", 24, false);
 				animation.addByIndices('fire', 'TYPHLOSION MECHANIC', generateIndicesAtPoint(16, 14), "", 24, false);
 				playAnim('idle');
+				scale.set(2.0, 2.0);
+				updateHitbox();
 				
 				characterData.facingDirection = RIGHT;
 
@@ -771,15 +779,18 @@ class Character extends FNFSprite
 				animation.addByPrefix('singRIGHTmiss', 'GOLD RIGHT POSE MISS', 24, false);
 				animation.addByPrefix('singDOWNmiss', 'GOLD DOWN POSE MISS', 24, false);
 
-				addOffset('idle');
-				addOffset("singUP", 35, 30);
-				addOffset("singRIGHT", -10, -7);
-				addOffset("singLEFT", 78, 16);
-				addOffset("singDOWN", -70, -37);
-				addOffset("singUPmiss", 36, 10);
-				addOffset("singRIGHTmiss", -15, -15);
-				addOffset("singLEFTmiss", 50);
-				addOffset("singDOWNmiss", -88, -77);
+				addOffset('idle', -200, -100);
+				addOffset("singUP", -165, -70);
+				addOffset("singRIGHT", -210, -107);
+				addOffset("singLEFT", -122, -84);
+				addOffset("singDOWN", -270, -137);
+				addOffset("singUPmiss", -164, -90);
+				addOffset("singRIGHTmiss", -215, -115);
+				addOffset("singLEFTmiss", -150, -100);
+				addOffset("singDOWNmiss", -288, -177);
+
+				scale.set(2.0, 2.0);
+				updateHitbox();
 
 				playAnim('idle');
 
