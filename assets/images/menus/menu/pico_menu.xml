@@ -1,17 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="pico menu.png">
-	<!-- Created with Adobe Animate version 22.0.8.217 -->
-	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="pico menu instance 10000" x="0" y="0" width="584" height="575"/>
-	<SubTexture name="pico menu instance 10001" x="0" y="0" width="584" height="575"/>
-	<SubTexture name="pico menu instance 10002" x="0" y="0" width="584" height="575"/>
-	<SubTexture name="pico menu instance 10003" x="584" y="0" width="584" height="575"/>
-	<SubTexture name="pico menu instance 10004" x="584" y="0" width="584" height="575"/>
-	<SubTexture name="pico menu instance 10005" x="584" y="0" width="584" height="575"/>
-	<SubTexture name="pico menu instance 10006" x="1168" y="0" width="584" height="575"/>
-	<SubTexture name="pico menu instance 10007" x="1168" y="0" width="584" height="575"/>
-	<SubTexture name="pico menu instance 10008" x="1168" y="0" width="584" height="575"/>
-	<SubTexture name="pico menu instance 10009" x="0" y="575" width="584" height="575"/>
-	<SubTexture name="pico menu instance 10010" x="0" y="575" width="584" height="575"/>
-	<SubTexture name="pico menu instance 10011" x="0" y="575" width="584" height="575"/>
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="pico_menu.png">
+<SubTexture name="pico menu instance 10000" x="0" y="571" width="579" height="569" frameX="0" frameY="0" frameWidth="584" frameHeight="575" />
+<SubTexture name="pico menu instance 10001" x="0" y="571" width="579" height="569" frameX="0" frameY="0" frameWidth="584" frameHeight="575" />
+<SubTexture name="pico menu instance 10002" x="0" y="571" width="579" height="569" frameX="0" frameY="0" frameWidth="584" frameHeight="575" />
+<SubTexture name="pico menu instance 10003" x="579" y="571" width="577" height="569" frameX="-2" frameY="-3" frameWidth="584" frameHeight="575" />
+<SubTexture name="pico menu instance 10004" x="579" y="571" width="577" height="569" frameX="-2" frameY="-3" frameWidth="584" frameHeight="575" />
+<SubTexture name="pico menu instance 10005" x="579" y="571" width="577" height="569" frameX="-2" frameY="-3" frameWidth="584" frameHeight="575" />
+<SubTexture name="pico menu instance 10006" x="0" y="0" width="580" height="571" frameX="-4" frameY="-4" frameWidth="584" frameHeight="575" />
+<SubTexture name="pico menu instance 10007" x="0" y="0" width="580" height="571" frameX="-4" frameY="-4" frameWidth="584" frameHeight="575" />
+<SubTexture name="pico menu instance 10008" x="0" y="0" width="580" height="571" frameX="-4" frameY="-4" frameWidth="584" frameHeight="575" />
+<SubTexture name="pico menu instance 10009" x="580" y="0" width="578" height="570" frameX="-4" frameY="-4" frameWidth="584" frameHeight="575" />
+<SubTexture name="pico menu instance 10010" x="580" y="0" width="578" height="570" frameX="-4" frameY="-4" frameWidth="584" frameHeight="575" />
+<SubTexture name="pico menu instance 10011" x="580" y="0" width="578" height="570" frameX="-4" frameY="-4" frameWidth="584" frameHeight="575" />
 </TextureAtlas>

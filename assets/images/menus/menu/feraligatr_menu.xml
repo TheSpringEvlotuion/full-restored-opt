@@ -1,17 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <TextureAtlas imagePath="feraligatr_menu.png">
-	<!-- Created with Adobe Animate version 22.0.7.214 -->
-	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="feraligatr menu instance 10000" x="0" y="0" width="813" height="695"/>
-	<SubTexture name="feraligatr menu instance 10001" x="0" y="0" width="813" height="695"/>
-	<SubTexture name="feraligatr menu instance 10002" x="0" y="0" width="813" height="695"/>
-	<SubTexture name="feraligatr menu instance 10003" x="813" y="0" width="813" height="695"/>
-	<SubTexture name="feraligatr menu instance 10004" x="813" y="0" width="813" height="695"/>
-	<SubTexture name="feraligatr menu instance 10005" x="813" y="0" width="813" height="695"/>
-	<SubTexture name="feraligatr menu instance 10006" x="0" y="695" width="813" height="695"/>
-	<SubTexture name="feraligatr menu instance 10007" x="0" y="695" width="813" height="695"/>
-	<SubTexture name="feraligatr menu instance 10008" x="0" y="695" width="813" height="695"/>
-	<SubTexture name="feraligatr menu instance 10009" x="813" y="695" width="813" height="695"/>
-	<SubTexture name="feraligatr menu instance 10010" x="813" y="695" width="813" height="695"/>
-	<SubTexture name="feraligatr menu instance 10011" x="813" y="695" width="813" height="695"/>
+<SubTexture name="feraligatr menu instance 10000" x="1523" y="0" width="811" height="646" frameX="0" frameY="-48" frameWidth="813" frameHeight="695" />
+<SubTexture name="feraligatr menu instance 10001" x="758" y="0" width="765" height="665" frameX="-46" frameY="-29" frameWidth="813" frameHeight="695" />
+<SubTexture name="feraligatr menu instance 10002" x="0" y="687" width="736" height="664" frameX="-77" frameY="-24" frameWidth="813" frameHeight="695" />
+<SubTexture name="feraligatr menu instance 10003" x="0" y="687" width="736" height="664" frameX="-77" frameY="-24" frameWidth="813" frameHeight="695" />
+<SubTexture name="feraligatr menu instance 10004" x="0" y="0" width="758" height="687" frameX="-48" frameY="-1" frameWidth="813" frameHeight="695" />
 </TextureAtlas>

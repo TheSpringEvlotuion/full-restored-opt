@@ -1,17 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="small hypno menu.png">
-	<!-- Created with Adobe Animate version 22.0.8.217 -->
-	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="small hypno menu instance 10000" x="0" y="0" width="513" height="376"/>
-	<SubTexture name="small hypno menu instance 10001" x="0" y="0" width="513" height="376"/>
-	<SubTexture name="small hypno menu instance 10002" x="0" y="0" width="513" height="376"/>
-	<SubTexture name="small hypno menu instance 10003" x="513" y="0" width="513" height="376"/>
-	<SubTexture name="small hypno menu instance 10004" x="513" y="0" width="513" height="376"/>
-	<SubTexture name="small hypno menu instance 10005" x="513" y="0" width="513" height="376"/>
-	<SubTexture name="small hypno menu instance 10006" x="1026" y="0" width="513" height="376"/>
-	<SubTexture name="small hypno menu instance 10007" x="1026" y="0" width="513" height="376"/>
-	<SubTexture name="small hypno menu instance 10008" x="1026" y="0" width="513" height="376"/>
-	<SubTexture name="small hypno menu instance 10009" x="0" y="376" width="513" height="376"/>
-	<SubTexture name="small hypno menu instance 10010" x="0" y="376" width="513" height="376"/>
-	<SubTexture name="small hypno menu instance 10011" x="0" y="376" width="513" height="376"/>
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="small_hypno_menu.png">
+<SubTexture name="small hypno menu instance 10000" x="508" y="374" width="499" height="365" frameX="-10" frameY="-1" frameWidth="513" frameHeight="376" />
+<SubTexture name="small hypno menu instance 10001" x="508" y="374" width="499" height="365" frameX="-10" frameY="-1" frameWidth="513" frameHeight="376" />
+<SubTexture name="small hypno menu instance 10002" x="508" y="374" width="499" height="365" frameX="-10" frameY="-1" frameWidth="513" frameHeight="376" />
+<SubTexture name="small hypno menu instance 10003" x="0" y="0" width="502" height="374" frameX="-9" frameY="-1" frameWidth="513" frameHeight="376" />
+<SubTexture name="small hypno menu instance 10004" x="0" y="0" width="502" height="374" frameX="-9" frameY="-1" frameWidth="513" frameHeight="376" />
+<SubTexture name="small hypno menu instance 10005" x="0" y="0" width="502" height="374" frameX="-9" frameY="-1" frameWidth="513" frameHeight="376" />
+<SubTexture name="small hypno menu instance 10006" x="502" y="0" width="513" height="370" frameX="0" frameY="-5" frameWidth="513" frameHeight="376" />
+<SubTexture name="small hypno menu instance 10007" x="502" y="0" width="513" height="370" frameX="0" frameY="-5" frameWidth="513" frameHeight="376" />
+<SubTexture name="small hypno menu instance 10008" x="502" y="0" width="513" height="370" frameX="0" frameY="-5" frameWidth="513" frameHeight="376" />
+<SubTexture name="small hypno menu instance 10009" x="0" y="374" width="508" height="367" frameX="-5" frameY="-2" frameWidth="513" frameHeight="376" />
+<SubTexture name="small hypno menu instance 10010" x="0" y="374" width="508" height="367" frameX="-5" frameY="-2" frameWidth="513" frameHeight="376" />
+<SubTexture name="small hypno menu instance 10011" x="0" y="374" width="508" height="367" frameX="-5" frameY="-2" frameWidth="513" frameHeight="376" />
 </TextureAtlas>

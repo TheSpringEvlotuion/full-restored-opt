@@ -1,17 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="muk menu.png">
-	<!-- Created with Adobe Animate version 22.0.8.217 -->
-	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="pico menu instance 10000" x="0" y="0" width="831" height="564"/>
-	<SubTexture name="muk menu instance 10001" x="0" y="0" width="831" height="564"/>
-	<SubTexture name="muk menu instance 10002" x="0" y="0" width="831" height="564"/>
-	<SubTexture name="muk menu instance 10003" x="831" y="0" width="831" height="564"/>
-	<SubTexture name="muk menu instance 10004" x="831" y="0" width="831" height="564"/>
-	<SubTexture name="muk menu instance 10005" x="831" y="0" width="831" height="564"/>
-	<SubTexture name="muk menu instance 10006" x="0" y="564" width="831" height="564"/>
-	<SubTexture name="muk menu instance 10007" x="0" y="564" width="831" height="564"/>
-	<SubTexture name="muk menu instance 10008" x="0" y="564" width="831" height="564"/>
-	<SubTexture name="muk menu instance 10009" x="831" y="564" width="831" height="564"/>
-	<SubTexture name="muk menu instance 10010" x="831" y="564" width="831" height="564"/>
-	<SubTexture name="muk menu instance 10011" x="831" y="564" width="831" height="564"/>
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="muk_menu.png">
+<SubTexture name="muk menu instance 10000" x="827" y="0" width="829" height="559" frameX="-2" frameY="0" frameWidth="831" frameHeight="564" />
+<SubTexture name="muk menu instance 10001" x="827" y="0" width="829" height="559" frameX="-2" frameY="0" frameWidth="831" frameHeight="564" />
+<SubTexture name="muk menu instance 10002" x="0" y="0" width="827" height="564" frameX="-2" frameY="0" frameWidth="831" frameHeight="564" />
+<SubTexture name="muk menu instance 10003" x="0" y="0" width="827" height="564" frameX="-2" frameY="0" frameWidth="831" frameHeight="564" />
+<SubTexture name="muk menu instance 10004" x="0" y="0" width="827" height="564" frameX="-2" frameY="0" frameWidth="831" frameHeight="564" />
+<SubTexture name="muk menu instance 10005" x="816" y="564" width="831" height="558" frameX="0" frameY="-2" frameWidth="831" frameHeight="564" />
+<SubTexture name="muk menu instance 10006" x="816" y="564" width="831" height="558" frameX="0" frameY="-2" frameWidth="831" frameHeight="564" />
+<SubTexture name="muk menu instance 10007" x="816" y="564" width="831" height="558" frameX="0" frameY="-2" frameWidth="831" frameHeight="564" />
+<SubTexture name="muk menu instance 10008" x="0" y="564" width="816" height="559" frameX="0" frameY="-1" frameWidth="831" frameHeight="564" />
+<SubTexture name="muk menu instance 10009" x="0" y="564" width="816" height="559" frameX="0" frameY="-1" frameWidth="831" frameHeight="564" />
+<SubTexture name="muk menu instance 10010" x="0" y="564" width="816" height="559" frameX="0" frameY="-1" frameWidth="831" frameHeight="564" />
 </TextureAtlas>

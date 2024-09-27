@@ -1,17 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="buried alive menu.png">
-	<!-- Created with Adobe Animate version 22.0.8.217 -->
-	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="buried alive menu instance 10000" x="0" y="0" width="612" height="676"/>
-	<SubTexture name="buried alive menu instance 10001" x="0" y="0" width="612" height="676"/>
-	<SubTexture name="buried alive menu instance 10002" x="0" y="0" width="612" height="676"/>
-	<SubTexture name="buried alive menu instance 10003" x="612" y="0" width="612" height="676"/>
-	<SubTexture name="buried alive menu instance 10004" x="612" y="0" width="612" height="676"/>
-	<SubTexture name="buried alive menu instance 10005" x="612" y="0" width="612" height="676"/>
-	<SubTexture name="buried alive menu instance 10006" x="1224" y="0" width="612" height="676"/>
-	<SubTexture name="buried alive menu instance 10007" x="1224" y="0" width="612" height="676"/>
-	<SubTexture name="buried alive menu instance 10008" x="1224" y="0" width="612" height="676"/>
-	<SubTexture name="buried alive menu instance 10009" x="0" y="676" width="612" height="676"/>
-	<SubTexture name="buried alive menu instance 10010" x="0" y="676" width="612" height="676"/>
-	<SubTexture name="buried alive menu instance 10011" x="0" y="676" width="612" height="676"/>
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="buried_alive_menu.png">
+<SubTexture name="buried alive menu instance 10000" x="1222" y="0" width="608" height="672" frameX="-3" frameY="-3" frameWidth="612" frameHeight="676" />
+<SubTexture name="buried alive menu instance 10001" x="1222" y="0" width="608" height="672" frameX="-3" frameY="-3" frameWidth="612" frameHeight="676" />
+<SubTexture name="buried alive menu instance 10002" x="1222" y="0" width="608" height="672" frameX="-3" frameY="-3" frameWidth="612" frameHeight="676" />
+<SubTexture name="buried alive menu instance 10003" x="0" y="676" width="609" height="669" frameX="-3" frameY="-5" frameWidth="612" frameHeight="676" />
+<SubTexture name="buried alive menu instance 10004" x="0" y="676" width="609" height="669" frameX="-3" frameY="-5" frameWidth="612" frameHeight="676" />
+<SubTexture name="buried alive menu instance 10005" x="0" y="676" width="609" height="669" frameX="-3" frameY="-5" frameWidth="612" frameHeight="676" />
+<SubTexture name="buried alive menu instance 10006" x="0" y="0" width="611" height="676" frameX="-1" frameY="-3" frameWidth="612" frameHeight="676" />
+<SubTexture name="buried alive menu instance 10007" x="0" y="0" width="611" height="676" frameX="-1" frameY="-3" frameWidth="612" frameHeight="676" />
+<SubTexture name="buried alive menu instance 10008" x="0" y="0" width="611" height="676" frameX="-1" frameY="-3" frameWidth="612" frameHeight="676" />
+<SubTexture name="buried alive menu instance 10009" x="611" y="0" width="611" height="673" frameX="0" frameY="-3" frameWidth="612" frameHeight="676" />
+<SubTexture name="buried alive menu instance 10010" x="611" y="0" width="611" height="673" frameX="0" frameY="-3" frameWidth="612" frameHeight="676" />
+<SubTexture name="buried alive menu instance 10011" x="611" y="0" width="611" height="673" frameX="0" frameY="-3" frameWidth="612" frameHeight="676" />
 </TextureAtlas>
