@@ -1,24 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="purin.png">
-	<!-- Created with Adobe Animate version 22.0.2.168 -->
-	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="purin0000" x="5" y="5" width="475" height="503"/>
-	<SubTexture name="purin0001" x="485" y="5" width="475" height="503"/>
-	<SubTexture name="purin0002" x="965" y="5" width="475" height="503"/>
-	<SubTexture name="purin0003" x="1445" y="5" width="475" height="503"/>
-	<SubTexture name="purin0004" x="5" y="513" width="475" height="503"/>
-	<SubTexture name="purin0005" x="485" y="513" width="475" height="503"/>
-	<SubTexture name="purin0006" x="965" y="513" width="475" height="503"/>
-	<SubTexture name="purin0007" x="1445" y="513" width="475" height="503"/>
-	<SubTexture name="purin0008" x="5" y="5" width="475" height="503"/>
-	<SubTexture name="purin0009" x="485" y="5" width="475" height="503"/>
-	<SubTexture name="purin0010" x="965" y="5" width="475" height="503"/>
-	<SubTexture name="purin0011" x="1445" y="5" width="475" height="503"/>
-	<SubTexture name="purin0012" x="5" y="513" width="475" height="503"/>
-	<SubTexture name="purin0013" x="485" y="513" width="475" height="503"/>
-	<SubTexture name="purin0014" x="5" y="1021" width="475" height="503"/>
-	<SubTexture name="purin0015" x="485" y="1021" width="475" height="503"/>
-	<SubTexture name="purin0016" x="965" y="1021" width="475" height="503"/>
-	<SubTexture name="purin0017" x="1445" y="1021" width="475" height="503"/>
-	<SubTexture name="purin0018" x="5" y="1529" width="475" height="503"/>
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Purin.png">
+	<!-- Created using the Spritesheet and XML generator -->
+	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
+	<SubTexture name="purin0000" x="958" y="506" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0001" x="0" y="506" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0002" x="958" y="0" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0003" x="479" y="506" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0004" x="479" y="0" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0005" x="0" y="0" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0006" x="958" y="506" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0007" x="0" y="506" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0008" x="958" y="0" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0009" x="479" y="506" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0010" x="958" y="506" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0011" x="0" y="506" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0012" x="958" y="0" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0013" x="479" y="506" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0014" x="479" y="0" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0015" x="0" y="0" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0016" x="958" y="506" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0017" x="0" y="506" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0018" x="958" y="0" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="purin0019" x="479" y="506" width="479" height="506" frameX="2" frameY="1" frameWidth="475" frameHeight="503"/>
+	<SubTexture name="10000857630000" x="0" y="1012" width="124" height="124" frameX="-10" frameY="-2" frameWidth="144" frameHeight="126"/>
 </TextureAtlas>
