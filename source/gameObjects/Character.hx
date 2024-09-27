@@ -120,6 +120,9 @@ class Character extends FNFSprite
 				addOffset("singRIGHTmiss", -1, -60);
 				addOffset("singDOWNmiss", -18, -136);
 
+				scale.set(2.0, 2.0);
+				updateHitbox();
+
 				playAnim('idle');
 
 				characterData.facingDirection = LEFT;
@@ -876,6 +879,7 @@ class Character extends FNFSprite
 				addOffset('psyshock particle', -940, 190);
 
 				setGraphicSize(Std.int(width * 1.3));
+				scale.set(2.0, 2.0);
 				updateHitbox();
 
 				playAnim('idle');
