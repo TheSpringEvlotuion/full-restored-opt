@@ -107,18 +107,18 @@ class Character extends FNFSprite
 				animation.addByPrefix('singRIGHTmiss', 'gf_right_better_miss instance 1', 24, false);
 				animation.addByPrefix('singDOWNmiss', 'gf_down_MISS instance 1', 24, false);
 
-				addOffset("idle", 194, 100);
-				addOffset("idle-alt", 205, 92);
-				addOffset("idle-alt2", 249, 77);
+				addOffset("idle", -206, -100);
+				addOffset("idle-alt", -195, -108);
+				addOffset("idle-alt2", -151, -123);
 
-				addOffset("singUP", 175, 149);
-				addOffset("singLEFT", 268, 76);
-				addOffset("singRIGHT", 190, 57);
-				addOffset("singDOWN", 184, -100);
-				addOffset("singUPmiss", 165, 150);
-				addOffset("singLEFTmiss", 265, 73);
-				addOffset("singRIGHTmiss", 199, 40);
-				addOffset("singDOWNmiss", 182, -36);
+				addOffset("singUP", -225, 149);
+				addOffset("singLEFT", -132, -124);
+				addOffset("singRIGHT", -210, -143);
+				addOffset("singDOWN", -216, -225);
+				addOffset("singUPmiss", -235, -50);
+				addOffset("singLEFTmiss", -135, -127);
+				addOffset("singRIGHTmiss", -201, -160);
+				addOffset("singDOWNmiss", -218, -236);
 
 				scale.set(2.0, 2.0);
 				updateHitbox();
@@ -883,8 +883,8 @@ class Character extends FNFSprite
 
 				playAnim('idle');
 
-				characterData.offsetX = -50;
-				characterData.offsetY = 0;
+				characterData.offsetX = -250;
+				characterData.offsetY = 100;
 				characterData.camOffsetX = 200;
 				characterData.healthbarColors = [249, 223, 68];
 				characterData.facingDirection = RIGHT;
