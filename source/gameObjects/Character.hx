@@ -107,18 +107,18 @@ class Character extends FNFSprite
 				animation.addByPrefix('singRIGHTmiss', 'gf_right_better_miss instance 1', 24, false);
 				animation.addByPrefix('singDOWNmiss', 'gf_down_MISS instance 1', 24, false);
 
-				addOffset("idle", -6);
-				addOffset("idle-alt", 5, -8);
-				addOffset("idle-alt2", 49, -23);
+				addOffset("idle", 194, 100);
+				addOffset("idle-alt", 205, 92);
+				addOffset("idle-alt2", 249, 77);
 
-				addOffset("singUP", -25, 49);
-				addOffset("singLEFT", 68, -24);
-				addOffset("singRIGHT", -10, -43);
-				addOffset("singDOWN", -16, -125);
-				addOffset("singUPmiss", -35, 50);
-				addOffset("singLEFTmiss", 65, -27);
-				addOffset("singRIGHTmiss", -1, -60);
-				addOffset("singDOWNmiss", -18, -136);
+				addOffset("singUP", 175, 149);
+				addOffset("singLEFT", 268, 76);
+				addOffset("singRIGHT", 190, 57);
+				addOffset("singDOWN", 184, -100);
+				addOffset("singUPmiss", 165, 150);
+				addOffset("singLEFTmiss", 265, 73);
+				addOffset("singRIGHTmiss", 199, 40);
+				addOffset("singDOWNmiss", 182, -36);
 
 				scale.set(2.0, 2.0);
 				updateHitbox();
@@ -878,14 +878,13 @@ class Character extends FNFSprite
 				addOffset('psyshock', -312, 22);
 				addOffset('psyshock particle', -940, 190);
 
-				setGraphicSize(Std.int(width * 1.3));
-				scale.set(2.0, 2.0);
+				setGraphicSize(Std.int(width * 2.6));
 				updateHitbox();
 
 				playAnim('idle');
 
-				characterData.offsetX = -250;
-				characterData.offsetY = 100;
+				characterData.offsetX = -50;
+				characterData.offsetY = 0;
 				characterData.camOffsetX = 200;
 				characterData.healthbarColors = [249, 223, 68];
 				characterData.facingDirection = RIGHT;
